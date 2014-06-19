@@ -35,6 +35,10 @@ angular.module('mean.auth').config(['$stateProvider', '$logProvider',
                     loggedin: checkLoggedOut
                 }
             })
+            .state('auth.thanks', {
+                url: '/something',
+                template: 'Something'
+            })
             .state('auth.register', {
                 url: '/register',
                 templateUrl: 'public/auth/views/register.html',
@@ -44,6 +48,14 @@ angular.module('mean.auth').config(['$stateProvider', '$logProvider',
             }).state('send', {
                 url: '/send-gift',
                 templateUrl: 'public/auth/views/send-gift.html',
+            }).state('thanks', {
+                url: '/thanks',
+                templateUrl: 'public/auth/views/thanks.html',
+                controller: function($scope, $state) {
+                    $scope.spend = function() { $state.transitionTo('gift');}
+                }
+            }).state('gift', {
+                    templateUrl: 'public/gifts/views/index.html'
             })
             .state('auth.test', {
                 url: '/test',

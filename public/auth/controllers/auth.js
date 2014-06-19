@@ -65,7 +65,7 @@ angular.module('mean.controllers.login', [])
                     });
             };
         }
-    ]).controller('SendGiftController', ['$scope', function($scope) {
+    ]).controller('SendGiftController', ['$scope', '$state', '$timeout', function($scope, $state, $timeout) {
 
         $scope.send = function() {
             var yes = confirm('I don\'t have the money though! Still wanna give me a gift?');
@@ -74,6 +74,10 @@ angular.module('mean.controllers.login', [])
             } else {
                 $scope.text = 'Sure you do!';
             }
+            // in any case...
+            $timeout(function(){
+                $state.transitionTo('home');
+            }, 2000);
         };
     }])
     .controller('testCtrl', ['$scope', '$rootScope', '$http', '$location',
