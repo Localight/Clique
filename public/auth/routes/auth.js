@@ -1,8 +1,11 @@
 'use strict';
 
 //Setting up route
-angular.module('mean.auth').config(['$stateProvider',
-    function($stateProvider) {
+angular.module('mean.auth').config(['$stateProvider', '$logProvider',
+
+    function($stateProvider, $logProvider) {
+
+        $logProvider.debugEnabled(true);
         // Check if the user is not conntected
         var checkLoggedOut = function($q, $timeout, $http, $location) {
             // Initialize a new promise
@@ -38,6 +41,9 @@ angular.module('mean.auth').config(['$stateProvider',
                 resolve: {
                     loggedin: checkLoggedOut
                 }
+            }).state('send', {
+                url: '/send-gift',
+                templateUrl: 'public/auth/views/send-gift.html',
             })
             .state('auth.test', {
                 url: '/test',

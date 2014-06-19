@@ -65,8 +65,18 @@ angular.module('mean.controllers.login', [])
                     });
             };
         }
-    ])
-    .controller('testCtrl', ['$scope', '$rootScope', '$http', '$location', 
+    ]).controller('SendGiftController', ['$scope', function($scope) {
+
+        $scope.send = function() {
+            var yes = confirm('I don\'t have the money though! Still wanna give me a gift?');
+            if(yes) {
+                $scope.text = 'AWESOME!';
+            } else {
+                $scope.text = 'Sure you do!';
+            }
+        };
+    }])
+    .controller('testCtrl', ['$scope', '$rootScope', '$http', '$location',
         function($scope, $rootScope, $http, $location) {
 
             $scope.testModel = {};
@@ -77,7 +87,7 @@ angular.module('mean.controllers.login', [])
                     keyword: $scope.testModel.keyword,
                     status: $scope.testModel.status,
                     amount: $scope.testModel.amount,
-                    kickbackAmount: $scope.testModel.kickbackAmount 
+                    kickbackAmount: $scope.testModel.kickbackAmount
                 })
                 .success(function(){
                     $scope.registerError = 0;

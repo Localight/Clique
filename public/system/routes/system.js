@@ -7,12 +7,11 @@ angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
             $urlRouterProvider.otherwise('/');
 
             // states for my app
-            $stateProvider              
+            $stateProvider
                 .state('home', {
                     url: '/',
                     templateUrl: 'public/system/views/index.html'
-                })
-                .state('auth', {
+                }).state('auth', {
                     templateUrl: 'public/auth/views/index.html'
                 });
         }

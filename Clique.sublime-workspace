@@ -1,0 +1,957 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"twi",
+				"twillioService"
+			],
+			[
+				"ac",
+				"access-token"
+			],
+			[
+				"au",
+				"authorizeByAccessToken"
+			],
+			[
+				"req",
+				"requestToken"
+			],
+			[
+				"acc",
+				"accessToken"
+			],
+			[
+				"re",
+				"requestToken"
+			],
+			[
+				"p",
+				"publisher"
+			],
+			[
+				"websi",
+				"websiteId"
+			],
+			[
+				"fil",
+				"fillWithBlanks"
+			],
+			[
+				"blo",
+				"blocks"
+			],
+			[
+				"full",
+				"fullBlocks"
+			],
+			[
+				"incom",
+				"incompleteBlocks"
+			],
+			[
+				"inc",
+				"incompleteBlocks"
+			],
+			[
+				"block",
+				"blockIds"
+			],
+			[
+				"ful",
+				"fullBlocks"
+			],
+			[
+				"in",
+				"incompleteBlocks"
+			],
+			[
+				"sp",
+				"specialProgramCheck"
+			],
+			[
+				"ads",
+				"adsInBlock"
+			],
+			[
+				"we",
+				"websiteId"
+			],
+			[
+				"ro",
+				"rotatingBlock"
+			],
+			[
+				"bla",
+				"blankAdType"
+			],
+			[
+				"no",
+				"noStyleCheck"
+			],
+			[
+				"B",
+				"Blocks"
+			],
+			[
+				"ad",
+				"adType"
+			],
+			[
+				"getAds",
+				"getAdsByType"
+			],
+			[
+				"getA",
+				"getAdsByType"
+			],
+			[
+				"get",
+				"getAdsWithSpecialProgram"
+			],
+			[
+				"par",
+				"parseAdFromQuery"
+			],
+			[
+				"ver",
+				"verifyByWid"
+			],
+			[
+				"verify",
+				"verifyByWid"
+			],
+			[
+				"parse",
+				"parsedReferer"
+			],
+			[
+				"pa",
+				"parsedReferer"
+			],
+			[
+				"web",
+				"websiteParser"
+			],
+			[
+				"c",
+				"currentRequests"
+			],
+			[
+				"resolve",
+				"resolveQuestion"
+			],
+			[
+				"que",
+				"queue"
+			],
+			[
+				"scrap",
+				"scrapperUrl"
+			],
+			[
+				"res",
+				"responseText"
+			],
+			[
+				"lice",
+				"Licence"
+			],
+			[
+				"lic",
+				"licence"
+			],
+			[
+				"licence",
+				"licenceKey"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"non",
+				"nonPromotedlist"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"sla",
+				"slates"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"con",
+				"console"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 1468,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/services/twillio-service.js",
+			"settings":
+			{
+				"buffer_size": 986,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var request = require('request');\nfunction test() {\n\n    var opts = {\n        url: 'http://5.39.146.32:12345/api/numbers/19717012156',\n        method: 'POST',\n        data: {message: 'stuff'}\n    };\n    console.log(opts.url);\n    request(opts, function(err, res, body) {\n        console.log(' response: ', body);\n        console.log('Response status: ',res && res.statusCode);\n        if(err) {\n            console.log('Err: ', err);\n        }\n        // process.exit(0);\n    });\n}",
+			"settings":
+			{
+				"buffer_size": 481,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/routes/index.js",
+			"settings":
+			{
+				"buffer_size": 1270,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/config/config.js",
+			"settings":
+			{
+				"buffer_size": 560,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/config/env/development.js",
+			"settings":
+			{
+				"buffer_size": 1051,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Markdown Preview/Markdown.sublime-build",
+	"command_palette":
+	{
+		"height": 245.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"open",
+				"Markdown Preview: Open Markdown Cheat sheet"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"pattern",
+				"Snippet: JS module pattern"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 647.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/zlatko/projects/Clique/server/routes/test.js",
+		"/home/zlatko/projects/ad_server/public/js/ad/ads.js",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-ads.js",
+		"/home/zlatko/projects/ad_server/server/views/pages/blocks.ejs",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-websites.js",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-blocks.js",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-impressions.js",
+		"/home/zlatko/projects/ad_server/server/models/model-blocks.js",
+		"/home/zlatko/projects/ad_server/server/modules/block-find-service.js",
+		"/home/zlatko/projects/ad_server/server/modules/ad-assembler-plugin.js",
+		"/home/zlatko/projects/ad_server/server/modules/adStatisticsService.js",
+		"/home/zlatko/projects/ad_server/ad_server.sublime-project",
+		"/home/zlatko/Downloads/products-WB0G69690/macadmin/Bootstrap Version 3/forms.html",
+		"/home/zlatko/projects/ad_server/server/models/model-websites.js",
+		"/home/zlatko/projects/ad_server/server/views/pages/partials/navbar.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/ads.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/clicks.ejs",
+		"/home/zlatko/projects/ad_server/server/index.js",
+		"/home/zlatko/projects/ad_server/server/controllers/index.js",
+		"/home/zlatko/projects/ad_server/server/views/pages/impressions.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/websites.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/index.ejs",
+		"/home/zlatko/projects/ad_server/public/js/custom.js",
+		"/home/zlatko/projects/ad_server/node_modules/mongoose/node_modules/mongodb/lib/mongodb/connection/connection_utils.js",
+		"/home/zlatko/projects/ad_server/config/config.js",
+		"/home/zlatko/projects/ad_server/node_modules/lodash-node/modern/internals/baseCreateWrapper.js",
+		"/home/zlatko/projects/ad_server/node_modules/grunt/node_modules/minimatch/test/brace-expand.js",
+		"/home/zlatko/projects/ad_server/node_modules/mongoose/node_modules/mongodb/lib/mongodb/db.js",
+		"/home/zlatko/projects/ad_server/node_modules/mongoose/examples/population/population-of-multiple-existing-docs.js",
+		"/home/zlatko/projects/ad_server/node_modules/basic-auth/Makefile",
+		"/home/zlatko/projects/ad_server/server/modules/api-authorization-service.js",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-impression-stats.js",
+		"/home/zlatko/projects/ad_server/server/modules/bootstrap.js",
+		"/home/zlatko/projects/ad_server/public/js/bootstrap.js",
+		"/home/zlatko/projects/ad_server/public/style/bootstrap.css",
+		"/home/zlatko/projects/ad_server/node_modules/lodash-node/compat/internals/baseIndexOf.js",
+		"/home/zlatko/projects/ad_server/node_modules/ejs/benchmark.js",
+		"/home/zlatko/projects/ad_server/test/bootstrap.js",
+		"/home/zlatko/projects/ad_server/server/views/index.ejs",
+		"/home/zlatko/projects/ad_server/server/models/model-impressions.js",
+		"/home/zlatko/projects/ad_server/server/modules/ad-parse-service.js",
+		"/home/zlatko/projects/ad_server/server/models/model-ads.js",
+		"/home/zlatko/projects/ad_server/package.json",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-clicks.js",
+		"/home/zlatko/projects/ad_server/server/modules/website-parse-service.js",
+		"/home/zlatko/projects/ad_server/server/controllers/ctrl-click-stats.js",
+		"/home/zlatko/projects/ad_server/server/views/partials/head.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/partials/page_heading.ejs",
+		"/home/zlatko/projects/ad_server/server/models/model-clicks.js",
+		"/home/zlatko/projects/ad_server/server/modules/websiteParseService.js",
+		"/home/zlatko/projects/ad_server/server/views/websites/edit.ejs",
+		"/home/zlatko/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/zlatko/projects/ad_server/server/views/pages/partials/head.ejs",
+		"/home/zlatko/projects/ad_server/public/img/favicon/favicon.png",
+		"/home/zlatko/projects/ad_server/public/style/style.css",
+		"/home/zlatko/projects/ad_server/server/views/pages/partials/head_data.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/partials/header.ejs",
+		"/home/zlatko/projects/ad_server/server/views/pages/index.html",
+		"/home/zlatko/Downloads/products-WB0G69690/macadmin/Bootstrap Version 3/index.html",
+		"/home/zlatko/projects/ad_server/server/views/error.ejs",
+		"/home/zlatko/projects/ad_server/config/logger.js",
+		"/home/zlatko/projects/ad_server/TODO.md",
+		"/home/zlatko/projects/ad_server/server/views/partials/footer.ejs",
+		"/mnt/share/Google Drive/Admin Detail Theme/b3/index.html",
+		"/home/zlatko/projects/ad_server/app.js",
+		"/home/zlatko/projects/ad_server/docs/request.md",
+		"/home/zlatko/projects/ad_server/routes/users.js",
+		"/home/zlatko/projects/postify/server/models/countries.js",
+		"/home/zlatko/.config/sublime-text-3/Packages/Markdown Preview/MarkdownPreview.sublime-settings",
+		"/home/zlatko/projects/ad_server/README.md",
+		"/home/zlatko/projects/ad_server/README.html",
+		"/home/zlatko/projects/ad_server/bin/www",
+		"/home/zlatko/projects/ad_server/.gitignore",
+		"/home/zlatko/projects/havenly/server/modules/mailgun.js",
+		"/home/zlatko/projects/answers/config/config.js",
+		"/home/zlatko/projects/answers/package.json",
+		"/home/zlatko/projects/answers/server/server.js",
+		"/home/zlatko/projects/answers/public/admin.jade",
+		"/home/zlatko/projects/answers/TODO.md",
+		"/home/zlatko/projects/answers/server/lib/scrapper.js",
+		"/home/zlatko/projects/invoices/app.js",
+		"/home/zlatko/projects/invoices/server/controllers/index.js",
+		"/home/zlatko/projects/answers/server/lib/redis.js",
+		"/home/zlatko/projects/answers/server/controllers.js",
+		"/home/zlatko/projects/invoices/server/controllers/invoices-controller.js",
+		"/home/zlatko/projects/answers/server/lib/auth.js",
+		"/home/zlatko/projects/answers/public/js/apptable.js",
+		"/home/zlatko/projects/answers/server/lib/askmebot.js",
+		"/home/zlatko/projects/answers/public/stats.jade",
+		"/home/zlatko/projects/answers/public/js/app.js",
+		"/home/zlatko/projects/answers/.gitignore",
+		"/home/zlatko/projects/answers/public/css/screen.css",
+		"/home/zlatko/projects/answers/public/login.jade",
+		"/home/zlatko/projects/answers/public/layout.jade",
+		"/home/zlatko/Downloads/aa3/views/dashboard.jade",
+		"/home/zlatko/Downloads/aa3/views/layout.jade",
+		"/home/zlatko/Downloads/aa3/views/login.jade",
+		"/home/zlatko/projects/postify-php/config.php",
+		"/home/zlatko/projects/postify/server/models/orders.js",
+		"/home/zlatko/projects/postify/server/controllers/orders.js",
+		"/home/zlatko/projects/answers/docs/specs.md",
+		"/home/zlatko/projects/answers/server/lib/wolphram.js",
+		"/home/zlatko/projects/PROJECTS/Job Board.md",
+		"/home/zlatko/.cache/.fr-P5adc4/detail-wrap/README.txt",
+		"/home/zlatko/projects/answers/README.md",
+		"/home/zlatko/projects/answers/gulpfile.js",
+		"/home/zlatko/projects/twitteraj/server/server.js",
+		"/home/zlatko/projects/twitteraj/server/lib/redis.js",
+		"/home/zlatko/projects/answers/.jshintrc",
+		"/home/zlatko/projects/twitteraj/.jshintrc",
+		"/home/zlatko/projects/twitteraj/server/lib/users.js",
+		"/home/zlatko/projects/postify/server/models/prints.js",
+		"/home/zlatko/projects/postify/server/models/photos.js",
+		"/home/zlatko/projects/postify/server/models/postcards.js",
+		"/home/zlatko/projects/postify/server/models/customers.js",
+		"/home/zlatko/projects/postify/server/models/users.js",
+		"/home/zlatko/projects/postify/server/models/prices.js",
+		"/home/zlatko/projects/postify/package.json",
+		"/home/zlatko/projects/postify/config/config.json",
+		"/home/zlatko/projects/postify-api/.gitignore",
+		"/home/zlatko/projects/postify-api/api_v2_outline.md",
+		"/home/zlatko/Desktop/2014-003.pdf",
+		"/home/zlatko/projects/postify-api/api_v2.md",
+		"/home/zlatko/Downloads/user.json",
+		"/home/zlatko/Downloads/postcard.json",
+		"/home/zlatko/Downloads/client (1).json",
+		"/home/zlatko/projects/postify-api/processes.md",
+		"/home/zlatko/Downloads/client.json"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"-node_modules/,-app/js/vendor/,-app/components/",
+			"-node_modules/",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"twilio",
+			"Refresh",
+			"web.",
+			"something",
+			"auth, ",
+			"next",
+			"auth.authorize",
+			"authorizeByAccessToken",
+			"Date.now",
+			"created:",
+			"\"",
+			"blockIds",
+			"', '",
+			"\n",
+			"<br/>",
+			"\\r\\n",
+			"\\r\\m",
+			"No blocks",
+			"No blocks for ",
+			"log",
+			"['",
+			".",
+			"['",
+			"']",
+			"['",
+			"debug",
+			"logger.log",
+			"MacAdmin",
+			"macadmin",
+			"page heading here",
+			"logger",
+			"res.",
+			"No impression",
+			"blocks",
+			"['",
+			"']",
+			"['",
+			"favicon",
+			".ejs",
+			"<div class=\"navbar navbar-fixed-top bs-docs-nav\" role=\"banner\">\n\n    <div class=\"conjtainer\">\n      <!-- Menu button for smallar screens -->\n      <div class=\"navbar-header\">\n		  <button class=\"navbar-toggle btn-navbar\" type=\"button\" data-toggle=\"collapse\" data-target=\".bs-navbar-collapse\">\n			<span>Menu</span>\n		  </button>\n		  <!-- Site name for smallar screens -->\n		  <a href=\"index.html\" class=\"navbar-brand hidden-lg\">AdServer</a>\n		</div>\n\n\n\n      <!-- Navigation starts -->\n      <nav class=\"collapse navbar-collapse bs-navbar-collapse\" role=\"navigation\">\n\n        <ul class=\"nav navbar-nav\">\n\n            <!-- Dropdown -->\n\n          </li>\n\n          <!-- Sync to server link -->\n          <li class=\"dropdown dropdown-big\">\n            <a href=\"#\" class=\"dropdown-toggle\" ><span class=\"label label-danger\"><i class=\"icon-refresh\"></i></span> Refresh</a>\n            <!-- Dropdown -->\n            <ul class=\"dropdown-menu\">\n\n            </ul>\n          </li>\n\n        </ul>\n\n        <!-- Search form -->\n        <form class=\"navbar-form navbar-left\" role=\"search\">\n			<div class=\"form-group\">\n				<input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n			</div>\n		</form>\n        <!-- Links -->\n        <ul class=\"nav navbar-nav pull-right\">\n          <li class=\"dropdown pull-right\">\n            <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"http://www.arstempo.hr\">\n              Powered by: Ars Tempo &copy;\n            </a>\n\n          </li>\n\n        </ul>\n      </nav>\n\n    </div>\n  </div>",
+			"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n  <meta charset=\"utf-8\">\n  <!-- Title and other stuffs -->\n  <title>Welcome to AdServer</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"\">\n  <meta name=\"keywords\" content=\"\">\n  <meta name=\"author\" content=\"\">\n\n\n  <!-- Stylesheets -->\n  <link href=\"/style/bootstrap.css\" rel=\"stylesheet\">\n  <!-- Font awesome icon -->\n  <link rel=\"stylesheet\" href=\"/style/font-awesome.css\">\n  <!-- jQuery UI -->\n  <link rel=\"stylesheet\" href=\"/style/jquery-ui.css\">\n  <!-- Calendar -->\n  <link rel=\"stylesheet\" href=\"/style/fullcalendar.css\">\n  <!-- prettyPhoto -->\n  <link rel=\"stylesheet\" href=\"/style/prettyPhoto.css\">\n  <!-- Star rating -->\n  <link rel=\"stylesheet\" href=\"/style/rateit.css\">\n  <!-- Date picker -->\n  <link rel=\"stylesheet\" href=\"/style/bootstrap-datetimepicker.min.css\">\n  <!-- CLEditor -->\n  <link rel=\"stylesheet\" href=\"/style/jquery.cleditor.css\">\n  <!-- Bootstrap toggle -->\n  <link rel=\"stylesheet\" href=\"/style/bootstrap-switch.css\">\n  <!-- Main stylesheet -->\n  <link href=\"/style/style.css\" rel=\"stylesheet\">\n  <!-- Widgets stylesheet -->\n  <link href=\"/style/widgets.css\" rel=\"stylesheet\">\n\n  <!-- HTML5 Support for IE -->\n  <!--[if lt IE 9]>\n  <script src=\"/js/html5shim.js\"></script>\n  <![endif]-->\n\n  <!-- Favicon -->\n  <link rel=\"shortcut icon\" href=\"img/favicon/favicon.png\">\n</head>",
+			"<h1><a href=\"#\"><span class=\"bold\">AdServer</span></a></h1>",
+			"</span",
+			"a href=\"Ads.ejs\">",
+			"href=\"style",
+			"src=\"js",
+			"_id",
+			"status",
+			"id: String,",
+			"TODO",
+			"_id",
+			"TODO",
+			"_id",
+			"'",
+			"logger",
+			"morgan",
+			"then",
+			"Licence check",
+			"Licence ch",
+			"LICENCE_CJ",
+			"return Q.r",
+			"inc",
+			"incr",
+			"Customer",
+			"User",
+			"#order",
+			"assert",
+			"Note",
+			"*Note",
+			"country",
+			"/pages",
+			"Page",
+			"languages",
+			",\n    }",
+			"maxle",
+			"minle",
+			"        maxlength: 50\n",
+			"        minlength: \\d,\n",
+			"        minlength: 3,\n",
+			"        minlength: \\d\\n",
+			"        minlength: \\d",
+			"Note",
+			"package_s",
+			",\"",
+			"### postc",
+			",\"",
+			"_id",
+			"\"ID\"",
+			"ID",
+			",\"",
+			"\"ID\":",
+			"ref: ",
+			"settings",
+			"recipient",
+			"address",
+			",\"",
+			"usd",
+			"currenc",
+			"price",
+			"\\t",
+			"language",
+			"country",
+			",\"",
+			".\"",
+			"campaign",
+			"customer",
+			",\"",
+			"voucher",
+			"sign-in",
+			"$rootscope.$broadcast",
+			"HeaderController",
+			"HeaderCon",
+			"data.me",
+			"console",
+			"console\n",
+			"console",
+			"subfilter",
+			"ng-init",
+			"AuthorController",
+			"conso",
+			"subcategory",
+			"sign in co",
+			"console",
+			"getColumns",
+			"slate.prev",
+			"states",
+			"onFinishRender",
+			"gridRendered"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"web-",
+			"",
+			"auth",
+			"authorize",
+			"starts:",
+			"'",
+			" ",
+			"",
+			"<br/>\n",
+			"\n",
+			".",
+			"",
+			".",
+			"blks",
+			".",
+			"",
+			".",
+			"",
+			"<% include partials/navbar %>",
+			"<% include partials/head %>",
+			"<h1><a href=\"#\">Ad<span class=\"bold\">Server</span></a> Dashboard</h1>",
+			"a href=\"ads.ejs\">",
+			"href=\"/style",
+			"src=\"/js",
+			"id: {\n        type: String,\n        unique: true,\n        required: true\n    },",
+			"id: {\n    type: String,\n    unique: true,\n    required: true\n},",
+			"id",
+			"",
+			"return d.r",
+			"Country",
+			"Print",
+			"Photo",
+			"Postcard",
+			"Price",
+			"Print",
+			"Photos",
+			"prints",
+			"Postcard",
+			"Customer",
+			"/pagesnippets",
+			"",
+			",\\n    \"",
+			"ID",
+			",\\n    \"",
+			"\\n    \"",
+			"    ",
+			",\\n\\t\"",
+			",\"\\n",
+			"article[0].",
+			", [",
+			"  ] ]\n            ,",
+			" ",
+			", "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1468,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1359,
+								1359
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 713.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "server/services/twillio-service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 986,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								514,
+								514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 192.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								191,
+								191
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "server/routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								530,
+								530
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 480.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "server/config/config.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								240,
+								240
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "server/config/env/development.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1051,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								989,
+								989
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 40.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 124.0
+	},
+	"project": "Clique.sublime-project",
+	"replace":
+	{
+		"height": 76.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ads.",
+				"public/js/ad/ads.js"
+			],
+			[
+				"custom.js",
+				"public/js/custom.js"
+			],
+			[
+				"mdwe",
+				"server/models/model-websites.js"
+			],
+			[
+				"mdbl",
+				"server/models/model-blocks.js"
+			],
+			[
+				"boo",
+				"server/modules/bootstrap.js"
+			],
+			[
+				"setings.",
+				"app/views/partials/settings.jade"
+			],
+			[
+				"foun",
+				"app/css/foundation.css"
+			],
+			[
+				"grid-c",
+				"server/controllers/grid-controller.js"
+			],
+			[
+				"fill",
+				"util/fill.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/projects/Mailgun action/mailgun.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 268.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

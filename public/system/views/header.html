@@ -5,6 +5,9 @@
 
   <div class="left pull-left">
     <ul class="navbar-nav nav">
+      <li class="pull-right">
+        <a href="#!/send-gift">Send gift</a>
+      </li>
       <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
           <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
       </li>
