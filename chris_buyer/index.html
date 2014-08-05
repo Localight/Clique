@@ -1,0 +1,114 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<!-- CSS -->
+	<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">-->
+	<link rel="stylesheet" href="style.css">
+	
+	<!-- JS -->
+	<!-- load angular-->
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+	
+</head>
+
+<!-- apply our angular app -->
+<body ng-app="clique" style="background-color:lightblue;">
+
+	<form name="clique_form" ng-controller="BuyerController as buyerCtrl" novalidate>
+    <div ng-controller="PageController as pageCtrl">
+      <div id="mainPage" ng-show="pageCtrl.isCurrent('main')">
+        <!--Logo-->
+        <div id="clique_logo">
+          <span class="first">The</span>
+          <div class="heart">Local</div>
+          <span class="last">Gift Card</span>
+        </div>
+        <div class="clear"></div>
+        
+        <!--To-->
+        <div id="clique_to">
+          <span>To</span>
+          <input type="text" name="To" placeholder="First Name" ng-model="formData.To" required />
+        </div>
+        
+        <!--From-->
+        <div id="clique_from">
+          <span>From</span>
+          <input type="text" name="To" placeholder="Your Name" ng-model="formData.From" required />
+        </div>
+        
+        <!--Amount-->
+        <div id="clique_amt" ng-controller="AmountController as amtCtrl">
+          <span class="leftarrow hide"></span>
+          <span class="rightarrow hide"></span>
+          <span ng-repeat="price in amtCtrl.prices" ng-class="{active: amtCtrl.is(price)}" ng-click="amtCtrl.set(price)">${{price}}</span>
+        </div>
+        
+        <!--Code-->
+        <div id="clique_code">
+          <span>Code</span>
+          <input type="text" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required />
+        </div>
+        
+        <!--Occasion-->
+        <div id="clique_occasion_selection" ng-controller="OccasionController as occCtrl">
+          <div style="float:left">
+            <div ng-repeat="occasion in occCtrl.left_column">
+              <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+            </div>
+          </div>
+          <div style="float:left">
+            <div ng-repeat="occasion in occCtrl.right_column">
+              <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          
+          <div id="clique_occasion">
+            <span class="inputlabel"></span>
+            <div class="charactercounter">{{occCtrl.charCount}}</div>
+            <textarea id="clique_input_occasion" maxlength="80" ng-model="formData.Occasion" required></textarea>
+            <input type="hidden" id="occasion_icon" ng-model="formData.Icon" required>
+          </div>
+        </div>
+        
+        <!--Date-->
+        <div id="clique_senddate">
+          <span class="inputlabel">Send</span>
+          <input readonly="readonly" type="text" id="clique_input_date" />
+          <div class="sendtoday"><img src="../public/demo23_files/sendtoday.png" alt="Send Today" /></div>
+          <div class="choosedate">
+            <img class="sendOnDate" src="../public/demo23_files/sendondate.png" alt="Choose a Date" />
+            <input type="date" class="hide" id="cliquedate" value="2013-12-31" min="2014-02-01" />
+            <input type="text" id="clique_input_enterdate" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
+          </div>
+        </div>
+      </div>
+      
+      <div id="reviewPage" ng-show="pageCtrl.isCurrent('review')">TEST
+      </div>
+    </div>
+    <pre>
+      To: {{formData.To}}
+      From: {{formData.From}}
+      Amount: {{formData.Amount}}
+      Code: {{formData.Code}}
+      Occasion: {{formData.Occasion}}
+      Date: {{formData.Date}}
+      CreditCardNumber: {{formData.CreditCardNumber}}
+      ExpireMonth: {{formData.ExpireMonth}}
+      ExpireYear: {{formData.ExpireYear}}
+      ExpireCVV: {{formData.ExpireCVV}}
+      PhoneNumber: {{formData.PhoneNumber}}
+      Email: {{formData.Email}}
+      Icon: {{formData.Icon}}
+      UniqueLink: {{formData.UniqueLink}}
+    </pre>
+    <div> clique_form is {{clique_form.$valid}} </div>
+	</form>
+</body>
+</html>
