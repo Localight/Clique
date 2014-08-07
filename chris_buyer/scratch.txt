@@ -1,0 +1,110 @@
+ng-click="dtCtrl.setDateType('today')"
+ng-click="dtCtrl.setDateType('choose')"
+
+
+<!-- initial attempt at using pickadate.js -->
+<script>
+  $('#datepicker').pickadate({
+    min: new Date(),
+    max: +365,
+    clear: '',
+    editable: true
+  });
+  
+  var button_open_close = $( '#setDateImg' );
+  var input_open_close = $( '#datepicker' ).pickadate();
+  var picker_open_close = input_open_close.pickadate('picker');
+  button_open_close.
+      on( 'click', function( event ) {
+          // if ( picker_open_close.get( 'open' ) ) {
+          //     picker_open_close.close()
+          // }
+          // else {
+              picker_open_close.open()
+          // }
+          event.stopPropagation()
+      }).
+      on( 'mousedown', function(event) {
+          event.preventDefault()
+      });
+  picker_open_close.on({close: function() {
+    console.log('Closed now');
+    console.log(picker_open_close.get());
+    $('#datepicker')[0].blur();
+  }});
+</script>
+
+<!-- trying hidden input for pickadate.js -->
+<script>
+$('#datepicker').pickadate({
+  min: new Date(),
+  max: +365,
+  clear: '',
+  editable: true,
+  formatSubmit: 'yyyy/mm/dd',
+  hiddenName: true,
+  onSet: function( event ) {
+    console.log('onSet')
+    //if ( event.select ) {
+        this.$node.
+            closest( '#datepicker_hidden' ).
+            after( '<div>' +
+                '<p>Value to submit: <code>' +
+                    this.get( 'select', 'yyyy/mm/dd' ) +
+                '</code></p>' +
+                '<p>Using the name: <code>' +
+                    this._hidden.name +
+                '</code></p></div>'
+            )
+    //}
+  }
+});
+</script>
+
+
+<!-- trying to manually format the date strings -->
+<script>
+cliqueApp.controller('DateController', function($scope){
+  this.dateType = '';
+  
+  this.setDateType = function(type){
+    this.dateType = type;
+    if (type == 'today') {
+      today = new Date();
+      yyyy = today.getFullYear();
+      mm = today.getMonth() + 1; // getMonth() returns values from 0-11
+      dd = today.getDate();
+      if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} // add '0' in front of day and month when necessary
+      $scope.formData.Date = yyyy + '-' + mm + '-' + dd;
+      
+    }
+    else if (type == 'choose') {
+      // do nothing
+    }
+  };
+  
+  this.formatDate = function(){
+    date = $scope.formData.Date.split('-');
+    yyyy = date[0];
+    mm = date[1] - 1;
+    dd = date[2];
+    
+    this.formattedDate = new Date(yyyy,mm,dd).toDateString();
+  };
+});
+</script>
+
+<!-- all of the different inputs I tried -->
+<div pickadate ng-model="formData.Date" ng-show="dtCtrl.showPickADate"></div>
+<input type="hidden" ng-model="formData.Date" ng-change="dtCtrl.formatDate()">
+<input type="text" pick-a-date="date" placeholder="Select Date" ng-model="formData.Date" /> {{ date }}
+<input id="datepicker" type="text" pick-a-date="dtCtrl.curDate" >
+<input id="datepicker_hidden" type="hidden" name="date_input" ng-model="dtCtrl.Date">
+<input type="date" ng-model="formData.Date" required>
+
+<!-- all of the header JS / CSS files -->
+<script src="pickadateJS/angular-datepicker.js"></script>
+<script src="pickadateJS/date.js"></script>
+<script src="pickadateJS/angularPickadate.js"></script>
+<script src="angular-pickadate/angular-pickadate.js"></script>
+<link rel="stylesheet" href="angular-pickadate/angular-pickadate.css">

@@ -7,12 +7,18 @@
 	<!-- CSS -->
 	<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">-->
 	<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pickadateJS/default.css">
+  <link rel="stylesheet" href="pickadateJS/default.date.css">
 	
 	<!-- JS -->
-	<!-- load angular-->
+	<!-- load angular and jquery-->
 	<script src="angular.min.js"></script>
+  <script src="jquery-2.1.1.min.js"></script>
 	<script src="app.js"></script>
-	
+  
+  <!-- DatePicker -->
+  <script src="pickadateJS/picker.js"></script>
+  <script src="pickadateJS/picker.date.js"></script>
 </head>
 
 <!-- apply our angular app -->
@@ -55,36 +61,43 @@
         </div>
         
         <!--Occasion-->
-        <div id="clique_occasion_selection" ng-controller="OccasionController as occCtrl">
-          <div style="float:left">
-            <div ng-repeat="occasion in occCtrl.left_column">
-              <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+        <div ng-controller="OccasionController as occCtrl">
+          <div id="clique_occasion_selection">
+            <div style="float:left">
+              <div ng-repeat="occasion in occCtrl.left_column">
+                <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+              </div>
             </div>
-          </div>
-          <div style="float:left">
-            <div ng-repeat="occasion in occCtrl.right_column">
-              <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+            <div style="float:left">
+              <div ng-repeat="occasion in occCtrl.right_column">
+                <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
+              </div>
             </div>
+            <div style="clear: both;"></div>
           </div>
-          <div style="clear: both;"></div>
           
           <div id="clique_occasion">
-            <span class="inputlabel"></span>
-            <div class="charactercounter">{{occCtrl.charCount}}</div>
-            <textarea id="clique_input_occasion" maxlength="80" ng-model="formData.Occasion" required></textarea>
+            <div>{{occCtrl.charsLeft}}</div>
+            <textarea id="clique_input_occasion" maxlength="100" ng-keypress="occCtrl.limitText()" ng-keyup="occCtrl.limitText()" ng-model="formData.Occasion" required></textarea>
+            <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
             <input type="hidden" id="occasion_icon" ng-model="formData.Icon" required>
           </div>
         </div>
         
         <!--Date-->
-        <div id="clique_senddate">
-          <span class="inputlabel">Send</span>
-          <input readonly="readonly" type="text" id="clique_input_date" />
-          <div class="sendtoday"><img src="../public/demo23_files/sendtoday.png" alt="Send Today" /></div>
-          <div class="choosedate">
-            <img class="sendOnDate" src="../public/demo23_files/sendondate.png" alt="Choose a Date" />
-            <input type="date" class="hide" id="cliquedate" value="2013-12-31" min="2014-02-01" />
-            <input type="text" id="clique_input_enterdate" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
+        <div id="clique_senddate" ng-controller="DateController as dtCtrl">
+          <div>
+            <span>Send</span>
+            <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date" />
+            <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date" />
+          </div>
+          <div>
+            <div>
+              <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" />
+              <img id="setDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date"  />
+            </div>
+            <input id="datepicker" size="13" name="date_input" ng-model="dtCtrl.formattedDate" required>
+            <span>Send on {{dtCtrl.formattedDate}}</span>
           </div>
         </div>
       </div>
@@ -109,6 +122,45 @@
       UniqueLink: {{formData.UniqueLink}}
     </pre>
     <div> clique_form is {{clique_form.$valid}} </div>
+    <script>
+    $('#datepicker').pickadate({
+      min: new Date(),
+      max: +365,
+      clear: '',
+      format: 'mmm. dd, yyyy',
+      formatSubmit: 'yyyy-mm-dd',
+      hiddenSuffix: '_hidden'
+    });
+    
+    var setDateImg = $('#setDateImg');
+    var setTodayImg = $('#setTodayImg');
+    var datepicker_input = $( '#datepicker' ).pickadate();
+    var picker = datepicker_input.pickadate('picker');
+    setDateImg.
+      on( 'click', function( event ) {
+        picker.open()
+        event.stopPropagation()
+      });
+    setTodayImg.
+      on( 'click', function( event ) {
+        picker.set('select', new Date()) // set picker to today
+        var today = picker.get('highlight', 'yyyy-mm-dd') // get formatted string
+        var myScope = angular.element(datepicker_input).scope();
+        myScope.$apply(function() {
+          myScope.dtCtrl.setDate(today); // set formData.Date to today
+        });
+        event.stopPropagation()
+      });
+    picker.on({close: function() {
+      datepicker_input.blur(); // remove focus from input element
+      var hidden_input = $('[name="date_input_hidden"]')[0]; // get hidden input object
+      console.log(hidden_input)
+      var myScope = angular.element(hidden_input).scope();
+      myScope.$apply(function() {
+        myScope.dtCtrl.setDate(hidden_input.value); // set formData.Date to the hidden input
+      });
+    }});
+  </script>
 	</form>
 </body>
 </html>

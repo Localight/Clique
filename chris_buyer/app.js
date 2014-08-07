@@ -1,4 +1,5 @@
 (function(){
+  // var cliqueApp = angular.module('clique',['pickadate']);
   var cliqueApp = angular.module('clique',[]);
   
   cliqueApp.controller('BuyerController', function($scope){
@@ -28,10 +29,8 @@
   
   cliqueApp.controller('AmountController', function($scope){
     this.prices = [2,25,50,75,100,250,500];
-    // this.amount = '';
     
     this.set = function(newAmount){
-      // this.amount = newAmount;
       $scope.formData.Amount = newAmount;
     };
     
@@ -51,7 +50,8 @@
   // });
   
   cliqueApp.controller('OccasionController', function($scope){
-    this.charCount = 80;
+    this.charsLeft = 100;
+    this.charLimit = 100;
     this.left_column = [
       {
         name: 'birthday',
@@ -69,7 +69,7 @@
           selected: '../public/demo23_files/occasion_anniversary_selected.png'
         },
         alt: 'Anniversary',
-        text: 'You remind me of time itself for you are my Past, Present, Future, and Forever. I love you. Happy Anniversary.'
+        text: 'You remind me of time itself for you are my Past, Future, and Forever. Happy Anniversary!'
       },
       {
         name: 'love',
@@ -78,7 +78,7 @@
           selected: '../public/demo23_files/occasion_love_selected.png'
         },
         alt: 'I Love You',
-        text: 'I love you! "Whatever our souls are made of, yours & mine are the same." ~ Emily Bronte'
+        text: 'I Iove you for all that you are, all you have been, and all you\'re yet to be.'
       },
       {
         name: 'getwell',
@@ -87,7 +87,7 @@
           selected: '../public/demo23_files/occasion_getwell_selected.png'
         },
         alt: 'Get Well',
-        text: 'Your family and friends miss you and look forward to your speedy recovery. Get well soon!'
+        text: 'I look forward to your speedy recovery. Get well soon!'
       },
       {
         name: 'congrats',
@@ -107,7 +107,7 @@
           selected: '../public/demo23_files/occasion_wedding_selected.png'
         },
         alt: 'Wedding',
-        text: 'Falling in love is EASY. But staying in love is EXTRAORDINARY. Congratulations on your marriage!'
+        text: 'Falling in love is easy. Staying in love is AMAZING. Congrats on your marriage!'
       },
       {
         name: 'baby',
@@ -151,6 +151,28 @@
       if ($scope.formData.Icon != occasion.name)
         $scope.formData.Occasion = occasion.text;
       $scope.formData.Icon = occasion.name;
+      this.limitText();
+    };
+    this.limitText = function() {
+      limit = this.charLimit;
+      
+      occasion = $scope.formData.Occasion;
+      if (typeof occasion != 'string') // == undefined || occasion == null
+        occasion = '';
+      
+      if (occasion.length > limit)
+        occasion = occasion.substring(0, limit);
+      else
+        this.charsLeft = limit - occasion.length;
+    }
+  });
+  
+  cliqueApp.controller('DateController', function($scope){
+    this.formattedDate = '';
+    
+    this.setDate = function(newDate){
+      $scope.formData.Date = newDate;
+      this.formattedDate = $('#datepicker').val(); // bind to ng-model
     }
   });
   
