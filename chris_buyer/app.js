@@ -22,17 +22,18 @@
   cliqueApp.directive('pickADate', function () {
     return {
       restrict: "A",
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
         element.pickadate({
           min: new Date(), // minimum date = today
           max: +365, // maximum date = 1 year from now
           clear: '', // disable 'Clear' button
+          format: 'yyyy-mm-dd',
           onSet: function(){
             var date = this.get('select', 'yyyy-mm-dd'); // 'this' refers to element.pickadate()
             var formattedDate = this.get('select', 'mmm. dd, yyyy');
             scope.$apply(function(){
-              scope.formData.Date = date;
               scope.formattedDate = formattedDate;
+              return date; // this is what ng-model binds to
             });
           },
           onClose: function(){
