@@ -108,3 +108,40 @@ cliqueApp.controller('DateController', function($scope){
 <script src="pickadateJS/angularPickadate.js"></script>
 <script src="angular-pickadate/angular-pickadate.js"></script>
 <link rel="stylesheet" href="angular-pickadate/angular-pickadate.css">
+
+<!-- working datepicker -->
+<script>
+  $('#datepicker').pickadate({
+    min: new Date(),
+    max: +365,
+    clear: '',
+    format: 'mmm. dd, yyyy',
+    formatSubmit: 'yyyy-mm-dd',
+    hiddenSuffix: '_hidden'
+  });
+  
+  var setDateImg = $('#setDateImg');
+  var setTodayImg = $('#setTodayImg');
+  var datepicker_input = $('#datepicker');
+  var picker = datepicker_input.pickadate('picker');
+  setDateImg.on( 'click', function( event ) {
+      picker.open()
+      event.stopPropagation() // stop click event from triggering picker.close()
+  });
+  setTodayImg.on( 'click', function( event ) {
+      picker.set('select', new Date()) // set picker to today
+      var today = picker.get('highlight', 'yyyy-mm-dd') // get formatted string
+      var myScope = angular.element(datepicker_input).scope();
+      myScope.$apply(function() {
+        myScope.setDate(today); // set formData.Date to today
+      });
+  });
+  picker.on({close: function() {
+    datepicker_input.blur(); // remove focus from input element
+    var hidden_input = $('[name="date_input_hidden"]')[0]; // get hidden input object
+    var myScope = angular.element(hidden_input).scope();
+    myScope.$apply(function() {
+      myScope.setDate(hidden_input.value); // set formData.Date to the hidden input
+    });
+  }});
+</script>

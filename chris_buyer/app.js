@@ -1,6 +1,42 @@
 (function(){
-  // var cliqueApp = angular.module('clique',['pickadate']);
   var cliqueApp = angular.module('clique',[]);
+  
+  cliqueApp.directive('pickADate', function () {
+    return {
+      restrict: "A",
+      link: function (scope, element, attrs) {
+        element.pickadate({
+          min: new Date(), // minimum date = today
+          max: +365, // maximum date = 1 year from now
+          clear: '', // disable 'Clear' button
+          onSet: function(){
+            var date = this.get('select', 'yyyy-mm-dd'); // 'this' refers to element.pickadate()
+            var formattedDate = this.get('select', 'mmm. dd, yyyy');
+            scope.$apply(function(){
+              scope.formData.Date = date;
+              scope.formattedDate = formattedDate;
+            });
+          },
+          onClose: function(){
+            element.blur(); // remove focus from input element
+          }
+        });
+        
+        var picker = element.pickadate('picker');
+        
+        var setTodayImg = $('#setTodayImg');
+        setTodayImg.on('click', function(event){
+          picker.set('select', new Date()); // set picker to today --> triggers onSet()
+        });
+        
+        var setOnDateImg = $('#setOnDateImg');
+        setOnDateImg.on('click', function(event){
+          picker.open();
+          event.stopPropagation(); // stop click event outside of input from triggering picker.close()
+        });
+      }
+    };
+  });
   
   cliqueApp.controller('BuyerController', function($scope){
     // we will store all of our form data in this object
@@ -51,9 +87,10 @@
     
     $scope.setOccasion = function(occasion){
       // change occasion text only if a new occasion is selected
-      if ($scope.formData.Icon != occasion.name)
+      if ($scope.formData.Icon != occasion.name) {
         $scope.formData.Occasion = occasion.text;
-      $scope.formData.Icon = occasion.name;
+        $scope.formData.Icon = occasion.name;
+      }
       $scope.limitOccText();
     };
     
@@ -65,10 +102,6 @@
     * Date
     **********/
     $scope.formattedDate = '';
-    $scope.setDate = function(newDate){
-      $scope.formData.Date = newDate;
-      $scope.formattedDate = $('#datepicker').val(); // bind to ng-model
-    };
   }]);
   
   cliqueApp.factory('TextService', function(){
