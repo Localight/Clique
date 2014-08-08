@@ -1,5 +1,23 @@
 (function(){
-  var cliqueApp = angular.module('clique',[]);
+  var cliqueApp = angular.module('clique',['ui.router']);
+  
+  // configuring our routes 
+  cliqueApp.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('main', { // route to show our main page (/)
+        url: '/',
+        templateUrl: 'partials/main.html',
+        controller: 'MainController'
+      })
+      .state('review', { // review page (/review)
+        url: '/review',
+        templateUrl: 'partials/review.html',
+        controller: 'ReviewController'
+      });
+       
+    // catch all route: send users to the main page
+    $urlRouterProvider.otherwise('/');
+  });
   
   cliqueApp.directive('pickADate', function () {
     return {
@@ -103,6 +121,10 @@
     **********/
     $scope.formattedDate = '';
   }]);
+  
+  cliqueApp.controller('ReviewController', function(){
+    //
+  });
   
   cliqueApp.factory('TextService', function(){
     var TextService = {};
