@@ -27,32 +27,68 @@
     };
   });
   
-  cliqueApp.controller('AmountController', function($scope){
-    this.prices = [2,25,50,75,100,250,500];
-    
-    this.set = function(newAmount){
+  cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
+                                  function($scope,   TextService,   OccasionService){
+    /**********
+    * Amount
+    **********/
+    $scope.prices = [2,25,50,75,100,250,500];
+    $scope.setAmount = function(newAmount){
       $scope.formData.Amount = newAmount;
     };
-    
-    this.is = function(checkAmount){
+    $scope.isAmount = function(checkAmount){
       return $scope.formData.Amount == checkAmount; // boolean
-    }
+    };
+    
+    /**********
+    * Occasion
+    **********/
+    // import occasions: $scope.occasions.left_column, $scope.occasions.right_column
+    $scope.occasions = OccasionService;
+    
+    $scope.occasions.charsLeft = 100;
+    var occCharLimit = 100;
+    
+    $scope.setOccasion = function(occasion){
+      // change occasion text only if a new occasion is selected
+      if ($scope.formData.Icon != occasion.name)
+        $scope.formData.Occasion = occasion.text;
+      $scope.formData.Icon = occasion.name;
+      $scope.limitOccText();
+    };
+    
+    $scope.limitOccText = function() {
+      $scope.occasions.charsLeft = TextService.limit($scope.formData.Occasion, occCharLimit);
+    };
+    
+    /**********
+    * Date
+    **********/
+    $scope.formattedDate = '';
+    $scope.setDate = function(newDate){
+      $scope.formData.Date = newDate;
+      $scope.formattedDate = $('#datepicker').val(); // bind to ng-model
+    };
+  }]);
+  
+  cliqueApp.factory('TextService', function(){
+    var TextService = {};
+    TextService.limit = function(text, charLimit) {
+      // if text is undefined or null, set equal to empty string
+      if (typeof text != 'string') text = '';
+      charsLeft = 0;
+      if (text.length > charLimit)
+        text = text.substring(0, charLimit); // trim text to charLimit
+      else
+        charsLeft = charLimit - text.length;
+      return charsLeft;
+    };
+    return TextService;
   });
   
-  // cliqueApp.controller('CodeController', function(){
-    // this.click = function(event){
-      // var elem = $(event.currentTarget);
-    	// if(elem.val() == 'Code') {
-    		// elem.prop('value','');
-    		// $('#clique_code span.inputlabel').html('Code');
-    	// }
-    // };
-  // });
-  
-  cliqueApp.controller('OccasionController', function($scope){
-    this.charsLeft = 100;
-    this.charLimit = 100;
-    this.left_column = [
+  cliqueApp.factory('OccasionService', function(){
+    var occasions = {};
+    occasions.left_column = [
       {
         name: 'birthday',
         images: {
@@ -99,7 +135,7 @@
         text: 'Spread joy. Chase your wildest dreams. Congratulations!'
       }
     ];
-    this.right_column = [
+    occasions.right_column = [
       {
         name: 'wedding',
         images: {
@@ -146,44 +182,6 @@
         text: 'If you want to be loved for who you are, just be yourself.'
       }
     ];
-    this.set = function(occasion){
-      // change occasion text only if a new occasion is selected
-      if ($scope.formData.Icon != occasion.name)
-        $scope.formData.Occasion = occasion.text;
-      $scope.formData.Icon = occasion.name;
-      this.limitText();
-    };
-    this.limitText = function() {
-      limit = this.charLimit;
-      
-      occasion = $scope.formData.Occasion;
-      if (typeof occasion != 'string') // == undefined || occasion == null
-        occasion = '';
-      
-      if (occasion.length > limit)
-        occasion = occasion.substring(0, limit);
-      else
-        this.charsLeft = limit - occasion.length;
-    }
+    return occasions;
   });
-  
-  cliqueApp.controller('DateController', function($scope){
-    this.formattedDate = '';
-    
-    this.setDate = function(newDate){
-      $scope.formData.Date = newDate;
-      this.formattedDate = $('#datepicker').val(); // bind to ng-model
-    }
-  });
-  
-  cliqueApp.controller('PageController', function(){
-    this.page = 'main';
-    this.isCurrent = function(page){
-      return this.page == page;
-    };
-    this.setPage = function(page){
-      this.page = page;
-    }
-  })
-
 })();

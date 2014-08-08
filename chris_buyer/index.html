@@ -25,84 +25,79 @@
 <body ng-app="clique" style="background-color:lightblue;">
 
 	<form name="clique_form" ng-controller="BuyerController as buyerCtrl" novalidate>
-    <div ng-controller="PageController as pageCtrl">
-      <div id="mainPage" ng-show="pageCtrl.isCurrent('main')">
-        <!--Logo-->
-        <div id="clique_logo">
-          <span class="first">The</span>
-          <div class="heart">Local</div>
-          <span class="last">Gift Card</span>
-        </div>
-        <div class="clear"></div>
-        
-        <!--To-->
-        <div id="clique_to">
-          <span>To</span>
-          <input type="text" name="To" placeholder="First Name" ng-model="formData.To" required />
-        </div>
-        
-        <!--From-->
-        <div id="clique_from">
-          <span>From</span>
-          <input type="text" name="To" placeholder="Your Name" ng-model="formData.From" required />
-        </div>
-        
-        <!--Amount-->
-        <div id="clique_amt" ng-controller="AmountController as amtCtrl">
-          <span class="leftarrow hide"></span>
-          <span class="rightarrow hide"></span>
-          <span ng-repeat="price in amtCtrl.prices" ng-class="{active: amtCtrl.is(price)}" ng-click="amtCtrl.set(price)">${{price}}</span>
-        </div>
-        
-        <!--Code-->
-        <div id="clique_code">
-          <span>Code</span>
-          <input type="text" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required />
-        </div>
-        
-        <!--Occasion-->
-        <div ng-controller="OccasionController as occCtrl">
-          <div id="clique_occasion_selection">
-            <div style="float:left">
-              <div ng-repeat="occasion in occCtrl.left_column">
-                <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
-              </div>
+    <div id="mainPage" ng-controller="MainController">
+      <!--Logo-->
+      <div id="clique_logo">
+        <span class="first">The</span>
+        <div class="heart">Local</div>
+        <span class="last">Gift Card</span>
+      </div>
+      <div class="clear"></div>
+      
+      <!--To-->
+      <div id="clique_to">
+        <span>To</span>
+        <input type="text" name="To" placeholder="First Name" ng-model="formData.To" required />
+      </div>
+      
+      <!--From-->
+      <div id="clique_from">
+        <span>From</span>
+        <input type="text" name="To" placeholder="Your Name" ng-model="formData.From" required />
+      </div>
+      
+      <!--Amount-->
+      <div id="clique_amt">
+        <span class="leftarrow hide"></span>
+        <span class="rightarrow hide"></span>
+        <span ng-repeat="price in prices" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
+      </div>
+      
+      <!--Code-->
+      <div id="clique_code">
+        <span>Code</span>
+        <input type="text" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required />
+      </div>
+      
+      <!--Occasion-->
+      <div>
+        <div id="clique_occasion_selection">
+          <div style="float:left">
+            <div ng-repeat="occasion in occasions.left_column">
+              <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)" />
             </div>
-            <div style="float:left">
-              <div ng-repeat="occasion in occCtrl.right_column">
-                <img ng-src="{{occasion.images.normal}}" ng-click="occCtrl.set(occasion)" />
-              </div>
+          </div>
+          <div style="float:left">
+            <div ng-repeat="occasion in occasions.right_column">
+              <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)" />
             </div>
-            <div style="clear: both;"></div>
           </div>
-          
-          <div id="clique_occasion">
-            <div>{{occCtrl.charsLeft}}</div>
-            <textarea id="clique_input_occasion" maxlength="100" ng-keypress="occCtrl.limitText()" ng-keyup="occCtrl.limitText()" ng-model="formData.Occasion" required></textarea>
-            <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
-            <input type="hidden" id="occasion_icon" ng-model="formData.Icon" required>
-          </div>
+          <div style="clear: both;"></div>
         </div>
         
-        <!--Date-->
-        <div id="clique_senddate" ng-controller="DateController as dtCtrl">
-          <div>
-            <span>Send</span>
-            <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date" />
-            <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date" />
-          </div>
-          <div>
-            <div>
-              <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" />
-              <img id="setDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date"  />
-            </div>
-            <input id="datepicker" size="13" name="date_input" ng-model="dtCtrl.formattedDate" required>
-            <span>Send on {{dtCtrl.formattedDate}}</span>
-          </div>
+        <div id="clique_occasion">
+          <div>{{occasions.charsLeft}}</div>
+          <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
+          <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
+          <input type="hidden" id="occasion_icon" ng-model="formData.Icon" required>
         </div>
       </div>
       
-      <div id="reviewPage" ng-show="pageCtrl.isCurrent('review')">TEST
+      <!--Date-->
+      <div id="clique_senddate">
+        <div>
+          <span>Send</span>
+          <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date" />
+          <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date" />
+        </div>
+        <div>
+          <div>
+            <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" />
+            <img id="setDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date"  />
+          </div>
+          <input id="datepicker" size="13" name="date_input" ng-model="formattedDate" required>
+          <span>Send on {{formattedDate}}</span>
+        </div>
       </div>
     </div>
     <pre>
@@ -134,30 +129,26 @@
     
     var setDateImg = $('#setDateImg');
     var setTodayImg = $('#setTodayImg');
-    var datepicker_input = $( '#datepicker' ).pickadate();
+    var datepicker_input = $('#datepicker');
     var picker = datepicker_input.pickadate('picker');
-    setDateImg.
-      on( 'click', function( event ) {
+    setDateImg.on( 'click', function( event ) {
         picker.open()
-        event.stopPropagation()
-      });
-    setTodayImg.
-      on( 'click', function( event ) {
+        event.stopPropagation() // stop click event from triggering picker.close()
+    });
+    setTodayImg.on( 'click', function( event ) {
         picker.set('select', new Date()) // set picker to today
         var today = picker.get('highlight', 'yyyy-mm-dd') // get formatted string
         var myScope = angular.element(datepicker_input).scope();
         myScope.$apply(function() {
-          myScope.dtCtrl.setDate(today); // set formData.Date to today
+          myScope.setDate(today); // set formData.Date to today
         });
-        event.stopPropagation()
-      });
+    });
     picker.on({close: function() {
       datepicker_input.blur(); // remove focus from input element
       var hidden_input = $('[name="date_input_hidden"]')[0]; // get hidden input object
-      console.log(hidden_input)
       var myScope = angular.element(hidden_input).scope();
       myScope.$apply(function() {
-        myScope.dtCtrl.setDate(hidden_input.value); // set formData.Date to the hidden input
+        myScope.setDate(hidden_input.value); // set formData.Date to the hidden input
       });
     }});
   </script>
