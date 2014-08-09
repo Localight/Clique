@@ -10,9 +10,14 @@
         controller: 'MainController'
       })
       .state('review', { // review page (/review)
-        url: '/review',
+        url: '/',
         templateUrl: 'partials/review.html',
         controller: 'ReviewController'
+      })
+      .state('final', { // final overlay (/final)
+        url: '/',
+        templateUrl: 'partials/final.html',
+        controller: 'FinalController'
       });
        
     // catch all route: send users to the main page
@@ -60,20 +65,21 @@
   cliqueApp.controller('BuyerController', function($scope){
     // we will store all of our form data in this object
     $scope.formData = {
-    		To: '',
-    		From: '',
-        Amount: '',
-    		Code: '',
-    		Occasion: '',
-    		Date: '',
-    		CreditCardNumber: '',
-    		ExpireMonth: '',
-    		ExpireYear: '',
-    		ExpireCVV: '',
-    		PhoneNumber: '',
-    		Email: '',
-        Icon: '',
-        UniqueLink: ''
+      To: '',
+      From: '',
+      Amount: '',
+      Code: '',
+      Occasion: '',
+      Date: '',
+      CreditCardNumber: '',
+      ExpireMonth: '',
+      ExpireYear: '',
+      ExpireCVV: '',
+      Zipcode: '',
+      PhoneNumber: '',
+      Email: '',
+      Icon: '',
+      UniqueLink: ''
     };
     
     // function to process the form
@@ -102,7 +108,7 @@
     $scope.occasions = OccasionService;
     
     $scope.occasions.charsLeft = 100;
-    var occCharLimit = 100;
+    var occCharLimit = 100; // no need to include the character limit inside $scope
     
     $scope.setOccasion = function(occasion){
       // change occasion text only if a new occasion is selected
@@ -124,6 +130,10 @@
   }]);
   
   cliqueApp.controller('ReviewController', function(){
+    //
+  });
+  
+  cliqueApp.controller('FinalController', function(){
     //
   });
   

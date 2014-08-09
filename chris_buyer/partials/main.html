@@ -16,7 +16,7 @@
   <!--From-->
   <div id="clique_from">
     <span>From</span>
-    <input type="text" name="To" placeholder="Your Name" ng-model="formData.From" required />
+    <input type="text" name="From" placeholder="Your Name" ng-model="formData.From" required />
   </div>
 
   <!--Amount-->
@@ -71,5 +71,48 @@
       <input id="datepicker" pick-a-date="" ng-model="formData.Date" required>
       <span>Send on {{formattedDate}}</span>
     </div>
+  </div>
+  
+  <!--Payment Type-->
+<!--   <div id="clique_paymenttype" class="hide nextinput textinput">
+    <span style="width:53%;" class="inputlabel">Check or Card?</span>
+    <img class="paybycheck" alt="Pay by Check" src="../public/demo23_files/paybycheck.png" />
+    <img class="paybycard" alt="Pay by Card" src="../public/demo23_files/paybycard.png" style="margin-left:5px;" />
+  </div> -->
+  
+    <!-- *** The pay by check section is not functional yet *** -->
+<!--   <div id="clique_paymenttypeselectedcheck" class="hide nextinput textinput">
+      <div class="accountnumbercontainer paymenttypecontainer textinput currentinput">
+          <img class="accountnumber" alt="Pay by Check" src="../public/demo23_files/paybycheck.png" />
+          <input type="text" id="clique_input_accountnumber" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
+      </div>
+      <div class="routingnumbercontainer paymenttypecontainer">
+          <img class="routingnumber" alt="Pay by Card" src="../public/demo23_files/paybycheck.png" style="margin-left:5px;" />
+          <input type="text" id="clique_input_routingnumber" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
+      </div>
+  </div> -->
+  
+  <!--Pay by card-->
+  <div id="clique_paymenttypeselectedcard" class="hide nextinput textinput">
+    <div class="creditcardnumbercontainer paymenttypecontainer textinput currentinput">
+      <span class="inputlabel">
+        <img class="creditcardnumber" alt="Pay by Check" src="../public/demo23_files/paybycard_black.png" />
+      </span>
+      <input type="text" pattern="\d*" id="clique_input_creditcardnumber" ng-model="formData.CreditCardNumber" placeholder="XXXX XXXX XXXX XXXX">
+    </div>
+    <div class="expiredatecontainer paymenttypecontainer textinput currentinput" style="height:44px;">
+      <input type="text" pattern="\d*" id="expiredate_month" ng-model="formData.ExpireMonth" placeholder="MM" required>
+      <input type="text" pattern="\d*" id="expiredate_year" ng-model="formData.ExpireYear" placeholder="YY" required>
+      <input type="text" pattern="\d*" id="expiredate_cvv" ng-model="formData.ExpireCVV" placeholder="CVV" required>
+      <input type="text" pattern="\d*" id="expiredate_zip" ng-model="formData.ZipCode" placeholder="ZIPCODE" required>
+    </div>
+  </div>
+  
+  <!--Go to Review Order-->
+  <div id="clique_revieworder" class="hide">
+    <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png" />
+    <a ui-sref="review">
+      <img class="revieworder" alt="Review Order" src="../public/demo23_files/revieworder.png" />
+    </a>
   </div>
 </div>

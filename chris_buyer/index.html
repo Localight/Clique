@@ -27,7 +27,7 @@
 <!-- apply our angular app -->
 <body ng-app="clique" style="background-color:lightblue;">
 
-	<form name="clique_form" ng-controller="BuyerController as buyerCtrl" ng-submit="processForm()" novalidate>
+	<form name="clique_form" ng-controller="BuyerController" novalidate>
     <div ui-view></div>
     
     <pre>
@@ -41,6 +41,7 @@
       ExpireMonth: {{formData.ExpireMonth}}
       ExpireYear: {{formData.ExpireYear}}
       ExpireCVV: {{formData.ExpireCVV}}
+      ZipCode: {{formData.ZipCode}}
       PhoneNumber: {{formData.PhoneNumber}}
       Email: {{formData.Email}}
       Icon: {{formData.Icon}}
