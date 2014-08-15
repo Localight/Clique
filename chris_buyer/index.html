@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- CSS -->
 	<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">-->
 	<link rel="stylesheet" href="style.css">
@@ -25,11 +26,13 @@
 </head>
 
 <!-- apply our angular app -->
-<body ng-app="clique" style="background-color:lightblue;">
+<body ng-app="clique">
 
 	<form name="clique_form" ng-controller="BuyerController" novalidate>
     <div ui-view></div>
-    
+    <div id="localStreetDiv">
+      <!-- <img id="localStreetImg" src="../public/demo23_files/local-street-low2.png"> -->
+    </div>
     <pre>
       To: {{formData.To}}
       From: {{formData.From}}

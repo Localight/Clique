@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'always_in_my_heartregular';
+    src: url('../public/demo23_files/fonts/always_in_my_heart-webfont.eot');
+    src: url('../public/demo23_files/fonts/always_in_my_heart-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../public/demo23_files/fonts/always_in_my_heart-webfont.woff') format('woff'),
+         url('../public/demo23_files/fonts/always_in_my_heart-webfont.ttf') format('truetype'),
+         url('../public/demo23_files/fonts/always_in_my_heart-webfont.svg#always_in_my_heartregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'profontwindowsregular';
+    src: url('../public/demo23_files/fonts/ProFontWindows-webfont.eot');
+    src: url('../public/demo23_files/fonts/ProFontWindows-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../public/demo23_files/fonts/ProFontWindows-webfont.woff') format('woff'),
+         url('../public/demo23_files/fonts/ProFontWindows-webfont.ttf') format('truetype'),
+         url('../public/demo23_files/fonts/ProFontWindows-webfont.svg#profontwindowsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	font-family: 'helvetica','sans-serif','arial';
+  background-color: #58e6df;
+  /* background-image: url('../public/demo23_files/local-street-low2.png');
+  background-position: center center;
+  background-repeat: no-repeat; */
+  padding: 0px;
+	margin: 0px;
+	height: 100%;
+/* 	padding: 0;
+	margin: 0;
+	height: 100%; */
+}
+
+.clear {
+	clear: both;
+}
+
+.hide {
+	/* display: none; */
+	/*visibility: hidden;*/
+}
+
+.heart {
+	font-family: 'always_in_my_heartregular';
+}
+
+/* Background Image */
+#localStreetDiv {
+  position: fixed;
+  top: 100px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* overflow: hidden; */
+}
+
+#localStreetImg {
+  position: absolute;
+  width: 100%;
+  max-width: 1000px;
+  bottom: -10%;
+  margin: 0 auto;
+  display: table;
+}
+
+/* Clique Logo */
+#clique_logo {
+  width: 200px;
+  margin: -10px auto 10px;
+  /* position: relative; */
+}
+
+#clique_logo span {
+  font-weight: bold;
+  font-size: 1.1em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+#clique_logo span.first {
+  top: 40px;
+  left: 70px;
+}
+
+#clique_logo div {
+  font-size: 5em;
+}
+
+#clique_logo span.last {
+  top: -20px;
+  left: 62px;
+}
+
+/* Wrapper */
+.wrapper {
+/*   display: table;
+  margin: 0 auto; */
+}
+
+/*--- section styles ---*/
+.checkmark
+{
+	position: relative;
+	float: right;
+	right: 15px;
+	top: 8px;
+	z-index: 2;
+	width: 25px;
+}
+
+#clique_section > div
+{
+	/* height: 44px; */
+	/* border-radius: 12px; */
+	margin-bottom: 4px;
+}
+
+label.inputlabel
+{
+	/* margin: 8px 0; */
+  /* margin: 0; */
+  /* padding: 0; */
+	font-size: 1.8em;
+	display: inline-block;
+	width: 25%;
+	text-align: right;
+	/* height: 20px; */
+	/* float: left; */
+}
+
+input.heart, span.heart {
+  font-size: 2.4em;
+  padding: 0;
+  width: 70%;
+  /* display: inline-block; */
+  /* text-align: left; */
+  /* float: left; */
+  border-radius: 12px;
+  border: 0;
+  margin: 0 0 0 2%;
+  color: black;
+}
+
+/* Amount Selection */
+#clique_amt {
+  height: 45px !important;
+  position: relative;
+  overflow-y: hidden; /* don't show scroll bar */
+  text-align: center; /* horizontally center this scrollwindow on the page */
+}
+
+#clique_amt_scrollwindow {
+	overflow-x: scroll;
+	height: 10em; /* push scroll bar downwards out of field of view */
+  white-space: nowrap; /* don't wrap the price spans */
+}
+
+.price {
+	border: 2px solid white;
+	color: white;
+	font-size: 1.6em;
+  display: inline-block;
+	border-radius: 10px;
+  vertical-align: middle;
+	padding: 3px 0 0; /* top, left/right, bottom */
+	height: 38px;
+	width: 75px;
+  margin: 0 3px; /* spacing between price boxes */
+}
+
+.price.active {
+	background-color: white;
+	border: 2px solid black;
+	color: black;
+}
+
+/* span.rightarrow, span.leftarrow
+{
+  vertical-align: top;
+	width: 0; 
+	height: 0; 
+	border-top: .6em solid transparent;
+	border-bottom: .6em solid transparent;
+  background-color: #58e6df;
+	display: inline-block;
+	top: 0.5em;
+}
+
+span.rightarrow
+{
+	border-left: .6em solid #ffffff;
+  margin-right: 10px;
+	right: 1%;
+}
+
+span.leftarrow
+{
+	border-right: .6em solid #ffffff;
+	left: 1%;
+} */

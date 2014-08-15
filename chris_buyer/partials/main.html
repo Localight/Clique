@@ -1,4 +1,4 @@
-<div>
+<div class="wrapper" id="clique_section">
   <!--Logo-->
   <div id="clique_logo">
     <span class="first">The</span>
@@ -9,27 +9,32 @@
 
   <!--To-->
   <div id="clique_to">
-    <span>To</span>
-    <input type="text" name="To" placeholder="First Name" ng-model="formData.To" required />
+    <label for="To" class="inputlabel">To</label>
+    <input type="text" id="To" class="heart" name="To" placeholder="First Name" ng-model="formData.To" required>
   </div>
 
   <!--From-->
   <div id="clique_from">
-    <span>From</span>
-    <input type="text" name="From" placeholder="Your Name" ng-model="formData.From" required />
+    <label for="From" class="inputlabel">From</label>
+    <input type="text" id="From" class="heart" name="From" placeholder="Your Name" ng-model="formData.From" required>
   </div>
 
   <!--Amount-->
   <div id="clique_amt">
-    <span class="leftarrow hide"></span>
-    <span class="rightarrow hide"></span>
-    <span ng-repeat="price in prices" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
+    
+    <div id="clique_amt_scrollwindow">
+      <span class="leftarrow hide"></span>
+        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
+      <span class="rightarrow hide"></span>
+    </div>
+    
   </div>
+  <div class="clear"></div>
 
   <!--Code-->
   <div id="clique_code">
-    <span>Code</span>
-    <input type="text" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required />
+    <label for="Code" class="inputlabel">Code</label>
+    <input type="text" id="Code" class="heart" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required>
   </div>
 
   <!--Occasion-->
@@ -37,15 +42,15 @@
     <div id="clique_occasion_selection">
       <div style="float:left">
         <div ng-repeat="occasion in occasions.left_column">
-          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)" />
+          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
         </div>
       </div>
       <div style="float:left">
         <div ng-repeat="occasion in occasions.right_column">
-          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)" />
+          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
         </div>
       </div>
-      <div style="clear: both;"></div>
+      <div class="clear"></div>
     </div>
     
     <div id="clique_occasion">
@@ -59,14 +64,14 @@
   <!--Date-->
   <div id="clique_senddate">
     <div>
-      <span>Send</span>
-      <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date" />
-      <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date" />
+      <label>Send</label>
+      <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date">
+      <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date">
     </div>
     <div>
       <div>
-        <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" />
-        <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date" />
+        <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today">
+        <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date">
       </div>
       <input id="datepicker" pick-a-date="" ng-model="formData.Date" required>
       <span>Send on {{formattedDate}}</span>
@@ -96,7 +101,7 @@
   <div id="clique_paymenttypeselectedcard" class="hide nextinput textinput">
     <div class="creditcardnumbercontainer paymenttypecontainer textinput currentinput">
       <span class="inputlabel">
-        <img class="creditcardnumber" alt="Pay by Check" src="../public/demo23_files/paybycard_black.png" />
+        <img class="creditcardnumber" alt="Pay by Check" src="../public/demo23_files/paybycard_black.png">
       </span>
       <input type="text" pattern="\d*" id="clique_input_creditcardnumber" ng-model="formData.CreditCardNumber" placeholder="XXXX XXXX XXXX XXXX">
     </div>
@@ -110,9 +115,9 @@
   
   <!--Go to Review Order-->
   <div id="clique_revieworder" class="hide">
-    <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png" />
+    <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png">
     <a ui-sref="review">
-      <img class="revieworder" alt="Review Order" src="../public/demo23_files/revieworder.png" />
+      <img class="revieworder" alt="Review Order" src="../public/demo23_files/revieworder.png">
     </a>
   </div>
 </div>
