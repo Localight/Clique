@@ -37,13 +37,10 @@
   <!--Occasion-->
   <div>
     <div id="clique_occasion_selection">
-      <div class="twoColumn">
-        <img ng-repeat="occasion in occasions.left_column" ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
-      </div>
-      <div class="twoColumn twoColumn_right">
-        <img ng-repeat="occasion in occasions.right_column" ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
-      </div>
-      <!-- <div class="clear"></div> -->
+      <ul>
+        <li ng-repeat="occasion in occasions" ng-click="setOccasion(occasion)"><img ng-src="{{occasion.images.normal}}"></li>
+        <!-- <li style="float: none;" class="clear"> -->
+      </ul>
     </div>
     
     <div id="clique_occasion">

@@ -159,8 +159,7 @@
   });
   
   cliqueApp.factory('OccasionService', function(){
-    var occasions = {};
-    occasions.left_column = [
+    var occasions = [
       {
         name: 'birthday',
         images: {
@@ -205,9 +204,7 @@
         },
         alt: 'Congrats',
         text: 'Spread joy. Chase your wildest dreams. Congratulations!'
-      }
-    ];
-    occasions.right_column = [
+      },
       {
         name: 'wedding',
         images: {
