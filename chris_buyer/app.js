@@ -120,6 +120,8 @@
     };
     
     $scope.limitOccText = function() {
+      textarea = $('#clique_input_occasion');
+      textarea.val(textarea.val().replace(/(\r\n|\n|\r)/gm,"")); // remove all line breaks
       $scope.occasions.charsLeft = TextService.limit($scope.formData.Occasion, occCharLimit);
     };
     

@@ -47,8 +47,10 @@
       <label for="clique_input_occasion" class="inputlabel">
         <img ng-src="{{occasions.selectedImg}}">
       </label>
-      <div id="occCharCount">{{occasions.charsLeft}}</div>
-      <textarea id="clique_input_occasion" class="rightColumn" maxlength="100" ng-change="limitOccText()" ng-model="formData.Occasion" required></textarea>
+      <div id="clique_input_occasion_wrapper" class="rightColumn">
+        <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
+        <span id="occCharCount">{{occasions.charsLeft}}</span>
+      </div>
       <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
     </div>
   </div>
