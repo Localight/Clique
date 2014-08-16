@@ -145,3 +145,6 @@ cliqueApp.controller('DateController', function($scope){
     });
   }});
 </script>
+
+<!-- removed these in the textarea and replaced with ng-change-->
+ng-keypress="limitOccText()" ng-keyup="limitOccText()"

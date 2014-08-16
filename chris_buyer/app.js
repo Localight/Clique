@@ -32,13 +32,11 @@
           min: new Date(), // minimum date = today
           max: +365, // maximum date = 1 year from now
           clear: '', // disable 'Clear' button
-          format: 'yyyy-mm-dd',
+          format: 'Sen!d on mmm. dd, yyyy', // use '!' to escape any "rule" characters
           onSet: function(){
             var date = this.get('select', 'yyyy-mm-dd'); // 'this' refers to element.pickadate()
-            var formattedDate = this.get('select', 'mmm. dd, yyyy');
             scope.$apply(function(){
-              scope.formattedDate = formattedDate;
-              return date; // this is what ng-model binds to
+              scope.formData.Date = date;
             });
           },
           onClose: function(){
@@ -107,6 +105,7 @@
     // import occasions: $scope.occasions.left_column, $scope.occasions.right_column
     $scope.occasions = OccasionService;
     
+    $scope.occasions.selectedImg = '';
     $scope.occasions.charsLeft = 100;
     var occCharLimit = 100; // no need to include the character limit inside $scope
     
@@ -115,6 +114,7 @@
       if ($scope.formData.Icon != occasion.name) {
         $scope.formData.Occasion = occasion.text;
         $scope.formData.Icon = occasion.name;
+        $scope.occasions.selectedImg = occasion.images.selected;
       }
       $scope.limitOccText();
     };
@@ -126,7 +126,13 @@
     /**********
     * Date
     **********/
-    $scope.formattedDate = '';
+    $scope.dateTypeImg = '';
+    $scope.setDateType = function(type) {
+      if(type=='today')
+        $scope.dateTypeImg = '../public/demo23_files/send_today_blk.png';
+      if(type=='choose')
+        $scope.dateTypeImg = '../public/demo23_files/send_on_date_blk.png';
+    }
   }]);
   
   cliqueApp.controller('ReviewController', function(){

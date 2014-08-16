@@ -10,71 +10,76 @@
   <!--To-->
   <div id="clique_to">
     <label for="To" class="inputlabel">To</label>
-    <input type="text" id="To" class="heart" name="To" placeholder="First Name" ng-model="formData.To" required>
+    <input type="text" id="To" class="heart rightColumn" name="To" placeholder="First Name" ng-model="formData.To" required>
   </div>
 
   <!--From-->
   <div id="clique_from">
     <label for="From" class="inputlabel">From</label>
-    <input type="text" id="From" class="heart" name="From" placeholder="Your Name" ng-model="formData.From" required>
+    <input type="text" id="From" class="heart rightColumn" name="From" placeholder="Your Name" ng-model="formData.From" required>
   </div>
 
   <!--Amount-->
   <div id="clique_amt">
-    
+    <span class="leftarrow"></span>
     <div id="clique_amt_scrollwindow">
-      <span class="leftarrow hide"></span>
-        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
-      <span class="rightarrow hide"></span>
+      <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
     </div>
-    
+    <span class="rightarrow"></span>
   </div>
-  <div class="clear"></div>
 
   <!--Code-->
   <div id="clique_code">
     <label for="Code" class="inputlabel">Code</label>
-    <input type="text" id="Code" class="heart" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required>
+    <input type="text" id="Code" class="heart rightColumn" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required>
   </div>
 
   <!--Occasion-->
   <div>
     <div id="clique_occasion_selection">
-      <div style="float:left">
-        <div ng-repeat="occasion in occasions.left_column">
-          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
-        </div>
+      <div class="twoColumn">
+        <img ng-repeat="occasion in occasions.left_column" ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
       </div>
-      <div style="float:left">
-        <div ng-repeat="occasion in occasions.right_column">
-          <img ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
-        </div>
+      <div class="twoColumn twoColumn_right">
+        <img ng-repeat="occasion in occasions.right_column" ng-src="{{occasion.images.normal}}" ng-click="setOccasion(occasion)">
       </div>
-      <div class="clear"></div>
+      <!-- <div class="clear"></div> -->
     </div>
     
     <div id="clique_occasion">
-      <div>{{occasions.charsLeft}}</div>
-      <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
+      <label for="clique_input_occasion" class="inputlabel">
+        <img ng-src="{{occasions.selectedImg}}">
+      </label>
+      <div id="occCharCount">{{occasions.charsLeft}}</div>
+      <textarea id="clique_input_occasion" class="rightColumn" maxlength="100" ng-change="limitOccText()" ng-model="formData.Occasion" required></textarea>
       <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
-      <input type="hidden" id="occasion_icon" ng-model="formData.Icon" required>
     </div>
   </div>
 
   <!--Date-->
   <div id="clique_senddate">
     <div>
-      <label>Send</label>
-      <img src="../public/demo23_files/send_today_blk.png" alt="Chosen Date">
-      <img src="../public/demo23_files/send_on_date_blk.png" alt="Chosen Date">
+      <label class="inputlabel">Send</label>
+      <div id="dateImages" class="rightColumn">
+        <img id="setTodayImg" src="../public/demo23_files/sendtoday2.png" alt="Send Today" ng-click="setDateType('today')">
+        <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date" ng-click="setDateType('choose')">
+      </div>
+<!--       <div id="dateImages" class="rightColumn">
+        <div class="twoColumn">
+          <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" ng-click="setDateType('today')">
+        </div>
+        <div class="twoColumn twoColumn_right">
+          <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date" ng-click="setDateType('choose')">
+        </div>
+      </div>
+      <div class="clear"></div> -->
     </div>
     <div>
-      <div>
-        <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today">
-        <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date">
-      </div>
-      <input id="datepicker" pick-a-date="" ng-model="formData.Date" required>
-      <span>Send on {{formattedDate}}</span>
+      <label class="inputlabel">
+        <img ng-src="{{dateTypeImg}}" alt="Chosen Date">
+      </label>
+      <input id="datepicker" class="rightColumn" pick-a-date="" required>
+
     </div>
   </div>
   
@@ -98,7 +103,7 @@
   </div> -->
   
   <!--Pay by card-->
-  <div id="clique_paymenttypeselectedcard" class="hide nextinput textinput">
+<!--   <div id="clique_paymenttypeselectedcard" class="hide nextinput textinput">
     <div class="creditcardnumbercontainer paymenttypecontainer textinput currentinput">
       <span class="inputlabel">
         <img class="creditcardnumber" alt="Pay by Check" src="../public/demo23_files/paybycard_black.png">
@@ -111,13 +116,13 @@
       <input type="text" pattern="\d*" id="expiredate_cvv" ng-model="formData.ExpireCVV" placeholder="CVV" required>
       <input type="text" pattern="\d*" id="expiredate_zip" ng-model="formData.ZipCode" placeholder="ZIPCODE" required>
     </div>
-  </div>
+  </div> -->
   
   <!--Go to Review Order-->
-  <div id="clique_revieworder" class="hide">
+<!--   <div id="clique_revieworder" class="hide">
     <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png">
     <a ui-sref="review">
       <img class="revieworder" alt="Review Order" src="../public/demo23_files/revieworder.png">
     </a>
-  </div>
+  </div> -->
 </div>
