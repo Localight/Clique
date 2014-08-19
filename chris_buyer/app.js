@@ -93,7 +93,9 @@
     **********/
     $scope.prices = [2,25,50,75,100,250,500];
     $scope.setAmount = function(newAmount){
+      $('#localStreetNoBlur, #localStreetBlur').addClass('blur'); // uses CSS Blur Filter
       $scope.formData.Amount = newAmount;
+      // $('#localStreetDiv').addClass('blurImg');
     };
     $scope.isAmount = function(checkAmount){
       return $scope.formData.Amount == checkAmount; // boolean

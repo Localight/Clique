@@ -30,9 +30,8 @@
 
 	<form name="clique_form" ng-controller="BuyerController" novalidate>
     <div ui-view></div>
-    <div id="localStreetDiv">
-      <!-- <img id="localStreetImg" src="../public/demo23_files/local-street-low2.png"> -->
-    </div>
+    <div id="localStreetBlur" class="localStreet"></div>
+    <div id="localStreetNoBlur" class="localStreet"></div>
     <pre>
       To: {{formData.To}}
       From: {{formData.From}}

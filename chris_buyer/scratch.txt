@@ -148,3 +148,14 @@ cliqueApp.controller('DateController', function($scope){
 
 <!-- removed these in the textarea and replaced with ng-change-->
 ng-keypress="limitOccText()" ng-keyup="limitOccText()"
+
+#localStreetDiv.blurCSS {
+  -webkit-filter: blur(7px);
+  -moz-filter: blur(7px);
+  -o-filter: blur(7px);
+  -ms-filter: blur(7px);
+  filter: blur(7px);
+  transition: background-image 1s ease-out 0s; /* property, duration, timing, delay */
+  -webkit-transition: all 1s linear 0s;
+  -o-transition: all 1s ease-out 0s;
+}
