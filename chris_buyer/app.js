@@ -10,12 +10,12 @@
         controller: 'MainController'
       })
       .state('review', { // review page (/review)
-        url: '/',
+        url: '/review',
         templateUrl: 'partials/review.html',
         controller: 'ReviewController'
       })
       .state('final', { // final overlay (/final)
-        url: '/',
+        url: '/final',
         templateUrl: 'partials/final.html',
         controller: 'FinalController'
       });
@@ -72,7 +72,7 @@
       CreditCardNumber: '',
       ExpireMonth: '',
       ExpireYear: '',
-      ExpireCVV: '',
+      CVV: '',
       Zipcode: '',
       PhoneNumber: '',
       Email: '',
@@ -93,12 +93,19 @@
     **********/
     $scope.prices = [2,25,50,75,100,250,500];
     $scope.setAmount = function(newAmount){
-      $('#localStreetNoBlur, #localStreetBlur').addClass('blur'); // uses CSS Blur Filter
+      $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
       $scope.formData.Amount = newAmount;
       // $('#localStreetDiv').addClass('blurImg');
     };
     $scope.isAmount = function(checkAmount){
       return $scope.formData.Amount == checkAmount; // boolean
+    };
+    
+    /**********
+    * Clique Code
+    **********/
+    $scope.flipCard = function() {
+      $('.front, .back').addClass('flipped');
     };
     
     /**********
@@ -130,18 +137,130 @@
     /**********
     * Date
     **********/
-    $scope.dateTypeImg = '';
+    // set default img
+    $scope.dateTypeImg = 'images/send-today-blk.png';
+    
     $scope.setDateType = function(type) {
       if(type=='today')
-        $scope.dateTypeImg = '../public/demo23_files/send_today_blk.png';
+        $scope.dateTypeImg = 'images/send-today-blk.png';
       if(type=='choose')
-        $scope.dateTypeImg = '../public/demo23_files/send_on_date_blk.png';
-    }
+        $scope.dateTypeImg = 'images/send-on-date-blk.png';
+    };
+    
+    /**********
+    * Payment
+    **********/
+    $scope.setExpireMonthAndYear = function(){
+      res = $scope.Expiry.split(' / ');
+      $scope.formData.ExpireMonth = res[0];
+      $scope.formData.ExpireYear = res[1];
+    };
+    
+    // set default img
+    $scope.cardTypeImg = 'images/cc-basic-blk.png';
+    
+    $scope.updateCreditCardImg = function(){
+      $scope.cardTypeImg;
+      switch ($.formance.creditCardType($scope.formData.CreditCardNumber)) {
+        case 'amex':
+          $scope.cardTypeImg = 'images/cc-amex-blk.png';
+          break;
+        case 'discover':
+          $scope.cardTypeImg = 'images/cc-discover-blk.png';
+          break;
+        case 'mastercard':
+          $scope.cardTypeImg = 'images/cc-mastercard-blk.png';
+          break;
+        case 'visa':
+          $scope.cardTypeImg = 'images/cc-visa-blk.png';
+          break;
+        default:
+          $scope.cardTypeImg = 'images/cc-basic-blk.png';
+      };
+    };
+    
+    
+    /**********
+    * Validation
+    **********/
+    jQuery(function($){
+      fields = ['credit_card_number',
+                'credit_card_expiry',
+                'credit_card_cvc',
+                'dd_mm_yyyy',
+                'yyyy_mm_dd',
+                'email',
+                'number',
+                'phone_number',
+                'time_yy_mm'
+      ];
+
+      $.each( fields, function (index, value) {
+        $('input.'+value).formance('format_'+value)
+          .parent()
+            .append('<label class=\'control-label\'></label>');
+
+        $('input.'+value).on('keyup change blur', function (value) {
+          return function (event) {
+            $this = $(this);
+            if ($this.formance('validate_'+value)) {
+              $this.parent()
+                .removeClass('has-success has-error')
+                .addClass('has-success')
+                .children(':last')
+                  .text('Valid!');
+            } else {
+              $this.parent()
+                .removeClass('has-success has-error')
+                .addClass('has-error')
+                .children(':last')
+                  .text('Invalid');
+            }
+          }
+        }(value));
+      });
+    });
   }]);
   
-  cliqueApp.controller('ReviewController', function(){
-    //
-  });
+  cliqueApp.controller('ReviewController', ['$scope', function($scope){
+        /**********
+    * Validation
+    **********/
+    jQuery(function($){
+      fields = ['email',
+                'phone_number'
+      ];
+
+      $.each( fields, function (index, value) {
+        $('input.'+value).formance('format_'+value)
+          .parent()
+            .append('<label class=\'control-label\'></label>');
+
+        $('input.'+value).on('keyup change blur', function (value) {
+          return function (event) {
+            $this = $(this);
+            if ($this.formance('validate_'+value)) {
+              $this.parent()
+                .removeClass('has-success has-error')
+                .addClass('has-success')
+                .children(':last')
+                  .text('Valid!');
+            } else {
+              $this.parent()
+                .removeClass('has-success has-error')
+                .addClass('has-error')
+                .children(':last')
+                  .text('Invalid');
+            }
+          }
+        }(value));
+      });
+    });
+    
+    $scope.test = function() {
+      alert('hi');
+    }
+  }]);
   
   cliqueApp.controller('FinalController', function(){
     //
@@ -167,8 +286,8 @@
       {
         name: 'birthday',
         images: {
-          normal: '../public/demo23_files/occasion_bday.png',
-          selected: '../public/demo23_files/occasion_bday_selected.png'
+          normal: 'images/occasion-birthday-icon-wht.png',
+          selected: 'images/occasion-birthday-icon-blk.png'
         },
         alt: 'Birthday',
         text: 'Variety is the spice of life. So I’m giving you the gift of choice!'
@@ -176,8 +295,8 @@
       {
         name: 'anniversary',
         images: {
-          normal: '../public/demo23_files/occasion_anniversary.png',
-          selected: '../public/demo23_files/occasion_anniversary_selected.png'
+          normal: 'images/occasion-anniversary-icon-wht.png',
+          selected: 'images/occasion-anniversary-icon-blk.png'
         },
         alt: 'Anniversary',
         text: 'You remind me of time itself for you are my Past, Future, and Forever. Happy Anniversary!'
@@ -185,8 +304,8 @@
       {
         name: 'love',
         images: {
-          normal: '../public/demo23_files/occasion_love.png',
-          selected: '../public/demo23_files/occasion_love_selected.png'
+          normal: 'images/occasion-love-icon-wht.png',
+          selected: 'images/occasion-love-icon-blk.png'
         },
         alt: 'I Love You',
         text: 'I Iove you for all that you are, all you have been, and all you\'re yet to be.'
@@ -194,8 +313,8 @@
       {
         name: 'getwell',
         images: {
-          normal: '../public/demo23_files/occasion_getwell.png',
-          selected: '../public/demo23_files/occasion_getwell_selected.png'
+          normal: 'images/occasion-getwell-icon-wht.png',
+          selected: 'images/occasion-getwell-icon-blk.png'
         },
         alt: 'Get Well',
         text: 'I look forward to your speedy recovery. Get well soon!'
@@ -203,8 +322,8 @@
       {
         name: 'congrats',
         images: {
-          normal: '../public/demo23_files/occasion_congrats.png',
-          selected: '../public/demo23_files/occasion_congrats_selected.png'
+          normal: 'images/occasion-congrats-icon-wht.png',
+          selected: 'images/occasion-congrats-icon-blk.png'
         },
         alt: 'Congrats',
         text: 'Spread joy. Chase your wildest dreams. Congratulations!'
@@ -212,8 +331,8 @@
       {
         name: 'wedding',
         images: {
-          normal: '../public/demo23_files/occasion_wedding.png',
-          selected: '../public/demo23_files/occasion_wedding_selected.png'
+          normal: 'images/occasion-wedding-icon-wht.png',
+          selected: 'images/occasion-wedding-icon-blk.png'
         },
         alt: 'Wedding',
         text: 'Falling in love is easy. Staying in love is AMAZING. Congrats on your marriage!'
@@ -221,8 +340,8 @@
       {
         name: 'baby',
         images: {
-          normal: '../public/demo23_files/occasion_baby.png',
-          selected: '../public/demo23_files/occasion_baby_selected.png'
+          normal: 'images/occasion-baby-icon-wht.png',
+          selected: 'images/occasion-baby-icon-blk.png'
         },
         alt: 'Baby',
         text: 'Congratulations on the birth of your child!'
@@ -230,8 +349,8 @@
       {
         name: 'sympathy',
         images: {
-          normal: '../public/demo23_files/occasion_sympathy.png',
-          selected: '../public/demo23_files/occasion_sympathy_selected.png'
+          normal: 'images/occasion-sympathy-icon-wht.png',
+          selected: 'images/occasion-sympathy-icon-blk.png'
         },
         alt: 'Sympathy',
         text: 'Our collective hearts are heavy with sympathy.'
@@ -239,8 +358,8 @@
       {
         name: 'thankyou',
         images: {
-          normal: '../public/demo23_files/occasion_thankyou.png',
-          selected: '../public/demo23_files/occasion_thankyou_selected.png'
+          normal: 'images/occasion-thankyou-icon-wht.png',
+          selected: 'images/occasion-thankyou-icon-blk.png'
         },
         alt: 'Thank You',
         text: 'You’re the best! You deserve some retail therapy.'
@@ -248,8 +367,8 @@
       {
         name: 'custom',
         images: {
-          normal: '../public/demo23_files/occasion_custom.png',
-          selected: '../public/demo23_files/occasion_custom_selected.png'
+          normal: 'images/occasion-custom-icon-wht.png',
+          selected: 'images/occasion-custom-icon-blk.png'
         },
         alt: 'Custom',
         text: 'If you want to be loved for who you are, just be yourself.'

@@ -1,57 +1,65 @@
-<div class="wrapper" id="clique_section">
+<div class="wrapper">
   <!--Logo-->
-  <div id="clique_logo">
-    <span class="first">The</span>
-    <div class="heart">Local</div>
-    <span class="last">Gift Card</span>
-  </div>
-  <div class="clear"></div>
-
+  <img class="clique_logo" src="images/logo-local-gift-card-blk.png">
+  
   <!--To-->
   <div id="clique_to">
     <label for="To" class="inputlabel">To</label>
-    <input type="text" id="To" class="heart rightColumn" name="To" placeholder="First Name" ng-model="formData.To" required>
+    <input type="text" id="To" class="heart rightColumn" name="To" placeholder="First Name" maxlength="16" ng-model="formData.To" required>
   </div>
 
   <!--From-->
   <div id="clique_from">
     <label for="From" class="inputlabel">From</label>
-    <input type="text" id="From" class="heart rightColumn" name="From" placeholder="Your Name" ng-model="formData.From" required>
+    <input type="text" id="From" class="heart rightColumn" name="From" placeholder="Your Name" maxlength="16" ng-model="formData.From" required>
   </div>
 
   <!--Amount-->
-  <div id="clique_amt">
+  <div id="clique_amt_selection">
     <span class="leftarrow"></span>
     <div id="clique_amt_scrollwindow">
       <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
     </div>
     <span class="rightarrow"></span>
   </div>
+  
+  <div id="clique_amt">
+    <label class="inputlabel">$</label>
+    <div class="rightColumn normal">{{formData.Amount}}</div>
+  </div>
 
   <!--Code-->
-  <div id="clique_code">
+  <div id="flip_container">
+    <div class="dummy"></div>
+    <div class="card front"></div>
+    <div class="card back">
+      <img src="images/circle-outline.png" alt="Clique Code Outline">
+      <div class="profont blackstrip">XXXXX</div>
+    </div>
+  </div>
+
+  <div id="clique_code" ng-click="flipCard()">
     <label for="Code" class="inputlabel">Code</label>
-    <input type="text" id="Code" class="heart rightColumn" name="Code" placeholder="XXXXXX" ng-model="formData.Code" required>
+    <input type="text" id="Code" class="profont number rightColumn" data-formance_length=5 name="Code" pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" required>
+    <img class="checkmark" src="images/checkmark-blk.png">
   </div>
 
   <!--Occasion-->
-  <div>
-    <div id="clique_occasion_selection">
-      <ul>
-        <li ng-repeat="occasion in occasions" ng-click="setOccasion(occasion)"><img ng-src="{{occasion.images.normal}}"></li>
-      </ul>
+  <div id="clique_occasion_selection">
+    <ul>
+      <li ng-repeat="occasion in occasions" ng-click="setOccasion(occasion)"><img ng-src="{{occasion.images.normal}}">{{occasion.alt}}</li>
+    </ul>
+  </div>
+  
+  <div id="clique_occasion">
+    <label for="clique_input_occasion" class="inputlabel">
+      <img ng-src="{{occasions.selectedImg}}">
+    </label>
+    <div id="clique_input_occasion_wrapper" class="rightColumn">
+      <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
+      <span id="occCharCount">{{occasions.charsLeft}} characters left</span>
     </div>
-    
-    <div id="clique_occasion">
-      <label for="clique_input_occasion" class="inputlabel">
-        <img ng-src="{{occasions.selectedImg}}">
-      </label>
-      <div id="clique_input_occasion_wrapper" class="rightColumn">
-        <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
-        <span id="occCharCount">{{occasions.charsLeft}} characters left</span>
-      </div>
-      <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
-    </div>
+    <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
   </div>
 
   <!--Date-->
@@ -59,68 +67,54 @@
     <div>
       <label class="inputlabel">Send</label>
       <div id="dateImages" class="rightColumn">
-        <img id="setTodayImg" src="../public/demo23_files/sendtoday2.png" alt="Send Today" ng-click="setDateType('today')">
-        <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date" ng-click="setDateType('choose')">
+        <img id="setTodayImg" src="images/send-today-wht.png" alt="Send Today" ng-click="setDateType('today')">Today
+        <img id="setOnDateImg" src="images/send-on-date-wht.png" alt="Choose a Date" ng-click="setDateType('choose')">On date
       </div>
-<!--       <div id="dateImages" class="rightColumn">
-        <div class="twoColumn">
-          <img id="setTodayImg" src="../public/demo23_files/sendtoday.png" alt="Send Today" ng-click="setDateType('today')">
-        </div>
-        <div class="twoColumn twoColumn_right">
-          <img id="setOnDateImg" src="../public/demo23_files/sendondate.png" alt="Choose a Date" ng-click="setDateType('choose')">
-        </div>
-      </div>
-      <div class="clear"></div> -->
     </div>
     <div>
       <label class="inputlabel">
         <img ng-src="{{dateTypeImg}}" alt="Chosen Date">
       </label>
       <input id="datepicker" class="rightColumn" pick-a-date="" required>
-
     </div>
   </div>
   
   <!--Payment Type-->
 <!--   <div id="clique_paymenttype" class="hide nextinput textinput">
     <span style="width:53%;" class="inputlabel">Check or Card?</span>
-    <img class="paybycheck" alt="Pay by Check" src="../public/demo23_files/paybycheck.png" />
-    <img class="paybycard" alt="Pay by Card" src="../public/demo23_files/paybycard.png" style="margin-left:5px;" />
+    <img class="paybycheck" alt="Pay by Check" src="images/paybycheck.png" />
+    <img class="paybycard" alt="Pay by Card" src="images/paybycard.png" style="margin-left:5px;" />
   </div> -->
   
     <!-- *** The pay by check section is not functional yet *** -->
 <!--   <div id="clique_paymenttypeselectedcheck" class="hide nextinput textinput">
       <div class="accountnumbercontainer paymenttypecontainer textinput currentinput">
-          <img class="accountnumber" alt="Pay by Check" src="../public/demo23_files/paybycheck.png" />
+          <img class="accountnumber" alt="Pay by Check" src="images/paybycheck.png" />
           <input type="text" id="clique_input_accountnumber" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
       </div>
       <div class="routingnumbercontainer paymenttypecontainer">
-          <img class="routingnumber" alt="Pay by Card" src="../public/demo23_files/paybycheck.png" style="margin-left:5px;" />
+          <img class="routingnumber" alt="Pay by Card" src="images/paybycheck.png" style="margin-left:5px;" />
           <input type="text" id="clique_input_routingnumber" class="textinput hide" style="width:100%;" value="mm/dd/yyyy" />
       </div>
   </div> -->
   
   <!--Pay by card-->
-<!--   <div id="clique_paymenttypeselectedcard" class="hide nextinput textinput">
-    <div class="creditcardnumbercontainer paymenttypecontainer textinput currentinput">
-      <span class="inputlabel">
-        <img class="creditcardnumber" alt="Pay by Check" src="../public/demo23_files/paybycard_black.png">
-      </span>
-      <input type="text" pattern="\d*" id="clique_input_creditcardnumber" ng-model="formData.CreditCardNumber" placeholder="XXXX XXXX XXXX XXXX">
+  <div id="clique_payment_card" class="">
+    <div id="creditcardnumbercontainer" class="paymentcontainer">
+      <img id="creditcardimg" ng-src="{{cardTypeImg}}">
+      <input type="text" id="clique_input_creditcardnumber" class="profont checkinput credit_card_number" ng-model="formData.CreditCardNumber" ng-change="updateCreditCardImg()" placeholder="XXXX XXXX XXXX XXXX" size="19" pattern="\d*" required>
+      <img class="checkmark" src="images/checkmark-blk.png">
     </div>
-    <div class="expiredatecontainer paymenttypecontainer textinput currentinput" style="height:44px;">
-      <input type="text" pattern="\d*" id="expiredate_month" ng-model="formData.ExpireMonth" placeholder="MM" required>
-      <input type="text" pattern="\d*" id="expiredate_year" ng-model="formData.ExpireYear" placeholder="YY" required>
-      <input type="text" pattern="\d*" id="expiredate_cvv" ng-model="formData.ExpireCVV" placeholder="CVV" required>
-      <input type="text" pattern="\d*" id="expiredate_zip" ng-model="formData.ZipCode" placeholder="ZIPCODE" required>
+    <div id="creditcardinfo" class="paymentcontainer">
+      <input type="text" id="expiredate" class="profont clique_input_expiredate credit_card_expiry" ng-model="Expiry" ng-change="setExpireMonthAndYear()" placeholder="MM / YYYY" maxlength="9" size="9" required>
+      <input type="text" id="cvv" class="profont clique_input_expiredate credit_card_cvc" ng-model="formData.CVV" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
+      <input type="text" id="zip" class="profont clique_input_expiredate number" data-formance_length=5 ng-model="formData.ZipCode" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
+      <img class="checkmark" src="images/checkmark-blk.png">
     </div>
-  </div> -->
+  </div>
   
   <!--Go to Review Order-->
-<!--   <div id="clique_revieworder" class="hide">
-    <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png">
-    <a ui-sref="review">
-      <img class="revieworder" alt="Review Order" src="../public/demo23_files/revieworder.png">
-    </a>
-  </div> -->
+  <div id="clique_revieworder" class="hide">
+    <a class="proceed_button" ui-sref="review">Continue</a>
+  </div>
 </div>

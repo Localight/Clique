@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'always_in_my_heartregular';
-    src: url('../public/demo23_files/fonts/always_in_my_heart-webfont.eot');
-    src: url('../public/demo23_files/fonts/always_in_my_heart-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../public/demo23_files/fonts/always_in_my_heart-webfont.woff') format('woff'),
-         url('../public/demo23_files/fonts/always_in_my_heart-webfont.ttf') format('truetype'),
-         url('../public/demo23_files/fonts/always_in_my_heart-webfont.svg#always_in_my_heartregular') format('svg');
+    src: url('fonts/always_in_my_heart-webfont.eot');
+    src: url('fonts/always_in_my_heart-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/always_in_my_heart-webfont.woff') format('woff'),
+         url('fonts/always_in_my_heart-webfont.ttf') format('truetype'),
+         url('fonts/always_in_my_heart-webfont.svg#always_in_my_heartregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'profontwindowsregular';
-    src: url('../public/demo23_files/fonts/ProFontWindows-webfont.eot');
-    src: url('../public/demo23_files/fonts/ProFontWindows-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../public/demo23_files/fonts/ProFontWindows-webfont.woff') format('woff'),
-         url('../public/demo23_files/fonts/ProFontWindows-webfont.ttf') format('truetype'),
-         url('../public/demo23_files/fonts/ProFontWindows-webfont.svg#profontwindowsregular') format('svg');
+    src: url('fonts/ProFontWindows-webfont.eot');
+    src: url('fonts/ProFontWindows-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ProFontWindows-webfont.woff') format('woff'),
+         url('fonts/ProFontWindows-webfont.ttf') format('truetype'),
+         url('fonts/ProFontWindows-webfont.svg#profontwindowsregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,15 +23,9 @@
 body {
   font-family: 'helvetica','sans-serif','arial';
   background-color: #58e6df;
-  /* background-image: url('../public/demo23_files/local-street-low2.png');
-  background-position: center center;
-  background-repeat: no-repeat; */
   padding: 0px;
   margin: 0px;
   height: 100%;
-/*   padding: 0;
-  margin: 0;
-  height: 100%; */
 }
 
 .clear {
@@ -44,8 +38,26 @@ body {
   /*visibility: hidden;*/
 }
 
+*:focus {
+  outline: 0; /* remove border around focused elements, especially on Google Chrome */
+}
+
 .heart {
   font-family: 'always_in_my_heartregular';
+  font-size: 2.4em;
+  padding: 0 1%;
+}
+
+.profont {
+  font-family: 'profontwindowsregular',Courier,serif;
+  font-size: 2em;
+  padding: 0 2%;
+}
+
+.normal {
+  font-size: 1.5em;
+  line-height: 45px;
+  padding-left: 2%;
 }
 
 /* Background Image */
@@ -56,16 +68,16 @@ body {
   height: 100%;
   z-index: -1;
   background-size: cover;
-  /* background-repeat: no-repeat; */
   background-position: center top;
-  transition: opacity 1.5s ease-out 0s; /* CSS property, duration, timing-function, delay */
-  -o-transition: opacity 1.5s ease-out 0s;
-  -webkit-transition: opacity 1.5s ease-out 0s;
+  background-color: #58e6df;
+  transition: opacity 1s ease-out 0s; /* CSS property, duration, timing-function, delay */
+  -o-transition: opacity 1s ease-out 0s;
+  -webkit-transition: opacity 1s ease-out 0s;
 }
 
 #localStreetNoBlur {
   opacity: 1;
-  background-image: url('../public/demo23_files/local-street-low2-chris.png');
+  background-image: url('images/local-street-low2-chris.png');
 }
 
 #localStreetNoBlur.blur {
@@ -73,41 +85,17 @@ body {
 }
 
 #localStreetBlur {
-  opacity: 0;
-  background-image: url('../public/demo23_files/local-street-low2-blur.png');
-}
-
-#localStreetBlur.blur {
-  opacity: 1;
+  background-image: url('images/local-street-low2-blur.png');
 }
 
 /* Clique Logo */
-#clique_logo {
-  width: 200px;
-  margin: -10px auto 10px;
-  /* position: relative; */
+.clique_logo {
+  margin: 10px auto;
+  width: 50%;
+  max-width: 300px;
+  display: block;
 }
-
-#clique_logo span {
-  font-weight: bold;
-  font-size: 1.1em;
-  position: relative;
-  text-transform: uppercase;
-}
-
-#clique_logo span.first {
-  top: 40px;
-  left: 70px;
-}
-
-#clique_logo div {
-  font-size: 5em;
-}
-
-#clique_logo span.last {
-  top: -20px;
-  left: 62px;
-}
+/* End Clique Logo */
 
 /* Wrapper */
 .wrapper {
@@ -115,20 +103,21 @@ body {
   margin: 0 auto;
 }
 
-/*--- section styles ---*/
-.checkmark {
-  position: relative;
-  float: right;
-  right: 15px;
-  top: 8px;
-  z-index: 2;
-  width: 25px;
-}
-
-#clique_section > div {
+.wrapper > div {
   /* height: 44px; */
   /* border-radius: 12px; */
-  margin-bottom: 4px;
+  margin-bottom: 1.5% !important;
+}
+
+/*--- section styles ---*/
+.checkmark {
+  float: right;
+  position: relative;
+  right: 1%;
+  top: 8px;
+  z-index: 2;
+  width: 10%;
+  max-width: 25px;
 }
 
 label.inputlabel {
@@ -136,49 +125,37 @@ label.inputlabel {
   /* margin: 0; */
   /* padding: 0; */
   font-size: 1.5em;
-  display: inline-block;
   width: 25%;
   text-align: right;
   position: relative;
-  top: 0.35em;
-  /* height: 20px; */
+  top: 8px;
   float: left;
-  /* clear: left; */
 }
 
 .inputlabel img {
-  /* height: inherit; SHOULD I USE THIS??*/
   height: 25px;
 }
 
 .rightColumn {
-  width: 70%;
+  width: 73%;
   border: 0;
   border-radius: 12px;
-  margin: 0 0 0 2%;
+  margin: 0 0 0 2%; /* margin-left */
   height: 45px;
   display: inline-block;
-}
-
-input.heart, span.heart {
-  font-size: 2.4em;
-  padding: 0 0 0 4px;
-  /* display: inline-block; */
-  /* text-align: left; */
-  /* float: left; */
-  /* color: black; */
+  box-sizing: border-box;
 }
 
 /* Amount Selection */
-#clique_amt {
+#clique_amt_selection {
   height: 45px !important;
   position: relative;
-  overflow-y: hidden; /* don't show scroll bar */
+  overflow: hidden; /* don't show scroll bar */
   text-align: center; /* horizontally center this scrollwindow on the page */
 }
 
 #clique_amt_scrollwindow {
-  width: 85%;
+  width: 80%;
   max-width: 600px;
   display: inline-block;
   overflow-x: scroll;
@@ -188,15 +165,16 @@ input.heart, span.heart {
 
 .price {
   border: 2px solid white;
+  border-radius: 10px;
   color: white;
   font-size: 1.6em;
   display: inline-block;
-  border-radius: 10px;
-  /* vertical-align: middle; */
   padding: 3px 0 0; /* top, left/right, bottom */
   height: 38px;
-  width: 75px;
-  margin: 0 3px; /* spacing between price boxes */
+  width: 30%;
+  min-width: 70px;
+  max-width: 100px;
+  margin: 0 1%; /* spacing between price boxes */
 }
 
 .price.active {
@@ -208,8 +186,6 @@ input.heart, span.heart {
 .rightarrow,
 .leftarrow {
   vertical-align: top;
-  /* width: 0;  */
-  /* height: 0;  */
   border-top: 0.8em solid transparent;
   border-bottom: 0.8em solid transparent;
   display: inline-block;
@@ -224,21 +200,104 @@ input.heart, span.heart {
 .leftarrow {
   border-right: 0.8em solid white;
 }
+/* End Amount Selection */
+
+/* Clique Code Styles */
+#flip_container {
+  width: 70%;
+  max-width: 350px;
+  margin: auto;
+  position: relative;
+}
+
+.dummy {
+  padding-top: 60%;
+  /* Credit card dimensions are 85.60 × 53.98 mm. 53.98/85.60 = 0.63 */
+  /* See http://www.mademyday.de/css-height-equals-width-with-pure-css.html about setting fixed aspect ratios */
+}
+
+.card {
+  height: 95%; /* compensate for 3px border width */
+  width: 97%;
+  position: absolute;
+  top: 0;
+  border: 3px solid white;
+  border-radius: 12px;
+  transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: transparent;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.front {
+  background-image: url('images/logo-local-gift-card-wht.png');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  transform: perspective(750px) rotateY(0deg);
+  -webkit-transform: perspective(750px) rotateY(0deg);
+}
+
+.back {
+  visibility: hidden;
+  transform: perspective(750px) rotateY(180deg);
+  -webkit-transform: perspective(750px) rotateY(180deg);
+}
+
+.back div {
+	text-align: right;
+  box-sizing: border-box;
+  padding-right: 5%;
+  position: relative;
+  top: 10%;
+	opacity: 0.8;
+	font-size: 1.6em;
+	color: grey;
+	background-color: white;
+}
+
+.back img {
+	position: absolute;
+	right: 0;
+	top: 8%;
+	height: 2.2em;
+	z-index: 2;
+}
+
+.card.front.flipped {
+  transform: perspective(750px) rotateY(180deg);
+  -webkit-transform: perspective(750px) rotateY(180deg);
+}
+.card.back.flipped {
+  visibility: visible;
+  transform: perspective(750px) rotateY(360deg);
+  -webkit-transform: perspective(750px) rotateY(360deg);
+}
+
+#clique_code {
+  position: relative;
+}
+
+#clique_code > img {
+  position: absolute;
+}
+/* End Clique Code Styles */
 
 /* occasion styles */
 #clique_occasion_selection {
   border: 2px solid white;
   border-radius: 12px;
-  margin: 0.5em auto;
-  display: table;
-  /* width: 100%; */
+  margin: auto;
   max-width: 600px;
-  padding: 1% 0;
 }
 
 #clique_occasion_selection ul {
-  padding: 0;
+  padding: 2% 2% 0% 2%;
   margin: 0;
+  display: table;
 }
 
 #clique_occasion_selection li {
@@ -246,16 +305,18 @@ input.heart, span.heart {
   width: 50%;
   height: 20%;
   float: left;
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 2.1%; /* 0.02/0.96 = 0.21 */
 }
 
 #clique_occasion_selection img {
-  display: block;
-  max-width: 100%;
-  padding: 2% 5%;
-  box-sizing: border-box;
+  max-width: 20%;
+  margin-right: 5%;
+  vertical-align: middle;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 319px) {
     #clique_occasion_selection li  {
         float: none;
         width: 100%;
@@ -266,9 +327,6 @@ input.heart, span.heart {
   position: relative; /* needed for occCharCount to be positioned properly */
   height: 100%;
   padding: 0.2em 0.5em 1.3em;
-  box-sizing: border-box;
-  border-radius: 12px;
-  border: 0;
   background-color: white;
 }
 
@@ -279,7 +337,7 @@ input.heart, span.heart {
   font-family: 'helvetica','sans-serif','arial';
   width: 100%;
   background-color: transparent;
-  border: 0;
+  border: none;
 }
 
 #occCharCount {
@@ -291,19 +349,116 @@ input.heart, span.heart {
 }
 /* end occasion section styles */
 
+/* date picker styles */
 #dateImages {
-  text-align: center;
+/*   text-align: center;
   vertical-align: middle;
-  display: table-cell; /* needed for vertical-align to work */
+  font-size: 2em;
+  color: white; */
 }
 
 #dateImages > img {
-  max-width: 40%;
-  margin: 0 4%;
-  max-height: 100%;
+  /* margin: 0 2%; */
+  height: 80%;
+  /* vertical-align: middle; */
+  /* position: relative; */
+  /* top: 10%; */
+  /* vertical-align: bottom; */
 }
 
 #datepicker {
   background: transparent;
   font-size: 1em;
+}
+/* end date picker styles */
+
+/* payment styles */
+#clique_payment_card {
+  border: 2px solid white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#clique_payment_card input {
+  background-color: transparent;
+}
+
+#creditcardnumbercontainer {
+  background-color: white;
+}
+
+.paymentcontainer {
+  height: 45px;
+  text-align: center;
+}
+
+.checkinput {
+  max-width: 70%;
+}
+
+#creditcardimg {
+  width: 10%;
+  max-width: 25px;
+  position: relative;
+  top: 0.35em;
+}
+
+#expiredate {
+  width: 40%; /* 9/18 = 0.5 */
+}
+
+#cvv {
+  width: 20%; /* 4/18 = 0.222 */
+}
+
+#zip {
+  width: 25%; /* 5/18 = 0.277 */
+}
+
+#clique_input_creditcardnumber {
+	font-size: 1.2em;
+  border: 0;
+}
+
+.clique_input_expiredate {
+  box-sizing: border-box;
+  border: 0;
+  text-align: center;
+  font-size: 1.5em;
+}
+/* end payment styles */
+
+/* Proceed Button Styles */
+#clique_revieworder {
+  background-color: black;
+  background-image: url('images/clique.png');
+  background-size: auto 60%;
+  background-position: 1em 60%;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  height: 45px;
+  text-align: right;
+  display: table;
+  width: 100%;
+}
+
+.proceed_button {
+  display: table-cell;
+  vertical-align: middle;
+  color: #58e6df;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding-right: 1em;
+}
+/* End Proceed Button Styles */
+
+/* Final Overlay Styles */
+#finalOverlay {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  padding: 0;
 }

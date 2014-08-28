@@ -23,10 +23,14 @@
   <!-- DatePicker -->
   <script src="pickadateJS/picker.js"></script>
   <script src="pickadateJS/picker.date.js"></script>
+
+  <!-- FormanceJS -->
+  <script src="jquery.formance.js"></script>
 </head>
 
 <!-- apply our angular app -->
 <body ng-app="clique">
+<!-- <div style="text-align: center;">||</div> -->
 
 	<form name="clique_form" ng-controller="BuyerController" novalidate>
     <div ui-view></div>
@@ -42,7 +46,7 @@
       CreditCardNumber: {{formData.CreditCardNumber}}
       ExpireMonth: {{formData.ExpireMonth}}
       ExpireYear: {{formData.ExpireYear}}
-      ExpireCVV: {{formData.ExpireCVV}}
+      CVV: {{formData.CVV}}
       ZipCode: {{formData.ZipCode}}
       PhoneNumber: {{formData.PhoneNumber}}
       Email: {{formData.Email}}

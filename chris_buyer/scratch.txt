@@ -159,3 +159,12 @@ ng-keypress="limitOccText()" ng-keyup="limitOccText()"
   -webkit-transition: all 1s linear 0s;
   -o-transition: all 1s ease-out 0s;
 }
+
+<select id="expiredate_month" class="clique_input_expiredate choose" ng-model="formData.ExpireMonth" ng-value="formData.ExpireMonth" required>
+  <option value="" disabled selected>MM</option>
+  <option ng-repeat="month in monthsList" class="option">{{month}}</option>
+</select>
+<select id="expiredate_year" class="clique_input_expiredate choose" ng-model="formData.ExpireYear" ng-value="formData.ExpireYear" required>
+  <option value="" disabled selected>YY</option>
+  <option ng-repeat="year in yearsList" class="option">{{year}}</option>
+</select>

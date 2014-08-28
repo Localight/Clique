@@ -1,59 +1,71 @@
-<div id="clique_ordersummary">
+<div id="clique_ordersummary" class="wrapper">
   <!--Back-->
   <a ui-sref="main">Back</a>
   
   <!--Amount-->
   <div class="summaryordertotal">
-    <span class="inputlabel">
-      <img alt="Bowtie" src="../public/demo23_files/bowtie.png" />
-    </span>
-    Send this gift of ${{ formData.Amount }}
+    <label class="inputlabel">
+      <img alt="Bowtie" src="images/bowtie.png" />
+    </label>
+    <div class="rightColumn normal">
+      Send this gift of ${{ formData.Amount }}
+    </div>
   </div>
   
   <!--To-->
   <div class="summaryto">
-    <span class="inputlabel">To</span>{{ formData.To }}
+    <label class="inputlabel">To</label>
+    <div class="heart rightColumn">
+      {{ formData.To }}
+    </div>
   </div>
   
   <!--Phone Number-->
   <div class="summaryphonenumber currentinput textinput">
-    <span class="inputlabel">
-      <img class="phonenumber" alt="Enter Phone Number" src="../public/demo23_files/phone.png" />
-    </span>
-    <input id="clique_input_phonenumber" pattern="\d*" ng-model="formData.PhoneNumber" placeholder="(XXX) XXX-XXX" />
+    <label class="inputlabel" for="clique_input_phonenumber">
+      <img class="phonenumber" alt="Enter Phone Number" src="images/phone.png" />
+    </label>
+    <input id="clique_input_phonenumber" class="rightColumn profont phone_number" pattern="\d*" ng-model="formData.PhoneNumber" placeholder="(XXX) XXX-XXXX">
   </div>
   
   <!--From-->
   <div class="summaryfrom">
-    <span class="inputlabel">From</span>{{ formData.From }}
+    <label class="inputlabel">From</label>
+    <div class="heart rightColumn">
+      {{ formData.From }}
+    </div>
   </div>
   
   <!--Send Receipt To-->
   <div class="summaryreceipt">
-    <span class="inputlabel"></span>
-    <span class="receiptmsg">Send receipt to</span>
+    <label class="inputlabel">&nbsp;</label>
+    <div class="rightColumn normal receiptmsg">Send receipt to</div>
   </div>
   
   <!--Email-->
   <div class="summaryemail textinput nextinput">
-    <span class="inputlabel">
-      <img class="emailsign" alt="Enter Email Address" src="../public/demo23_files/emailsign.png" />
-    </span>
-    <input id="clique_input_email" class="heart textinput" ng-model="formData.Email" placeholder="you@email.com" />
+    <label class="inputlabel">
+      <img class="emailsign" alt="Enter Email Address" src="images/emailsign.png" />
+    </label>
+    <input id="clique_input_email" class="rightColumn heart email" ng-model="formData.Email" placeholder="you@email.com">
+  </div>
+  
+  <div id="clique_revieworder" class="hide">
+    <a class="proceed_button" ui-sref="final">Schedule Order</a>
   </div>
   
   <!--Schedule Gift-->
-  <div id="clique_schedulegift" class="hide">
-    <img class="cliquelogo" alt="Clique Logo" src="../public/demo23_files/clique.png" />
+<!--   <div id="clique_schedulegift" class="hide">
+    <img class="cliquelogo" alt="Clique Logo" src="images/clique.png" />
     <a ui-sref="final">
-      <img class="scheduleorder" alt="Schedule Order" ng-click="processForm()" src="../public/demo23_files/scheduleorder.png"/>
+      <img class="scheduleorder" alt="Schedule Order" ng-click="processForm()" src="images/scheduleorder.png"/>
     </a>
-  </div>
+  </div> -->
   
   <!--Clique Logo-->
-  <div id="clique_logo">
+<!--   <div id="clique_logo">
     <span class="first">The</span>
     <div class="heart">Local</div>
     <span class="last">Gift Card</span>
-  </div>
+  </div> -->
 </div>
