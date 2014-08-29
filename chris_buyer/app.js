@@ -46,12 +46,12 @@
         
         var picker = element.pickadate('picker');
         
-        var setTodayImg = $('#setTodayImg');
+        var setTodayImg = $('#sendToday');
         setTodayImg.on('click', function(event){
           picker.set('select', new Date()); // set picker to today --> triggers onSet()
         });
         
-        var setOnDateImg = $('#setOnDateImg');
+        var setOnDateImg = $('#sendOnDate');
         setOnDateImg.on('click', function(event){
           picker.open();
           event.stopPropagation(); // stop click event outside of input from triggering picker.close()
@@ -88,6 +88,25 @@
   
   cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
                                   function($scope,   TextService,   OccasionService){
+    var elems = [ // '#clique_to',
+                  // '#clique_from',
+                  ['#clique_amt_selection', '#clique_amt'],
+                  ['#flip_container', '#clique_code', '#clique_code_message'],
+                  ['#clique_occasion_selection', '#clique_occasion'],
+                  ['#clique_senddate_selection', '#clique_senddate'],
+                  '#clique_payment_card',
+                  '#clique_revieworder'];
+    
+    $.each(elems, function(index,value){
+      if(index>0) $(value.toString()).addClass('hide');
+      $(value.toString()).on('click focus', function(){
+        console.log('test');
+        $(elems[index].toString()).removeClass('nextinput');
+        $(elems[index+1].toString()).removeClass('hide')
+                                    .addClass('nextinput');
+      });
+    });
+    
     /**********
     * Amount
     **********/
@@ -105,7 +124,12 @@
     * Clique Code
     **********/
     $scope.flipCard = function() {
-      $('.front, .back').addClass('flipped');
+      $('.card').addClass('flipped');
+      // $('#flipper').addClass('flipped');
+    };
+    
+    $scope.getStoreName = function() {
+      $scope.storeName = 'Doly\'s Delectibles';      
     };
     
     /**********
@@ -223,7 +247,10 @@
   }]);
   
   cliqueApp.controller('ReviewController', ['$scope', function($scope){
-        /**********
+    // Scroll to top of page
+    window.scrollTo(0, 0);
+  
+    /**********
     * Validation
     **********/
     jQuery(function($){

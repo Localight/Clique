@@ -25,25 +25,35 @@
   
   <div id="clique_amt">
     <label class="inputlabel">$</label>
-    <div class="rightColumn normal">{{formData.Amount}}</div>
+    <div class="rightColumn helveticaInput">{{formData.Amount}}</div>
   </div>
 
   <!--Code-->
   <div id="flip_container">
     <div class="dummy"></div>
-    <div class="card front"></div>
-    <div class="card back">
-      <img src="images/circle-outline.png" alt="Clique Code Outline">
+    <div id="front" class="card"></div>
+    <div id="back" class="card">
       <div class="profont blackstrip">XXXXX</div>
+      <img src="images/circle-outline.png" alt="Clique Code Outline">
     </div>
   </div>
 
   <div id="clique_code" ng-click="flipCard()">
     <label for="Code" class="inputlabel">Code</label>
-    <input type="text" id="Code" class="profont number rightColumn" data-formance_length=5 name="Code" pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" required>
+    <input type="text" id="Code" class="profont number rightColumn" data-formance_length=5 name="Code" pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" ng-change="getStoreName()" required>
     <img class="checkmark" src="images/checkmark-blk.png">
   </div>
-
+  
+  <div id="clique_code_message">
+    <label class="inputlabel">
+      <img src="images/at-icon-blk.png">
+    </label>
+    <div class="helveticaText rightColumn">
+      Good at <span class="bold">{{storeName}}</span>
+      <span class="italicMessage">and participating merchants</span>
+    </div>
+  </div>
+  
   <!--Occasion-->
   <div id="clique_occasion_selection">
     <ul>
@@ -63,20 +73,25 @@
   </div>
 
   <!--Date-->
-  <div id="clique_senddate">
-    <div>
-      <label class="inputlabel">Send</label>
-      <div id="dateImages" class="rightColumn">
-        <img id="setTodayImg" src="images/send-today-wht.png" alt="Send Today" ng-click="setDateType('today')">Today
-        <img id="setOnDateImg" src="images/send-on-date-wht.png" alt="Choose a Date" ng-click="setDateType('choose')">On date
+  <div id="clique_senddate_selection">
+    <label class="inputlabel">Send</label>
+    <div id="dateImages" class="rightColumn">
+      <div id="sendToday" ng-click="setDateType('today')">
+        <img id="sendTodayImg" src="images/send-today-wht.png" alt="Send Today">
+        Today
+      </div>
+      <div id="sendOnDate" ng-click="setDateType('choose')">
+        <img id="sendOnDateImg" src="images/send-on-date-wht.png" alt="Choose a Date">
+        On date
       </div>
     </div>
-    <div>
-      <label class="inputlabel">
-        <img ng-src="{{dateTypeImg}}" alt="Chosen Date">
-      </label>
-      <input id="datepicker" class="rightColumn" pick-a-date="" required>
-    </div>
+  </div>
+  
+  <div id="clique_senddate">
+    <label class="inputlabel">
+      <img ng-src="{{dateTypeImg}}" alt="Chosen Date">
+    </label>
+    <input id="datepicker" class="rightColumn" pick-a-date="" required>
   </div>
   
   <!--Payment Type-->

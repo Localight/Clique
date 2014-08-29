@@ -7,8 +7,8 @@
     <label class="inputlabel">
       <img alt="Bowtie" src="images/bowtie.png" />
     </label>
-    <div class="rightColumn normal">
-      Send this gift of ${{ formData.Amount }}
+    <div class="rightColumn helveticaText">
+      Send this gift of <span class="bold">${{ formData.Amount }}</span>
     </div>
   </div>
   
@@ -25,7 +25,7 @@
     <label class="inputlabel" for="clique_input_phonenumber">
       <img class="phonenumber" alt="Enter Phone Number" src="images/phone.png" />
     </label>
-    <input id="clique_input_phonenumber" class="rightColumn profont phone_number" pattern="\d*" ng-model="formData.PhoneNumber" placeholder="(XXX) XXX-XXXX">
+    <input id="clique_input_phonenumber" class="rightColumn helveticaInput phone_number" pattern="\d*" ng-model="formData.PhoneNumber" placeholder="(XXX) XXX-XXXX">
   </div>
   
   <!--From-->
@@ -39,11 +39,11 @@
   <!--Send Receipt To-->
   <div class="summaryreceipt">
     <label class="inputlabel">&nbsp;</label>
-    <div class="rightColumn normal receiptmsg">Send receipt to</div>
+    <div class="rightColumn helveticaText receiptmsg">Send receipt to</div>
   </div>
   
   <!--Email-->
-  <div class="summaryemail textinput nextinput">
+  <div class="summaryemail textinput">
     <label class="inputlabel">
       <img class="emailsign" alt="Enter Email Address" src="images/emailsign.png" />
     </label>

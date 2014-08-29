@@ -168,3 +168,108 @@ ng-keypress="limitOccText()" ng-keyup="limitOccText()"
   <option value="" disabled selected>YY</option>
   <option ng-repeat="year in yearsList" class="option">{{year}}</option>
 </select>
+
+
+
+
+
+
+
+
+
+
+#flip_container {
+  width: 70%;
+  max-width: 350px;
+  margin: auto;
+  position: relative;
+  perspective: 750px;
+  /* transform-style: preserve-3d; */
+}
+
+.dummy {
+  padding-top: 60%;
+  /* Credit card dimensions are 85.60 × 53.98 mm. 53.98/85.60 = 0.63 */
+  /* See http://www.mademyday.de/css-height-equals-width-with-pure-css.html about setting fixed aspect ratios */
+}
+
+/* #flipper {
+  transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  position: relative;
+   perspective: 750px;
+  transform-style: preserve-3d;
+} */
+
+.card {
+  height: 95%; /* compensate for 3px border width */
+  width: 97%;
+  position: absolute;
+  top: 0;
+  border: 3px solid white;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: transparent;
+  background-color: rgba(255,255,255,0.2);
+  transition: transform 3s ease-in-out;
+  -webkit-transition: -webkit-transform 3s ease-in-out;
+  display: block;
+}
+
+.front {
+  background-image: url('images/logo-local-gift-card-wht.png');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+  /* transform: rotateY(0deg); */
+  /* -webkit-transform: perspective(750px) rotateY(0deg); */
+}
+
+.back {
+  /* visibility: hidden; */
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  /* z-index: 3; */
+  /* -webkit-transform: perspective(750px) rotateY(180deg); */
+}
+
+.back div {
+	text-align: right;
+  box-sizing: border-box;
+  padding-right: 5%;
+  position: relative;
+  top: 10%;
+	opacity: 0.8;
+	font-size: 1.6em;
+	color: grey;
+	background-color: white;
+}
+
+.back img {
+	position: absolute;
+	right: 0;
+	top: 8%;
+	height: 2.2em;
+	z-index: 3;
+}
+
+#flipper.flipped {
+  /* transform: rotateY(180deg); */
+}
+
+.card.front.flipped {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  /* -webkit-transform: perspective(750px) rotateY(180deg); */
+}
+.card.back.flipped {
+  /* visibility: visible; */
+  transform: rotateY(360deg) !important;
+  -webkit-transform: rotateY(360deg) !important;
+  /* -webkit-transform: perspective(750px) rotateY(360deg); */
+}
+
+C:\Users\Christopher Yeh\Documents\GitHub\Clique\chris_buyer\
+C:\Users\Christopher Yeh\Documents\GitHub\Clique\chris_buyer\index.html
