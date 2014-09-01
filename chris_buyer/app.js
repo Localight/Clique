@@ -54,6 +54,7 @@
         var setOnDateImg = $('#sendOnDate');
         setOnDateImg.on('click', function(event){
           picker.open();
+          $(['#clique_senddate_selection', '#clique_senddate'].toString()).removeClass('nextinput');
           event.stopPropagation(); // stop click event outside of input from triggering picker.close()
         });
       }
@@ -88,33 +89,14 @@
   
   cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
                                   function($scope,   TextService,   OccasionService){
-    var elems = [ // '#clique_to',
-                  // '#clique_from',
-                  ['#clique_amt_selection', '#clique_amt'],
-                  ['#flip_container', '#clique_code', '#clique_code_message'],
-                  ['#clique_occasion_selection', '#clique_occasion'],
-                  ['#clique_senddate_selection', '#clique_senddate'],
-                  '#clique_payment_card',
-                  '#clique_revieworder'];
-    
-    $.each(elems, function(index,value){
-      if(index>0) $(value.toString()).addClass('hide');
-      $(value.toString()).on('click focus', function(){
-        console.log('test');
-        $(elems[index].toString()).removeClass('nextinput');
-        $(elems[index+1].toString()).removeClass('hide')
-                                    .addClass('nextinput');
-      });
-    });
-    
     /**********
     * Amount
     **********/
     $scope.prices = [2,25,50,75,100,250,500];
     $scope.setAmount = function(newAmount){
-      $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
       $scope.formData.Amount = newAmount;
-      // $('#localStreetDiv').addClass('blurImg');
+      $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
+      $(['#clique_amt_selection', '#clique_amt'].toString()).addClass('valid');
     };
     $scope.isAmount = function(checkAmount){
       return $scope.formData.Amount == checkAmount; // boolean
@@ -125,7 +107,6 @@
     **********/
     $scope.flipCard = function() {
       $('.card').addClass('flipped');
-      // $('#flipper').addClass('flipped');
     };
     
     $scope.getStoreName = function() {
@@ -138,7 +119,9 @@
     // import occasions: $scope.occasions.left_column, $scope.occasions.right_column
     $scope.occasions = OccasionService;
     
-    $scope.occasions.selectedImg = '';
+    // set default img
+    $scope.occasions.selectedImg = 'images/occasion-custom-icon-blk.png';
+    
     $scope.occasions.charsLeft = 100;
     var occCharLimit = 100; // no need to include the character limit inside $scope
     
@@ -167,7 +150,7 @@
     $scope.setDateType = function(type) {
       if(type=='today')
         $scope.dateTypeImg = 'images/send-today-blk.png';
-      if(type=='choose')
+      else if(type=='choose')
         $scope.dateTypeImg = 'images/send-on-date-blk.png';
     };
     
@@ -211,39 +194,136 @@
       fields = ['credit_card_number',
                 'credit_card_expiry',
                 'credit_card_cvc',
-                'dd_mm_yyyy',
-                'yyyy_mm_dd',
-                'email',
                 'number',
-                'phone_number',
-                'time_yy_mm'
       ];
 
       $.each( fields, function (index, value) {
-        $('input.'+value).formance('format_'+value)
-          .parent()
-            .append('<label class=\'control-label\'></label>');
-
-        $('input.'+value).on('keyup change blur', function (value) {
-          return function (event) {
-            $this = $(this);
-            if ($this.formance('validate_'+value)) {
-              $this.parent()
-                .removeClass('has-success has-error')
-                .addClass('has-success')
-                .children(':last')
-                  .text('Valid!');
-            } else {
-              $this.parent()
-                .removeClass('has-success has-error')
-                .addClass('has-error')
-                .children(':last')
-                  .text('Invalid');
-            }
-          }
-        }(value));
+        $('input.'+value).formance('format_'+value);
       });
     });
+    
+    $scope.dirty = {
+      To: false,
+      From: false,
+      Amount: true,
+      Code: false,
+      Occasion: false,
+      Date: false,
+      CreditCard: false
+    };
+    
+    $scope.valid = {
+      To: false,
+      From: false,
+      Amount: false,
+      Code: false,
+      Occasion: false,
+      Date: false,
+      CreditCard: true
+    };
+    
+    var fieldOrder = ['To', 'From', 'Amount', 'Code', 'Occasion', 'Date', 'CreditCard'];
+    
+    // var elems = {
+      // Amount: '#clique_amt_wrapper',
+      // Code: '#clique_code_wrapper',
+      // Occasion: '#clique_occasion_wrapper',
+      // Date: '#clique_senddate_wrapper',
+      // CreditCard: '#clique_CreditCard'
+    // };
+    
+    $scope.isNextInput = function(input) {
+      // this function returns true only if 'input' is not dirty and the element before 'input' is not valid
+      thisIndex = fieldOrder.indexOf(input);
+      return !$scope.dirty[fieldOrder[thisIndex]] && !$scope.valid[fieldOrder[thisIndex-1]];
+    };
+    
+    $scope.allDirtyBefore = function(input) {
+      // this function returns true only if all elements before 'input' are dirty
+      thisIndex = fieldOrder.indexOf(input);
+      for(i=0; i<thisIndex; i++) {
+        if (!$scope.dirty[fieldOrder[i]]) 
+          return false;
+      }
+      return true;
+    };
+    
+    $scope.$watchCollection('formData', function(newVals, oldVals) {
+      for(i=0; i<fieldOrder.length-1; i++) { // do not include Credit Card
+        var field = fieldOrder[i];
+        if(newVals[field] != oldVals[field]) {
+          var val = newVals[field];
+          if(val) { // if val exists
+            $scope.dirty[field] = true;
+            $scope.valid[field] = $scope.checkValid(field,val);
+          };
+          console.log(fieldOrder[i] + ': ' + val + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
+        }
+      };
+      
+      $scope.mainInvalid = false;
+      for(i=0; i<fieldOrder.length; i++) {
+        if (!$scope.valid[fieldOrder[i]]) 
+          $scope.mainInvalid = true;
+      };
+      console.log('mainInvalid = ' + $scope.mainInvalid);
+    });
+    
+    $scope.checkValid = function(field, val) {
+      switch(field) {
+        case 'To':
+          return val.length > 0 && val.length <= 16;
+          break;
+        case 'From':
+          return val.length > 0 && val.length <= 16;
+          break;
+        case 'Amount':
+          return $scope.prices.indexOf(val) != -1;
+          break;
+        case 'Code':
+          if (/^\d{5}$/.test(val)) { // only digits, exactly 5 digits in length
+            $('#clique_code .checkmark').css('visibility','visible');
+            return true;
+          }
+          else {
+            $('#clique_code .checkmark').css('visibility','hidden');
+            return false;
+          }
+          break;
+        case 'Occasion':
+          return val.length > 0 && val.length <= 100;
+          break;
+        case 'Date':
+          return true; // NEEDS BETTER VALIDATION
+          break;
+        case 'CreditCard':
+          // if ($scope.checkValid('CreditCardNumber') &&
+              // $scope.checkValid('ExpireMonth') &&
+              // $scope.checkValid('ExpireYear') &&
+              // $scope.checkValid('CVV') &&
+              // $scope.checkValid('Zipcode'))
+            // return true;
+          // else
+            // return false;
+          return true;
+          break;
+        case 'CreditCardNumber':
+          return $('#clique_input_creditcardnumber').formance('validate_credit_card_number');
+          break;
+        case 'ExpireMonth':
+          return true;
+          break;
+        case 'ExpireYear':
+          return true;
+          break;
+        case 'CVV':
+          return $('#clique_input_cvv').formance('validate_credit_card_cvc');
+          break;
+        case 'Zipcode':
+          return /^\d{5}$/.test(val);
+          break;
+      }
+    };
   }]);
   
   cliqueApp.controller('ReviewController', ['$scope', function($scope){

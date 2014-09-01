@@ -28,6 +28,8 @@ body {
   height: 100%;
 }
 
+
+/* General Styles */
 /* .clear {
   clear: both;
   float: none !important;
@@ -42,6 +44,21 @@ body {
   outline: 0; /* remove border around focused elements, especially on Google Chrome */
 }
 
+.roundWhiteBorder {
+  border: 2px solid white;
+  border-radius: 12px;
+}
+
+.marginBottom {
+  margin-bottom: 1.5% !important;
+}
+
+.nextInput {
+  opacity: 0.5;
+}
+/* End General Styles */
+
+/* Font Styles */
 .heart {
   font-family: 'always_in_my_heartregular';
   font-size: 2.4em;
@@ -69,6 +86,7 @@ body {
 .bold {
   font-weight: bold;
 }
+/* End Font Styles */
 
 /* Background Image */
 .localStreet {
@@ -114,18 +132,12 @@ body {
 }
 
 .wrapper > div {
-  /* height: 44px; */
-  /* border-radius: 12px; */
   margin-bottom: 1.5% !important;
 }
 
 /*--- section styles ---*/
-.nextinput {
-  opacity: 0.5;
-  display: block;
-}
-
 .checkmark {
+  visibility: hidden;
   float: right;
   position: relative;
   right: 1%;
@@ -317,8 +329,6 @@ label.inputlabel {
 
 /* occasion styles */
 #clique_occasion_selection {
-  border: 2px solid white;
-  border-radius: 12px;
   margin: auto;
   max-width: 600px;
 }
@@ -385,9 +395,6 @@ label.inputlabel {
 /* date picker styles */
 #clique_senddate_selection {
   color: white;
-  border: 2px solid white;
-  border-radius: 12px;
-
 }
 
 #dateImages {
@@ -417,8 +424,6 @@ label.inputlabel {
 
 /* payment styles */
 #clique_payment_card {
-  border: 2px solid white;
-  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -467,32 +472,31 @@ label.inputlabel {
 .clique_input_expiredate {
   box-sizing: border-box;
   border: 0;
-  text-align: center;
   font-size: 1.5em;
 }
 /* end payment styles */
 
 /* Proceed Button Styles */
-#clique_revieworder {
+.proceed_button {
   background-color: black;
   background-image: url('images/clique.png');
   background-size: auto 60%;
   background-position: 1em 60%;
   background-repeat: no-repeat;
+  border: 0;
   border-radius: 12px;
+  width: 100%;
   height: 45px;
   text-align: right;
-  display: table;
-  width: 100%;
-}
-
-.proceed_button {
-  display: table-cell;
-  vertical-align: middle;
   color: #58e6df;
-  text-decoration: none;
   font-size: 1.2em;
   padding-right: 1em;
+}
+
+.proceed_button:disabled {
+  background-color: grey;
+  opacity: 0.5;
+  cursor: default;
 }
 /* End Proceed Button Styles */
 
