@@ -53,6 +53,10 @@ body {
   margin-bottom: 1.5% !important;
 }
 
+input {
+  border: 0;
+}
+
 .nextInput {
   opacity: 0.5;
 }
@@ -425,6 +429,7 @@ label.inputlabel {
 /* payment styles */
 #clique_payment_card {
   overflow: hidden;
+  font-size: 0.6em;
 }
 
 #creditcardnumbercontainer {
@@ -452,27 +457,20 @@ label.inputlabel {
   top: 0.35em;
 }
 
-#expiredate {
+#clique_input_expiry {
   width: 40%; /* 9/18 = 0.5 */
 }
 
-#cvv {
+#clique_input_cvv {
   width: 20%; /* 4/18 = 0.222 */
 }
 
-#zip {
+#clique_input_zip {
   width: 25%; /* 5/18 = 0.277 */
 }
 
-#clique_input_creditcardnumber {
-	font-size: 1.2em;
-  border: 0;
-}
-
-.clique_input_expiredate {
+.clique_input_expiry {
   box-sizing: border-box;
-  border: 0;
-  font-size: 1.5em;
 }
 /* end payment styles */
 

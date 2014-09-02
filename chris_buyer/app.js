@@ -71,10 +71,9 @@
       Occasion: '',
       Date: '',
       CreditCardNumber: '',
-      ExpireMonth: '',
-      ExpireYear: '',
+      Expiry: '',
       CVV: '',
-      Zipcode: '',
+      ZIPcode: '',
       PhoneNumber: '',
       Email: '',
       Icon: '',
@@ -157,11 +156,11 @@
     /**********
     * Payment
     **********/
-    $scope.setExpireMonthAndYear = function(){
-      res = $scope.Expiry.split(' / ');
-      $scope.formData.ExpireMonth = res[0];
-      $scope.formData.ExpireYear = res[1];
-    };
+    // $scope.setExpireMonthAndYear = function(){
+      // res = $scope.Expiry.split(' / ');
+      // $scope.formData.ExpireMonth = res[0];
+      // $scope.formData.ExpireYear = res[1];
+    // };
     
     // set default img
     $scope.cardTypeImg = 'images/cc-basic-blk.png';
@@ -209,7 +208,11 @@
       Code: false,
       Occasion: false,
       Date: false,
-      CreditCard: false
+      CreditCardNumber: false,
+      Expiry: false,
+      CVV: false,
+      ZIPcode: false,
+      ProceedButton: false
     };
     
     $scope.valid = {
@@ -219,18 +222,15 @@
       Code: false,
       Occasion: false,
       Date: false,
-      CreditCard: true
+      CreditCardNumber: false,
+      Expiry: false,
+      CVV: false,
+      ZIPcode: false
     };
     
-    var fieldOrder = ['To', 'From', 'Amount', 'Code', 'Occasion', 'Date', 'CreditCard'];
+    $scope.mainValid = false;
     
-    // var elems = {
-      // Amount: '#clique_amt_wrapper',
-      // Code: '#clique_code_wrapper',
-      // Occasion: '#clique_occasion_wrapper',
-      // Date: '#clique_senddate_wrapper',
-      // CreditCard: '#clique_CreditCard'
-    // };
+    var fieldOrder = ['To', 'From', 'Amount', 'Code', 'Occasion', 'Date', 'CreditCardNumber', 'Expiry', 'CVV', 'ZIPcode'];
     
     $scope.isNextInput = function(input) {
       // this function returns true only if 'input' is not dirty and the element before 'input' is not valid
@@ -248,26 +248,52 @@
       return true;
     };
     
-    $scope.$watchCollection('formData', function(newVals, oldVals) {
-      for(i=0; i<fieldOrder.length-1; i++) { // do not include Credit Card
-        var field = fieldOrder[i];
-        if(newVals[field] != oldVals[field]) {
-          var val = newVals[field];
-          if(val) { // if val exists
-            $scope.dirty[field] = true;
-            $scope.valid[field] = $scope.checkValid(field,val);
-          };
-          console.log(fieldOrder[i] + ': ' + val + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
+    // watch all fields
+    angular.forEach(fieldOrder, function (field) {
+      $scope.$watch('formData.'+field, function (newVal, oldVal) {
+        if(newVal) { // if newVal exists
+          $scope.dirty[field] = true;
+          $scope.valid[field] = $scope.checkValid(field,newVal);
         }
-      };
-      
-      $scope.mainInvalid = false;
-      for(i=0; i<fieldOrder.length; i++) {
-        if (!$scope.valid[fieldOrder[i]]) 
-          $scope.mainInvalid = true;
-      };
-      console.log('mainInvalid = ' + $scope.mainInvalid);
+        else {
+          $scope.valid[field] = false;
+        }
+        console.log(field + ': ' + newVal + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
+        
+        $scope.mainValid = true;
+        for(i=0; i<fieldOrder.length; i++) {
+          if (!$scope.valid[fieldOrder[i]]) {
+            $scope.mainValid = false;
+            break;
+          }
+        };
+        if ($scope.mainValid) {
+          $scope.dirty.ProceedButton = true;
+          console.log('mainValid = ' + $scope.mainValid);
+        }
+      });
     });
+    
+    // $scope.$watchCollection('formData', function(newVals, oldVals) {
+      // for(i=0; i<fieldOrder.length-1; i++) { // do not include Credit Card
+        // var field = fieldOrder[i];
+        // if(newVals[field] != oldVals[field]) {
+          // var val = newVals[field];
+          // if(val) { // if val exists
+            // $scope.dirty[field] = true;
+            // $scope.valid[field] = $scope.checkValid(field,val);
+          // };
+          // console.log(fieldOrder[i] + ': ' + val + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
+        // }
+      // };
+      
+      // $scope.mainInvalid = false;
+      // for(i=0; i<fieldOrder.length; i++) {
+        // if (!$scope.valid[fieldOrder[i]]) 
+          // $scope.mainInvalid = true;
+      // };
+      // console.log('mainInvalid = ' + $scope.mainInvalid);
+    // });
     
     $scope.checkValid = function(field, val) {
       switch(field) {
@@ -296,31 +322,48 @@
         case 'Date':
           return true; // NEEDS BETTER VALIDATION
           break;
-        case 'CreditCard':
-          // if ($scope.checkValid('CreditCardNumber') &&
-              // $scope.checkValid('ExpireMonth') &&
-              // $scope.checkValid('ExpireYear') &&
-              // $scope.checkValid('CVV') &&
-              // $scope.checkValid('Zipcode'))
-            // return true;
-          // else
-            // return false;
-          return true;
-          break;
         case 'CreditCardNumber':
-          return $('#clique_input_creditcardnumber').formance('validate_credit_card_number');
+          if ($('#clique_input_creditcardnumber').formance('validate_credit_card_number')) {
+            $('#creditcardnumbercontainer .checkmark').css('visibility','visible');
+            return true;
+          }
+          else {
+            $('#creditcardnumbercontainer .checkmark').css('visibility','hidden');
+            return false;
+          }
           break;
-        case 'ExpireMonth':
-          return true;
-          break;
-        case 'ExpireYear':
-          return true;
+        case 'Expiry':
+          if ($('#clique_input_expiry').formance('validate_credit_card_expiry')) {
+            if ($scope.valid.CVV && $scope.valid.ZIPcode)
+              $('#creditcardinfo .checkmark').css('visibility','visible');
+            return true;
+          }
+          else {
+            $('#creditcardinfo .checkmark').css('visibility','hidden');
+            return false;
+          }
           break;
         case 'CVV':
-          return $('#clique_input_cvv').formance('validate_credit_card_cvc');
+          if ($('#clique_input_cvv').formance('validate_credit_card_cvc')) {
+            if ($scope.valid.Expiry && $scope.valid.ZIPcode)
+              $('#creditcardinfo .checkmark').css('visibility','visible');
+            return true;
+          }
+          else {
+            $('#creditcardinfo .checkmark').css('visibility','hidden');
+            return false;
+          }
           break;
-        case 'Zipcode':
-          return /^\d{5}$/.test(val);
+        case 'ZIPcode':
+          if (/^\d{5}$/.test(val)) { // only digits, exactly 5 digits in length
+            if ($scope.valid.Expiry && $scope.valid.CVV)
+              $('#creditcardinfo .checkmark').css('visibility','visible');
+            return true;
+          }
+          else {
+            $('#creditcardinfo .checkmark').css('visibility','hidden');
+            return false;
+          }
           break;
       }
     };
@@ -363,10 +406,6 @@
         }(value));
       });
     });
-    
-    $scope.test = function() {
-      alert('hi');
-    }
   }]);
   
   cliqueApp.controller('FinalController', function(){

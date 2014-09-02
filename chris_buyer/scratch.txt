@@ -270,6 +270,3 @@ ng-keypress="limitOccText()" ng-keyup="limitOccText()"
   -webkit-transform: rotateY(360deg) !important;
   /* -webkit-transform: perspective(750px) rotateY(360deg); */
 }
-
-C:\Users\Christopher Yeh\Documents\GitHub\Clique\chris_buyer\
-C:\Users\Christopher Yeh\Documents\GitHub\Clique\chris_buyer\index.html

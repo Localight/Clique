@@ -129,23 +129,22 @@
   
   <!--Pay by card-->
   <div id="clique_payment_card" class="roundWhiteBorder"
-    ng-class="{nextInput: isNextInput('CreditCard')}"
-    ng-show="allDirtyBefore('CreditCard')">
+    ng-show="allDirtyBefore('CreditCardNumber')">
     <div id="creditcardnumbercontainer" class="paymentcontainer">
       <img id="creditcardimg" ng-src="{{cardTypeImg}}">
       <input type="text" id="clique_input_creditcardnumber" class="profont checkinput credit_card_number" ng-model="formData.CreditCardNumber" ng-change="updateCreditCardImg()" placeholder="XXXX XXXX XXXX XXXX" size="19" pattern="\d*" required>
       <img class="checkmark" src="images/checkmark-blk.png">
     </div>
     <div id="creditcardinfo" class="paymentcontainer">
-      <input type="text" id="clique_input_expiredate" class="profont clique_input_expiredate credit_card_expiry" ng-model="Expiry" ng-change="setExpireMonthAndYear()" placeholder="MM / YYYY" pattern="\d*" maxlength="9" size="9" required>
-      <input type="text" id="clique_input_cvv" class="profont clique_input_expiredate credit_card_cvc" ng-model="formData.CVV" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
-      <input type="text" id="clique_input_zip" class="profont clique_input_expiredate number" data-formance_length=5 ng-model="formData.ZipCode" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
+      <input type="text" id="clique_input_expiry" class="profont clique_input_expiry credit_card_expiry" ng-model="formData.Expiry" placeholder="MM / YYYY" pattern="\d*" maxlength="9" size="9" required>
+      <input type="text" id="clique_input_cvv" class="profont clique_input_expiry credit_card_cvc" ng-model="formData.CVV" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
+      <input type="text" id="clique_input_zip" class="profont clique_input_expiry number" data-formance_length=5 ng-model="formData.ZIPcode" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
       <img class="checkmark" src="images/checkmark-blk.png">
     </div>
   </div>
   
   <!--Go to Review Order-->
-  <a id="clique_revieworder" ui-sref="review" ng-show="dirty.Date">
-    <button class="proceed_button" ng-disabled="mainInvalid">Continue</button>
+  <a id="clique_revieworder" ui-sref="review" ng-show="dirty.ProceedButton">
+    <button class="proceed_button" ng-disabled="!mainValid">Continue</button>
   </a>
 </div>
