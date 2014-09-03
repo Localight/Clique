@@ -160,8 +160,8 @@
       }
       $scope.limitOccText();
       
-      $('#clique_occasion_selection').hide();
       $('#clique_occasion').show();
+      $('#clique_occasion_selection').hide();
     	$('#clique_input_occasion').focus();
     };
     
@@ -171,35 +171,20 @@
       $scope.occasions.charsLeft = TextService.limit($scope.formData.Occasion, occCharLimit);
     };
     
-    // $scope.occasionLabel_click = function() {
-      // $('#clique_occasion_selection').show();
-      // $('#clique_input_occasion').focus();
-    // };
+    $('#clique_occasion label').on('click', function() {
+      $('#clique_occasion_selection').show();
+      $('#clique_input_occasion').focus();
+    });
     
-    // $scope.occasionWrapper_blur = function() {
-      // if($scope.dirty.Occasion && $('#clique_input_occasion').is(":focus"))
-        // $('#clique_occasion_selection').hide();
-    // };
+    $('#clique_input_occasion').on('blur', function() {
+    	$('#clique_input_occasion_wrapper').addClass('filledIn');
+      $('#occCharCount').hide();
+    });
     
-    // $scope.inputOccasion_blur = function() {
-    	// $('#clique_input_occasion_wrapper').addClass('filledIn');
-      // $('#occCharCount').hide();
-    // };
-    
-    // $('#clique_input_occasion').on('blur', function() {
-    	// $('#clique_input_occasion_wrapper').addClass('filledIn');
-      // $('#occCharCount').hide();
-    // });
-    
-    // $scope.inputOccasion_focus = function() {
-      // $('#clique_input_occasion_wrapper').removeClass('filledIn');
-      // $('#occCharCount').show();
-    // };
-    
-    // $('#clique_input_occasion').on('focus', function() {
-    	// $('#clique_input_occasion_wrapper').removeClass('filledIn');
-      // $('#occCharCount').show();
-    // });
+    $('#clique_input_occasion').on('focus', function() {
+    	$('#clique_input_occasion_wrapper').removeClass('filledIn');
+      $('#occCharCount').show();
+    });
     
     /**********
     * Date

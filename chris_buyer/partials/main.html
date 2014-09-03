@@ -63,7 +63,7 @@
   
   <!--Occasion-->
   <!-- Use "tabindex" to make this div "focusable" -->
-  <div id="clique_occasion_wrapper" tabindex="0" ng-blur="occasionWrapper_blur()"
+  <div id="clique_occasion_wrapper" tabindex="0"
     ng-class="{nextInput: isNextInput('Occasion')}"
     ng-show="allDirtyBefore('Occasion')">
     <div id="clique_occasion_selection" class="roundWhiteBorder marginBottom">
@@ -75,11 +75,11 @@
     </div>
     
     <div id="clique_occasion" class="hide">
-      <label for="clique_input_occasion" class="inputlabel" ng-click="occasionLabel_click()">
+      <label for="clique_input_occasion" class="inputlabel">
         <img ng-src="{{occasions.selectedImg}}">
       </label>
       <div id="clique_input_occasion_wrapper" class="rightColumn">
-        <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" ng-focus="inputOccasion_focus()" ng-blur="inputOccasion_blur()" required></textarea>
+        <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
         <span id="occCharCount">{{occasions.charsLeft}} characters left</span>
       </div>
       <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
