@@ -36,7 +36,7 @@ body {
 } */
 
 .hide {
-  display: none !important;
+  display: none;
   /*visibility: hidden;*/
 }
 
@@ -59,6 +59,12 @@ input {
 
 .nextInput {
   opacity: 0.5;
+}
+
+div.filledIn, input.filledIn, textarea.filledIn {
+  color: black;
+  border-color: transparent;
+  background-color: transparent !important;
 }
 /* End General Styles */
 
@@ -143,12 +149,22 @@ input {
 .checkmark {
   visibility: hidden;
   float: right;
+  display: inline-block;
   position: relative;
-  right: 1%;
-  top: 8px;
+  right: 2%;
+  top: 5%;
   z-index: 2;
   width: 10%;
   max-width: 25px;
+  height: 80%;
+  background-image: url('images/checkmark-blk.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.filledIn .checkmark {
+  background-image: url('images/checkmark-wht.png');
 }
 
 label.inputlabel {
@@ -373,7 +389,7 @@ label.inputlabel {
 #clique_input_occasion_wrapper {
   position: relative; /* needed for occCharCount to be positioned properly */
   height: 100%;
-  padding: 0.2em 0.5em 1.3em;
+  padding: 0.2em 0.5em 1.3em 2%;
   background-color: white;
 }
 
@@ -381,10 +397,11 @@ label.inputlabel {
   height: 5em;
   outline: none;
   resize: none;
+  font-size: 1em; /* by default, Google Chrome shrinks font-size in <input> and <textarea> fields, so we need to explicitly set the font-size */
   font-family: 'helvetica','sans-serif','arial';
   width: 100%;
   background-color: transparent;
-  border: none;
+  border: 0;
 }
 
 #occCharCount {
@@ -432,13 +449,14 @@ label.inputlabel {
   font-size: 0.6em;
 }
 
-#creditcardnumbercontainer {
-  background-color: white;
-}
-
 .paymentcontainer {
   height: 45px;
   text-align: center;
+  background-color: white;
+}
+
+.paymentcontainer.filledIn input {
+  color: white;
 }
 
 .paymentcontainer input {
@@ -489,11 +507,12 @@ label.inputlabel {
   color: #58e6df;
   font-size: 1.2em;
   padding-right: 1em;
+  cursor: pointer;
 }
 
 .proceed_button:disabled {
-  background-color: grey;
-  opacity: 0.5;
+  background-color: gray;
+  opacity: 0.6;
   cursor: default;
 }
 /* End Proceed Button Styles */

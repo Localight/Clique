@@ -88,6 +88,33 @@
   
   cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
                                   function($scope,   TextService,   OccasionService){
+    $scope.toggleShow = function(elemsArray) {
+      for (i=0; i<elemsArray.length; i++) {
+        elem = $(elemsArray[i]);
+        if (elem.css('display') == 'none')
+          elem.show();
+        else
+          elem.hide();
+      }
+    };
+    
+    $scope.showHide = function(elemsToShow, elemsToHide) {
+      $(elemsToShow).show();
+      $(elemsToHide).hide();
+    };
+    
+    /**********
+    * To / From
+    **********/
+    $('#clique_input_to, #clique_input_from').on('blur', function() {
+      if($(this).hasClass('ng-dirty'))
+        $(this).addClass('filledIn');
+    });
+    
+    $('#clique_input_to, #clique_input_from').on('focus', function() {
+      $(this).removeClass('filledIn');
+    });
+    
     /**********
     * Amount
     **********/
@@ -95,7 +122,6 @@
     $scope.setAmount = function(newAmount){
       $scope.formData.Amount = newAmount;
       $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
-      $(['#clique_amt_selection', '#clique_amt'].toString()).addClass('valid');
     };
     $scope.isAmount = function(checkAmount){
       return $scope.formData.Amount == checkAmount; // boolean
@@ -105,11 +131,12 @@
     * Clique Code
     **********/
     $scope.flipCard = function() {
-      $('.card').addClass('flipped');
+      $('#flip_container').show();
+      window.setTimeout(function(){$('.card').addClass('flipped')}, 500);
     };
     
     $scope.getStoreName = function() {
-      $scope.storeName = 'Doly\'s Delectibles';      
+      $scope.storeName = 'Doly\'s Delectibles';
     };
     
     /**********
@@ -132,6 +159,10 @@
         $scope.occasions.selectedImg = occasion.images.selected;
       }
       $scope.limitOccText();
+      
+      $('#clique_occasion_selection').hide();
+      $('#clique_occasion').show();
+    	$('#clique_input_occasion').focus();
     };
     
     $scope.limitOccText = function() {
@@ -139,6 +170,36 @@
       textarea.val(textarea.val().replace(/(\r\n|\n|\r)/gm,"")); // remove all line breaks
       $scope.occasions.charsLeft = TextService.limit($scope.formData.Occasion, occCharLimit);
     };
+    
+    // $scope.occasionLabel_click = function() {
+      // $('#clique_occasion_selection').show();
+      // $('#clique_input_occasion').focus();
+    // };
+    
+    // $scope.occasionWrapper_blur = function() {
+      // if($scope.dirty.Occasion && $('#clique_input_occasion').is(":focus"))
+        // $('#clique_occasion_selection').hide();
+    // };
+    
+    // $scope.inputOccasion_blur = function() {
+    	// $('#clique_input_occasion_wrapper').addClass('filledIn');
+      // $('#occCharCount').hide();
+    // };
+    
+    // $('#clique_input_occasion').on('blur', function() {
+    	// $('#clique_input_occasion_wrapper').addClass('filledIn');
+      // $('#occCharCount').hide();
+    // });
+    
+    // $scope.inputOccasion_focus = function() {
+      // $('#clique_input_occasion_wrapper').removeClass('filledIn');
+      // $('#occCharCount').show();
+    // };
+    
+    // $('#clique_input_occasion').on('focus', function() {
+    	// $('#clique_input_occasion_wrapper').removeClass('filledIn');
+      // $('#occCharCount').show();
+    // });
     
     /**********
     * Date
@@ -151,6 +212,8 @@
         $scope.dateTypeImg = 'images/send-today-blk.png';
       else if(type=='choose')
         $scope.dateTypeImg = 'images/send-on-date-blk.png';
+      
+      $scope.toggleShow(['#clique_senddate_selection', '#clique_senddate']);
     };
     
     /**********
@@ -166,35 +229,40 @@
     $scope.cardTypeImg = 'images/cc-basic-blk.png';
     
     $scope.updateCreditCardImg = function(){
-      $scope.cardTypeImg;
-      switch ($.formance.creditCardType($scope.formData.CreditCardNumber)) {
-        case 'amex':
-          $scope.cardTypeImg = 'images/cc-amex-blk.png';
-          break;
-        case 'discover':
-          $scope.cardTypeImg = 'images/cc-discover-blk.png';
-          break;
-        case 'mastercard':
-          $scope.cardTypeImg = 'images/cc-mastercard-blk.png';
-          break;
-        case 'visa':
-          $scope.cardTypeImg = 'images/cc-visa-blk.png';
-          break;
-        default:
-          $scope.cardTypeImg = 'images/cc-basic-blk.png';
-      };
+      var type = $.formance.creditCardType($scope.formData.CreditCardNumber);
+      var acceptedTypes = ['amex', 'discover', 'mastercard', 'visa'];
+      
+      if(acceptedTypes.indexOf(type) != -1)
+        $scope.cardTypeImg = 'images/cc-' + type;
+      else
+        $scope.cardTypeImg = 'images/cc-basic';      
+      
+      var filledIn = $('#creditcardnumbercontainer').hasClass('filledIn');
+      console.log(filledIn);
+      if(filledIn)
+        $scope.cardTypeImg += '-wht.png';
+      else
+        $scope.cardTypeImg += '-blk.png';
+      console.log($scope.cardTypeImg);
     };
     
+    $scope.ccnFocus = function() {
+      $('#creditcardnumbercontainer').removeClass('filledIn');
+      $('#creditcardinfo').addClass('filledIn');
+      $scope.updateCreditCardImg();
+    };
+    
+    $scope.expiryFocus = function() {
+      $('#creditcardnumbercontainer').addClass('filledIn');
+      $('#creditcardinfo').removeClass('filledIn');
+      $scope.updateCreditCardImg();
+    };
     
     /**********
     * Validation
     **********/
     jQuery(function($){
-      fields = ['credit_card_number',
-                'credit_card_expiry',
-                'credit_card_cvc',
-                'number',
-      ];
+      fields = ['credit_card_number', 'credit_card_expiry', 'credit_card_cvc', 'number'];
 
       $.each( fields, function (index, value) {
         $('input.'+value).formance('format_'+value);
@@ -274,32 +342,9 @@
       });
     });
     
-    // $scope.$watchCollection('formData', function(newVals, oldVals) {
-      // for(i=0; i<fieldOrder.length-1; i++) { // do not include Credit Card
-        // var field = fieldOrder[i];
-        // if(newVals[field] != oldVals[field]) {
-          // var val = newVals[field];
-          // if(val) { // if val exists
-            // $scope.dirty[field] = true;
-            // $scope.valid[field] = $scope.checkValid(field,val);
-          // };
-          // console.log(fieldOrder[i] + ': ' + val + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
-        // }
-      // };
-      
-      // $scope.mainInvalid = false;
-      // for(i=0; i<fieldOrder.length; i++) {
-        // if (!$scope.valid[fieldOrder[i]]) 
-          // $scope.mainInvalid = true;
-      // };
-      // console.log('mainInvalid = ' + $scope.mainInvalid);
-    // });
-    
     $scope.checkValid = function(field, val) {
       switch(field) {
-        case 'To':
-          return val.length > 0 && val.length <= 16;
-          break;
+        case 'To': // 'To' and 'From' share the same validation
         case 'From':
           return val.length > 0 && val.length <= 16;
           break;
@@ -309,6 +354,8 @@
         case 'Code':
           if (/^\d{5}$/.test(val)) { // only digits, exactly 5 digits in length
             $('#clique_code .checkmark').css('visibility','visible');
+            $('#clique_code_message').show(400)
+            $('#flip_container, #clique_code').hide();
             return true;
           }
           else {
@@ -365,6 +412,8 @@
             return false;
           }
           break;
+        default:
+          return false;
       }
     };
   }]);
