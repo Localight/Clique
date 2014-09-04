@@ -53,7 +53,7 @@
   <!--Schedule Gift-->
   <div>
     <a ui-sref="final" ng-show="dirty.Email">
-      <button class="proceed_button" ng-click="processForm()" ng-disabled="!reviewValid || !mainValid">Schedule Order</button>
+      <button class="proceed_button" ng-click="processForm()" ng-disabled="!pagesValid.main || !pagesValid.review">Schedule Order</button>
     </a>
   </div>
 </div>
