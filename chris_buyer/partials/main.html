@@ -5,15 +5,9 @@
   <!--To-->
   <div id="clique_to">
     <label for="To" class="inputlabel">To</label>
-    <input type="text" id="clique_input_to" class="heart rightColumn" placeholder="First Name" maxlength="16" ng-model="formData.To" required>
+    <input type="text" id="clique_input_to" class="heart rightColumn" placeholder="First Name" maxlength="16" ng-model="formData.To" autofocus required>
   </div>
-
-  <!--From-->
-  <div id="clique_from">
-    <label for="From" class="inputlabel">From</label>
-    <input type="text" id="clique_input_from" class="heart rightColumn" placeholder="Your Name" maxlength="16" ng-model="formData.From" required>
-  </div>
-
+  
   <!--Amount-->
   <div id="clique_amt_wrapper">
     <div id="clique_amt_selection">
@@ -29,7 +23,13 @@
       <div class="helveticaInput rightColumn">{{formData.Amount}}</div>
     </div>
   </div>
-
+  
+  <!--From-->
+  <div id="clique_from" ng-class="{nextInput: isNextInput('From')}">
+    <label for="From" class="inputlabel">From</label>
+    <input type="text" id="clique_input_from" class="heart rightColumn" placeholder="Your Name" maxlength="16" ng-model="formData.From" required>
+  </div>
+  
   <!--Code-->
   <div id="clique_code_wrapper" ng-show="allDirtyBefore('Code')">
     <div id="flip_container" class="marginBottom hide">
@@ -41,14 +41,13 @@
       </div>
     </div>
 
-    <div id="clique_code" ng-click="flipCard()">
+    <div id="clique_code" class="marginBottom" ng-class="{nextInput: isNextInput('Code')}" ng-click="flipCard()">
       <label for="Code" class="inputlabel">Code</label>
       <input type="text" id="clique_input_code" class="profont rightColumn number" data-formance_length=5 pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" ng-change="getStoreName()" required>
-      <div class="checkmark"></div>
+      <!-- <div class="checkmark"></div> -->
     </div>
     
-    <div id="clique_code_message" class="hide"
-      ng-click="showHide('#flip_container, #clique_code','#clique_code_message')">
+    <div id="clique_code_message" class="hide">
       <label class="inputlabel">
         <img src="images/at-icon-blk.png">
       </label>
@@ -60,10 +59,7 @@
   </div>
   
   <!--Occasion-->
-  <!-- Use "tabindex" to make this div "focusable" -->
-  <div id="clique_occasion_wrapper" tabindex="0"
-    ng-class="{nextInput: isNextInput('Occasion')}"
-    ng-show="allDirtyBefore('Occasion')">
+  <div id="clique_occasion_wrapper" ng-show="dirty.Occasion || valid.Code">
     <div id="clique_occasion_selection" class="roundWhiteBorder marginBottom">
       <ul>
         <li ng-repeat="occasion in occasions" ng-click="setOccasion(occasion)">
@@ -85,9 +81,7 @@
   </div>
 
   <!--Date-->
-  <div id="clique_date_wrapper" 
-    ng-class="{nextInput: isNextInput('Date')}"
-    ng-show="allDirtyBefore('Date')">
+  <div id="clique_date_wrapper" ng-show="allDirtyBefore('Date')">
     <div id="clique_date_selection" class="roundWhiteBorder">
       <label class="inputlabel">Send</label>
       <div id="dateImages" class="rightColumn">
@@ -146,7 +140,9 @@
   </div>
   
   <!--Go to Review Order-->
-  <a id="clique_revieworder" ui-sref="review" ng-show="dirty.ProceedButton">
-    <button class="proceed_button" ng-disabled="!mainValid">Continue</button>
-  </a>
+  <div>
+    <a ui-sref="review" ng-show="dirty.ProceedButton">
+      <button class="proceed_button" ng-disabled="!mainValid">Continue</button>
+    </a>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 <div id="clique_ordersummary" class="wrapper">
   <!--Back-->
-  <a ui-sref="main">Back</a>
+  <!-- <a ui-sref="main">Back</a> -->
   
   <!--Amount-->
   <div class="summaryordertotal">
@@ -21,15 +21,15 @@
   </div>
   
   <!--Phone Number-->
-  <div class="summaryphonenumber currentinput textinput">
+  <div id="clique_phonenumber" ng-class="{nextInput: !dirty.PhoneNumber}">
     <label class="inputlabel" for="clique_input_phonenumber">
       <img class="phonenumber" alt="Enter Phone Number" src="images/phone.png" />
     </label>
-    <input type="text" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" pattern="\d*" placeholder="(XXX) XXX-XXXX" ng-model="formData.PhoneNumber">
+    <input type="text" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" pattern="\d*" placeholder="(XXX) XXX-XXXX" maxlength="14" ng-model="formData.PhoneNumber" autofocus required>
   </div>
   
   <!--From-->
-  <div class="summaryfrom">
+  <div>
     <label class="inputlabel">From</label>
     <div class="heart rightColumn">
       {{ formData.From }}
@@ -37,35 +37,23 @@
   </div>
   
   <!--Send Receipt To-->
-  <div class="summaryreceipt">
+  <div>
     <label class="inputlabel">&nbsp;</label>
-    <div class="rightColumn helveticaText receiptmsg">Send receipt to</div>
+    <div class="rightColumn helveticaText">Send receipt to</div>
   </div>
   
   <!--Email-->
-  <div class="summaryemail">
+  <div id="clique_email" ng-class="{nextInput: !dirty.Email}">
     <label class="inputlabel">
-      <img class="emailsign" alt="Enter Email Address" src="images/emailsign.png" />
+      <img alt="Enter Email Address" src="images/emailsign_blk.png" />
     </label>
-    <input id="clique_input_email" class="rightColumn helveticaInput" type="email" ng-model="formData.Email" placeholder="you@email.com">
-  </div>
-  
-  <div id="clique_revieworder" class="hide">
-    <a class="proceed_button" ui-sref="final">Schedule Order</a>
+    <input type="email" id="clique_input_email" class="rightColumn helveticaInput" placeholder="you@email.com" ng-model="formData.Email">
   </div>
   
   <!--Schedule Gift-->
-<!--   <div id="clique_schedulegift" class="hide">
-    <img class="cliquelogo" alt="Clique Logo" src="images/clique.png" />
-    <a ui-sref="final">
-      <img class="scheduleorder" alt="Schedule Order" ng-click="processForm()" src="images/scheduleorder.png"/>
+  <div>
+    <a ui-sref="final" ng-show="dirty.Email">
+      <button class="proceed_button" ng-click="processForm()" ng-disabled="!reviewValid || !mainValid">Schedule Order</button>
     </a>
-  </div> -->
-  
-  <!--Clique Logo-->
-<!--   <div id="clique_logo">
-    <span class="first">The</span>
-    <div class="heart">Local</div>
-    <span class="last">Gift Card</span>
-  </div> -->
+  </div>
 </div>

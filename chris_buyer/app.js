@@ -80,14 +80,30 @@
       UniqueLink: ''
     };
     
+    // allocate validation variables
+    $scope.mainValid = false;
+    $scope.reviewValid = false;
+    
     // function to process the form
     $scope.processForm = function() {
-      alert('awesome!');  
+      // do some AJAX call to server only if both the main and review pages are valid
+      if ($scope.mainValid && $scope.reviewValid) {
+        alert('awesome!');
+      }
+      
+      // disable the Submit Button on the review page to prevent processing
+      // the form twice in case the user double-clicks on the Submit Button
+      $scope.reviewValid = false;
     };
   });
   
   cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
                                   function($scope,   TextService,   OccasionService){
+    // on document load, give focus to "To" and make it the current input
+    $( document ).ready(function() {
+      $('#clique_input_to').focus().parent().addClass('currentInput');
+    });
+    
     // General show/hide function
     $scope.showHide = function(elemsToShow, elemsToHide) {
       $(elemsToShow).show();
@@ -106,15 +122,14 @@
     });
     
     /**********
-    * To / From
+    * To / From / Code
     **********/
-    $('#clique_input_to, #clique_input_from')
+    $('#clique_input_to, #clique_input_from, #clique_input_code')
       .on('blur', function() {
-        if($(this).hasClass('ng-dirty'))
-          $(this).addClass('filledIn');
+        $(this).parent().removeClass('currentInput');
       })
       .on('focus', function() {
-        $(this).removeClass('filledIn');
+        $(this).parent().removeClass('nextInput').addClass('currentInput');
     });
     
     /**********
@@ -128,6 +143,9 @@
       $scope.formData.Amount = newAmount;
       $('#clique_amt').show();
       $('#clique_amt_selection').hide();
+      
+      // give focus to "From" if it isn't dirty yet
+      if(!$scope.dirty.From) $('#clique_input_from').focus();
     };
     
     $scope.isAmount = function(checkAmount){
@@ -148,10 +166,15 @@
       $scope.storeName = 'Doly\'s Delectibles'; // USING A PLACEHOLDER FOR NOW
     };
     
+    $('#clique_code_message').on('click', function(){
+      $('#flip_container, #clique_code').show();
+      $('#clique_input_code').focus();
+    });
+    
     /**********
     * Occasion
     **********/
-    // import occasions from OccasionService
+    // import occasions object from OccasionService
     $scope.occasions = OccasionService;
     
     // set default occasion icon to display
@@ -208,12 +231,12 @@
       // add new click event listener to $('html')
       $('html').on('click', hide_clique_occasion_selection);
       
-    	$('#clique_input_occasion_wrapper').addClass('filledIn');
       $('#occCharCount').hide();
+      $('#clique_occasion').removeClass('currentInput');
     });
     
     $('#clique_input_occasion').on('focus', function() {
-    	$('#clique_input_occasion_wrapper').removeClass('filledIn');
+      $('#clique_occasion').addClass('currentInput');
       $('#occCharCount').show();
     });
     
@@ -287,8 +310,8 @@
     
     $scope.dirty = {
       To: false,
-      From: false,
       Amount: false,
+      From: false,
       Code: false,
       Occasion: false,
       Date: false,
@@ -301,8 +324,8 @@
     
     $scope.valid = {
       To: false,
-      From: false,
       Amount: false,
+      From: false,
       Code: false,
       Occasion: false,
       Date: false,
@@ -312,14 +335,12 @@
       ZIPcode: false
     };
     
-    $scope.mainValid = false;
-    
-    var fieldOrder = ['To', 'From', 'Amount', 'Code', 'Occasion', 'Date', 'CreditCardNumber', 'Expiry', 'CVV', 'ZIPcode'];
+    var fieldOrder = ['To', 'Amount', 'From', 'Code', 'Occasion', 'Date', 'CreditCardNumber', 'Expiry', 'CVV', 'ZIPcode'];
     
     $scope.isNextInput = function(input) {
       // this function returns true only if 'input' is not dirty and the element before 'input' is not valid
       thisIndex = fieldOrder.indexOf(input);
-      return !$scope.dirty[fieldOrder[thisIndex]] && !$scope.valid[fieldOrder[thisIndex-1]];
+      return !$scope.dirty[fieldOrder[thisIndex]]; // && !$scope.valid[fieldOrder[thisIndex-1]];
     };
     
     $scope.allDirtyBefore = function(input) {
@@ -343,7 +364,7 @@
           $scope.valid[field] = false;
           
           // we still need to call checkValid so that checkmarks will be shown appropriately
-          $scope.checkValid(field,newVal)
+          $scope.checkValid(field,'')
         }
         console.log(field + ': ' + newVal + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
         
@@ -375,13 +396,13 @@
           break;
         case 'Code':
           if (/^\d{5}$/.test(val)) { // only digits, exactly 5 digits in length
-            $('#clique_code .checkmark').css('visibility','visible'); // show checkmark
-            $('#clique_code_message').show(400) // show message with animation
-            $('#flip_container, #clique_code').hide();
+            $('#clique_code_message').show('slow') // show message with animation
+            $('#flip_container').hide();
+            $('#clique_input_code').blur();
             return true;
           }
-          else {
-            $('#clique_code .checkmark').css('visibility','hidden'); // hide checkmark
+          else { // if invalid
+            $('#clique_code_message').hide('fast'); // hide message with animation
             return false;
           }
           break;
@@ -443,7 +464,78 @@
   cliqueApp.controller('ReviewController', ['$scope', function($scope){
     // scroll to top of page
     window.scrollTo(0, 0);
-  
+    
+    // on document load, give focus to "Phone Number" and make it the current input
+    $( document ).ready(function() {
+      $('#clique_input_phonenumber').focus().parent().removeClass('nextInput').addClass('currentInput');
+    });
+    
+    /**********
+    * Phone Number / Email
+    **********/
+    $('#clique_input_phonenumber, #clique_input_email')
+      .on('blur', function() {
+        $(this).parent().removeClass('currentInput');
+      })
+      .on('focus', function() {
+        $(this).parent().addClass('currentInput');
+    });
+    
+    $scope.dirty = {
+      PhoneNumber: false,
+      Email: false,
+      SubmitButton: false
+    };
+    
+    $scope.valid = {
+      PhoneNumber: false,
+      Email: false
+    };
+    
+    var fieldOrder = ['PhoneNumber', 'Email'];
+    
+    // watch each field separately
+    angular.forEach(fieldOrder, function(field) { // for each field in fieldOrder
+      $scope.$watch('formData.'+field, function (newVal, oldVal) {
+        if(newVal) { // if newVal exists
+          $scope.dirty[field] = true;
+          $scope.valid[field] = $scope.checkValid(field,newVal);
+        }
+        else { // if newVal is null or undefined, then it is invalid
+          $scope.valid[field] = false;
+        }
+        console.log(field + ': ' + newVal + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
+        
+        // check if all fields on the review page are valid
+        $scope.reviewValid = true;
+        for(i=0; i<fieldOrder.length; i++) {
+          // if any of the fields are not valid, then set reviewValid to false
+          if (!$scope.valid[fieldOrder[i]]) {
+            $scope.reviewValid = false;
+            break; // no need to check remaining fields once any field is not valid
+          }
+        };
+        
+        // if reviewValid has ever been true, the SubmitButton Button will be visible
+        if ($scope.mainValid)
+          $scope.dirty.SubmitButton = true;
+      });
+    });
+    
+    // giant validation switch for each field
+    $scope.checkValid = function(field, val) {
+      switch(field) {
+        case 'PhoneNumber':
+          return $('#clique_input_phonenumber').formance('validate_phone_number');
+          break;
+        case 'Email':
+          return $('#clique_input_email').formance('validate_email');
+          break;
+        default:
+          return false;
+      }
+    };
+    
     /**********
     * Validation
     **********/
@@ -461,7 +553,8 @@
   }]);
   
   cliqueApp.controller('FinalController', function(){
-    //
+    // begin fade in transition 100ms after page loads
+    window.setTimeout(function(){$('#finalOverlay').addClass('complete')}, 100);
   });
   
   cliqueApp.factory('TextService', function(){
