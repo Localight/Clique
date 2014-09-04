@@ -47,9 +47,10 @@ body {
   margin-bottom: 1.5% !important;
 }
 
-input {
+input, textarea {
   border: 0;
   background-color: transparent;
+  background-image: none; /* remove inset gradient on Firefox mobile */
 }
 
 .currentInput {
@@ -407,8 +408,6 @@ label.inputlabel {
   font-size: 1em; /* by default, Google Chrome shrinks font-size in <input> and <textarea> fields, so we need to explicitly set the font-size to maintain consistency across browsers */
   font-family: 'helvetica','sans-serif','arial';
   width: 100%;
-  background-color: transparent;
-  border: 0;
 }
 
 #occCharCount {
