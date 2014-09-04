@@ -109,9 +109,10 @@
       $('#clique_input_to').focus().parent().addClass('currentInput');
     });
     
-    // when an input or textarea is focused, scroll it to the top of the screen
+    // when an input is focused, scroll it to the top of the screen
     // use setTimeout so other DOM manipulation finishes before scroll happens
-    $('input, textarea').on('focus', function() {
+    // do not trigger this on the occasion textarea so that the occasion selection does not get hidden
+    $('input').on('focus', function() {
       elem = $(this)[0];
       setTimeout(function(){ elem.scrollIntoView(); }, 50);
     });
