@@ -1,17 +1,17 @@
 <div class="wrapper">
   <!--Logo-->
-  <img class="clique_logo marginBottom" src="images/logo-local-gift-card-blk.png">
+  <img id="clique_logo" src="images/logo-local-gift-card-blk.png">
   
   <!--To-->
   <div id="clique_to">
     <label for="To" class="inputlabel">To</label>
-    <input type="text" id="clique_input_to" class="heart rightColumn" name="To" placeholder="First Name" maxlength="16" ng-model="formData.To" required>
+    <input type="text" id="clique_input_to" class="heart rightColumn" placeholder="First Name" maxlength="16" ng-model="formData.To" required>
   </div>
 
   <!--From-->
   <div id="clique_from">
     <label for="From" class="inputlabel">From</label>
-    <input type="text" id="clique_input_from" class="heart rightColumn" name="From" placeholder="Your Name" maxlength="16" ng-model="formData.From" required>
+    <input type="text" id="clique_input_from" class="heart rightColumn" placeholder="Your Name" maxlength="16" ng-model="formData.From" required>
   </div>
 
   <!--Amount-->
@@ -19,21 +19,19 @@
     <div id="clique_amt_selection">
       <span class="leftarrow"></span>
       <div id="clique_amt_scrollwindow">
-        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price); toggleShow(['#clique_amt_selection', '#clique_amt'])">${{price}}</span>
+        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
       </div>
       <span class="rightarrow"></span>
     </div>
     
-    <div id="clique_amt" class="hide" ng-click="toggleShow(['#clique_amt_selection', '#clique_amt'])">
+    <div id="clique_amt" class="hide" ng-click="showHide('#clique_amt_selection', '#clique_amt')">
       <label class="inputlabel">$</label>
-      <div class="rightColumn helveticaInput">{{formData.Amount}}</div>
+      <div class="helveticaInput rightColumn">{{formData.Amount}}</div>
     </div>
   </div>
 
   <!--Code-->
-  <div id="clique_code_wrapper"
-    ng-class="{nextInput: isNextInput('Code')}"
-    ng-show="allDirtyBefore('Code')">
+  <div id="clique_code_wrapper" ng-show="allDirtyBefore('Code')">
     <div id="flip_container" class="marginBottom hide">
       <div class="dummy"></div>
       <div id="front" class="card"></div>
@@ -45,8 +43,8 @@
 
     <div id="clique_code" ng-click="flipCard()">
       <label for="Code" class="inputlabel">Code</label>
-      <input id="clique_input_code" class="profont number rightColumn" data-formance_length=5 name="Code" type="text" pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" ng-change="getStoreName()" required>
-      <img class="checkmark" src="images/checkmark-blk.png">
+      <input type="text" id="clique_input_code" class="profont rightColumn number" data-formance_length=5 pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" ng-change="getStoreName()" required>
+      <div class="checkmark"></div>
     </div>
     
     <div id="clique_code_message" class="hide"
@@ -76,7 +74,7 @@
     
     <div id="clique_occasion" class="hide">
       <label for="clique_input_occasion" class="inputlabel">
-        <img ng-src="{{occasions.selectedImg}}">
+        <img ng-src="{{occasions.selectedIcon}}">
       </label>
       <div id="clique_input_occasion_wrapper" class="rightColumn">
         <textarea id="clique_input_occasion" maxlength="100" ng-keypress="limitOccText()" ng-keyup="limitOccText()" ng-model="formData.Occasion" required></textarea>
@@ -87,28 +85,28 @@
   </div>
 
   <!--Date-->
-  <div id="clique_senddate_wrapper" 
+  <div id="clique_date_wrapper" 
     ng-class="{nextInput: isNextInput('Date')}"
     ng-show="allDirtyBefore('Date')">
-    <div id="clique_senddate_selection" class="roundWhiteBorder">
+    <div id="clique_date_selection" class="roundWhiteBorder">
       <label class="inputlabel">Send</label>
       <div id="dateImages" class="rightColumn">
         <div id="sendToday" ng-click="setDateType('today')">
           <img id="sendTodayImg" src="images/send-today-wht.png" alt="Send Today">
           Today
         </div>
-        <div id="sendOnDate" ng-click="setDateType('choose')">
+        <div id="sendOnDate" ng-click="setDateType('on-date')">
           <img id="sendOnDateImg" src="images/send-on-date-wht.png" alt="Choose a Date">
           On date
         </div>
       </div>
     </div>
     
-    <div id="clique_senddate" class="hide">
-      <label class="inputlabel">
-        <img src="images/send-on-date-blk.png" ng-src="{{dateTypeImg}}" alt="Chosen Date">
+    <div id="clique_date" class="hide">
+      <label for="clique_input_date" class="inputlabel">
+        <img ng-src="{{dateTypeImg}}" alt="Chosen Date">
       </label>
-      <input id="datepicker" class="rightColumn" pick-a-date="" required>
+      <input type="text" id="clique_input_date" class="rightColumn" pick-a-date="" required>
     </div>
   </div>
   
@@ -140,9 +138,9 @@
       <div class="checkmark"></div>
     </div>
     <div id="creditcardinfo" class="paymentcontainer filledIn">
-      <input type="text" id="clique_input_expiry" class="profont clique_input_expiry credit_card_expiry" ng-model="formData.Expiry" ng-focus="expiryFocus()" placeholder="MM / YYYY" pattern="\d*" maxlength="9" size="9" required>
-      <input type="text" id="clique_input_cvv" class="profont clique_input_expiry credit_card_cvc" ng-model="formData.CVV" ng-focus="expiryFocus()" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
-      <input type="text" id="clique_input_zip" class="profont clique_input_expiry number" data-formance_length=5 ng-model="formData.ZIPcode" ng-focus="expiryFocus()" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
+      <input type="text" id="clique_input_expiry" class="profont expiry credit_card_expiry" ng-model="formData.Expiry" ng-focus="expiryFocus()" placeholder="MM / YYYY" pattern="\d*" maxlength="9" size="9" required>
+      <input type="text" id="clique_input_cvv" class="profont expiry credit_card_cvc" ng-model="formData.CVV" ng-focus="expiryFocus()" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
+      <input type="text" id="clique_input_zip" class="profont expiry number" data-formance_length=5 ng-model="formData.ZIPcode" ng-focus="expiryFocus()" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
       <div class="checkmark"></div>
     </div>
   </div>

@@ -241,7 +241,7 @@
       return;
     }
     $target = $(e.currentTarget);
-    val = $target.val(); // + digit;
+    val = $target.val(); // // CHANGED. Original: $target.val() + digit;
     if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
       // e.preventDefault();
       return $target.val("0" + val + " / ");
@@ -305,7 +305,7 @@
   $.formance.fn.format_credit_card_expiry = function() {
     this.formance('restrictNumeric');
     this.on('keypress', restrictExpiry);
-    this.on('keyup', formatExpiry);
+    this.on('keyup', formatExpiry); // CHANGED. Original: keypress
     this.on('keypress', formatForwardSlashExpiry);
     this.on('keypress', formatForwardExpiry);
     this.on('keydown', formatBackExpiry);
@@ -1253,7 +1253,7 @@
       text += "" + first3;
     }
     if ((first3 != null ? first3.length : void 0) === 3) {
-      text += " - ";
+      text += "-"; // CHANGED. Original: text += " - ";
     }
     if (last4 != null) {
       text += "" + last4;
@@ -1287,7 +1287,7 @@
       return;
     }
     $target = $(e.currentTarget);
-    val = $target.val();// + digit;
+    val = $target.val(); // CHANGED. Original: $target.val() + digit;
     text = reFormatPhoneNumber(val);
     // e.preventDefault();
     return $target.val(text);
@@ -1335,7 +1335,7 @@
   $.formance.fn.format_phone_number = function() {
     this.formance('restrictNumeric');
     this.on('keypress', restrictPhoneNumber);
-    this.on('keyup', formatPhoneNumber);
+    this.on('keyup', formatPhoneNumber); // CHANGED. Original: keypress
     this.on('keydown', formatBackPhoneNumber);
     this.on('paste', formatPastePhoneNumber);
     return this;
