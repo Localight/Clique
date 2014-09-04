@@ -30,11 +30,6 @@ body {
 
 
 /* General Styles */
-/* .clear {
-  clear: both;
-  float: none !important;
-} */
-
 .hide {
   display: none;
 }
@@ -531,13 +526,15 @@ label.inputlabel {
 
 /* Final Overlay Styles */
 #finalOverlay {
-  background-color: black;
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
   padding: 0;
+  background-color: black;
+  opacity: 0.5;
+  display: table;
+  text-align: center;
   transition: opacity 2s;
   -webkit-transition: opacity 2s;
 }
@@ -549,7 +546,6 @@ label.inputlabel {
 .overlayText {
 	color: #58e6df;
 	font-size: 3em;
-	position: relative;
-	top: 30%;
-	left: 30%;	
+  display: table-cell;
+  vertical-align: middle;
 }

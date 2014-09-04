@@ -89,11 +89,6 @@
       review: false
     };
     
-    // $scope.$watchCollection('pagesValid', function (newVal, oldVal) {
-      // console.log('pagesValid.main in big scope = ' + newVal.main);
-      // console.log('pagesValid.review in big scope = ' + newVal.review);
-    // });
-    
     // function to process the form
     $scope.processForm = function() {
       // do some AJAX call to server only if both the main and review pages are valid
@@ -114,6 +109,13 @@
       $('#clique_input_to').focus().parent().addClass('currentInput');
     });
     
+    // when an input or textarea is focused, scroll it to the top of the screen
+    // use setTimeout so other DOM manipulation finishes before scroll happens
+    $('input, textarea').on('focus', function() {
+      elem = $(this)[0];
+      setTimeout(function(){ elem.scrollIntoView(); }, 50);
+    });
+    
     // General show/hide function
     $scope.showHide = function(elemsToShow, elemsToHide) {
       $(elemsToShow).show();
@@ -122,7 +124,7 @@
     
     // if any field after "To" becomes dirty, blur the background and stop watching $scope.dirty
     var background = $scope.$watchCollection('dirty', function() {
-      for(i=1; i<fieldOrder.length; i++) {
+      for(i=1; i<fieldOrder.length; i++) { // start "i" at 1 to avoid "To"
         if ($scope.dirty[fieldOrder[i]]) {
           $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
           background(); // de-register this listener once background is blurred
