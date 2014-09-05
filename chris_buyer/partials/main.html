@@ -13,7 +13,7 @@
     <div id="clique_amt_selection">
       <span class="leftarrow"></span>
       <div id="clique_amt_scrollwindow">
-        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)">${{price}}</span>
+        <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setAmount(price)"><small>$</small>{{price}}</span>
       </div>
       <span class="rightarrow"></span>
     </div>

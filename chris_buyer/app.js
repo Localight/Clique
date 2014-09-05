@@ -109,12 +109,15 @@
       $('#clique_input_to').focus().parent().addClass('currentInput');
     });
     
-    // when an input is focused, scroll it to the top of the screen
+    // when an input is focused, scroll it to the bottom of the screen with 50px padding below
     // use setTimeout so other DOM manipulation finishes before scroll happens
     // do not trigger this on the occasion textarea so that the occasion selection does not get hidden
     $('input').on('focus', function() {
-      elem = $(this)[0];
-      setTimeout(function(){ elem.scrollIntoView(); }, 50);
+      elem = $(this);
+      setTimeout(function(){ 
+        elem[0].scrollIntoView(false);
+        window.scrollBy(0,50);
+      }, 500);
     });
     
     // General show/hide function
