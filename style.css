@@ -119,7 +119,7 @@ input, textarea {
 
 #localStreetNoBlur {
   opacity: 1;
-  background-image: url('images/local-street-low2-chris.png');
+  background-image: url('images/local-street-bg.png');
 }
 
 #localStreetNoBlur.blur {
@@ -127,7 +127,8 @@ input, textarea {
 }
 
 #localStreetBlur {
-  background-image: url('images/local-street-low2-blur.png');
+  /* background-image: url('images/local-street-low2-blur.png'); */
+  background-image: url('images/local-street-bg-blur.png');
 }
 
 /* Clique Logo */
@@ -146,7 +147,7 @@ input, textarea {
 }
 
 .wrapper > div {
-  margin-bottom: 1.5% !important;
+  margin-bottom: 2.5% !important;
 }
 
 /*--- section styles ---*/
@@ -211,6 +212,14 @@ label.inputlabel {
   white-space: nowrap; /* don't wrap the price spans */
 }
 
+#clique_amt_scrollwindow small {
+  font-size: 50%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.6em;
+}
+
 .price {
   border: 2px solid white;
   border-radius: 5px;
@@ -220,7 +229,7 @@ label.inputlabel {
   padding: 3px 0 0; /* top, left/right, bottom */
   height: 38px;
   width: 25%;
-  min-width: 70px;
+  min-width: 68px;
   max-width: 100px;
   margin: 0 1%; /* spacing between price boxes */
 }
