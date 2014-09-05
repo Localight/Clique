@@ -23,9 +23,9 @@
   <!--Phone Number-->
   <div id="clique_phonenumber" ng-class="{nextInput: !dirty.PhoneNumber}">
     <label class="inputlabel" for="clique_input_phonenumber">
-      <img class="phonenumber" alt="Enter Phone Number" src="images/phone.png" />
+      <img alt="Enter Phone Number" src="images/phone.png" />
     </label>
-    <input type="text" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" pattern="\d*" placeholder="(XXX) XXX-XXXX" maxlength="14" ng-model="formData.PhoneNumber" autofocus required>
+    <input type="text" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" placeholder="(XXX) XXX-XXXX" maxlength="14" pattern="\d*" ng-model="formData.PhoneNumber" autofocus required>
   </div>
   
   <!--From-->
@@ -47,13 +47,13 @@
     <label class="inputlabel">
       <img alt="Enter Email Address" src="images/emailsign_blk.png" />
     </label>
-    <input type="email" id="clique_input_email" class="rightColumn helveticaInput" placeholder="you@email.com" ng-model="formData.Email">
+    <input type="email" id="clique_input_email" class="rightColumn helveticaInput email" placeholder="you@email.com" data-formance_algorithm='complex' ng-model="formData.Email">
   </div>
   
   <!--Schedule Gift-->
   <div>
     <a ui-sref="final" ng-show="dirty.Email">
-      <button class="proceed_button" ng-click="processForm()" ng-disabled="!reviewValid || !mainValid">Schedule Order</button>
+      <button class="proceed_button" ng-click="processForm()" ng-disabled="!pagesValid.main || !pagesValid.review">Schedule Order</button>
     </a>
   </div>
 </div>

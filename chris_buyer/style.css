@@ -30,11 +30,6 @@ body {
 
 
 /* General Styles */
-/* .clear {
-  clear: both;
-  float: none !important;
-} */
-
 .hide {
   display: none;
 }
@@ -45,27 +40,28 @@ body {
 
 .roundWhiteBorder {
   border: 2px solid white;
-  border-radius: 12px;
+  border-radius: 7px;
 }
 
 .marginBottom {
   margin-bottom: 1.5% !important;
 }
 
-input {
+input, textarea {
   border: 0;
   background-color: transparent;
+  background-image: none; /* remove inset gradient on Firefox mobile */
 }
 
 .currentInput {
   background-color: white !important;
-  border-radius: 12px !important;
+  border-radius: 7px !important;
   opacity: 1 !important;
 }
 
 .nextInput {
   opacity: 0.5;
-  border-radius: 12px;
+  border-radius: 7px;
   background-color: rgba(255,255,255,0.7);
 }
 
@@ -111,7 +107,7 @@ input {
   position: fixed;
   top: 40%;
   width: 100%;
-  height: 100%;
+  height: 60%; /* 60% + 40% (from "top") = 100% of the screen's height*/
   z-index: -1;
   background-size: cover;
   background-position: center top;
@@ -191,7 +187,7 @@ label.inputlabel {
 .rightColumn {
   width: 73%;
   border: 0;
-  border-radius: 12px;
+  border-radius: 7px;
   margin: 0 0 0 2%; /* margin-left */
   height: 45px;
   display: inline-block;
@@ -217,13 +213,13 @@ label.inputlabel {
 
 .price {
   border: 2px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   font-size: 1.6em;
   display: inline-block;
   padding: 3px 0 0; /* top, left/right, bottom */
   height: 38px;
-  width: 30%;
+  width: 25%;
   min-width: 70px;
   max-width: 100px;
   margin: 0 1%; /* spacing between price boxes */
@@ -311,7 +307,7 @@ label.inputlabel {
 	text-align: right;
   box-sizing: border-box;
   width: 100%;
-  padding-right: 5%;
+  padding-right: 8%;
   position: absolute;
   top: 10%;
 	opacity: 0.8;
@@ -341,13 +337,8 @@ label.inputlabel {
   -webkit-backface-visibility: hidden;
 }
 
-/* position the checkmark absolutely (instead of relatively) so it appears on top of the input field */
-/* #clique_code div.checkmark {
-  position: absolute;
-} */
-
 #clique_code_message > div {
-  line-height: 1.5em;
+  line-height: 1.2em;
 }
 
 .italicMessage {
@@ -359,7 +350,7 @@ label.inputlabel {
 
 /* occasion styles */
 #clique_occasion_selection {
-  margin: auto;
+  margin: 2% auto; /* increase margin-top and margin-bottom slightly */
   max-width: 600px;
 }
 
@@ -412,8 +403,6 @@ label.inputlabel {
   font-size: 1em; /* by default, Google Chrome shrinks font-size in <input> and <textarea> fields, so we need to explicitly set the font-size to maintain consistency across browsers */
   font-family: 'helvetica','sans-serif','arial';
   width: 100%;
-  background-color: transparent;
-  border: 0;
 }
 
 #occCharCount {
@@ -512,7 +501,7 @@ label.inputlabel {
   background-position: 1em 60%;
   background-repeat: no-repeat;
   border: 0;
-  border-radius: 12px;
+  border-radius: 7px;
   width: 100%;
   height: 45px;
   text-align: right;
@@ -531,13 +520,15 @@ label.inputlabel {
 
 /* Final Overlay Styles */
 #finalOverlay {
-  background-color: black;
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
   padding: 0;
+  background-color: black;
+  opacity: 0.5;
+  display: table;
+  text-align: center;
   transition: opacity 2s;
   -webkit-transition: opacity 2s;
 }
@@ -549,7 +540,6 @@ label.inputlabel {
 .overlayText {
 	color: #58e6df;
 	font-size: 3em;
-	position: relative;
-	top: 30%;
-	left: 30%;	
+  display: table-cell;
+  vertical-align: middle;
 }

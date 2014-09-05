@@ -43,8 +43,7 @@
 
     <div id="clique_code" class="marginBottom" ng-class="{nextInput: isNextInput('Code')}" ng-click="flipCard()">
       <label for="Code" class="inputlabel">Code</label>
-      <input type="text" id="clique_input_code" class="profont rightColumn number" data-formance_length=5 pattern="\d*" maxlength="5" placeholder="XXXXX" ng-model="formData.Code" ng-change="getStoreName()" required>
-      <!-- <div class="checkmark"></div> -->
+      <input type="text" id="clique_input_code" class="profont rightColumn number" placeholder="XXXXX" maxlength="5" pattern="\d*" data-formance_length=5 ng-model="formData.Code" ng-change="getStoreName()" required>
     </div>
     
     <div id="clique_code_message" class="hide">
@@ -60,7 +59,7 @@
   
   <!--Occasion-->
   <div id="clique_occasion_wrapper" ng-show="dirty.Occasion || valid.Code">
-    <div id="clique_occasion_selection" class="roundWhiteBorder marginBottom">
+    <div id="clique_occasion_selection" class="roundWhiteBorder">
       <ul>
         <li ng-repeat="occasion in occasions" ng-click="setOccasion(occasion)">
           <img ng-src="{{occasion.images.normal}}">{{occasion.alt}}
@@ -128,13 +127,13 @@
     ng-show="allDirtyBefore('CreditCardNumber')">
     <div id="creditcardnumbercontainer" class="paymentcontainer">
       <img id="creditcardimg" ng-src="{{cardTypeImg}}">
-      <input type="text" id="clique_input_creditcardnumber" class="profont checkinput credit_card_number" ng-model="formData.CreditCardNumber" ng-change="updateCreditCardImg()" ng-focus="ccnFocus()" placeholder="XXXX XXXX XXXX XXXX" size="19" pattern="\d*" required>
+      <input type="text" id="clique_input_creditcardnumber" class="profont checkinput credit_card_number" placeholder="XXXX XXXX XXXX XXXX" size="19" pattern="\d*" ng-model="formData.CreditCardNumber" ng-change="updateCreditCardImg()" ng-focus="ccnFocus()" required>
       <div class="checkmark"></div>
     </div>
     <div id="creditcardinfo" class="paymentcontainer filledIn">
-      <input type="text" id="clique_input_expiry" class="profont expiry credit_card_expiry" ng-model="formData.Expiry" ng-focus="expiryFocus()" placeholder="MM / YYYY" pattern="\d*" maxlength="9" size="9" required>
-      <input type="text" id="clique_input_cvv" class="profont expiry credit_card_cvc" ng-model="formData.CVV" ng-focus="expiryFocus()" placeholder="CVV" pattern="\d*" maxlength="4" size="4" required>
-      <input type="text" id="clique_input_zip" class="profont expiry number" data-formance_length=5 ng-model="formData.ZIPcode" ng-focus="expiryFocus()" placeholder="ZIP" pattern="\d*" maxlength="5" size="5" required>
+      <input type="text" id="clique_input_expiry" class="profont expiry credit_card_expiry" placeholder="MM / YYYY" maxlength="9" size="9" pattern="\d*" ng-model="formData.Expiry" ng-focus="expiryFocus()" required>
+      <input type="text" id="clique_input_cvv" class="profont expiry credit_card_cvc" placeholder="CVV" maxlength="4" size="4" pattern="\d*" ng-model="formData.CVV" ng-focus="expiryFocus()" required>
+      <input type="text" id="clique_input_zip" class="profont expiry number" placeholder="ZIP" maxlength="5" size="5" pattern="\d*" data-formance_length=5 ng-model="formData.ZIPcode" ng-focus="expiryFocus()" required>
       <div class="checkmark"></div>
     </div>
   </div>
@@ -142,7 +141,7 @@
   <!--Go to Review Order-->
   <div>
     <a ui-sref="review" ng-show="dirty.ProceedButton">
-      <button class="proceed_button" ng-disabled="!mainValid">Continue</button>
+      <button class="proceed_button" ng-disabled="!pagesValid.main">Continue</button>
     </a>
   </div>
 </div>

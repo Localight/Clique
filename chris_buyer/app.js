@@ -62,6 +62,9 @@
   });
   
   cliqueApp.controller('BuyerController', function($scope){
+    // NOTE: only Javascript objects declared here will be accessible by child controllers
+    // Primitive variable types will NOT be accessible by child controllers
+    
     // we will store all of our form data in this object
     $scope.formData = {
       To: '',
@@ -81,27 +84,37 @@
     };
     
     // allocate validation variables
-    $scope.mainValid = false;
-    $scope.reviewValid = false;
+    $scope.pagesValid = {
+      main: false,
+      review: false
+    };
     
     // function to process the form
     $scope.processForm = function() {
       // do some AJAX call to server only if both the main and review pages are valid
-      if ($scope.mainValid && $scope.reviewValid) {
+      if ($scope.pagesValid.main && $scope.pagesValid.review) {
+        // disable the Submit Button on the review page to prevent processing
+        // the form twice in case the user double-clicks on the Submit Button
+        $scope.pagesValid.review = false;
+        
+        // make AJAX Call
         alert('awesome!');
       }
-      
-      // disable the Submit Button on the review page to prevent processing
-      // the form twice in case the user double-clicks on the Submit Button
-      $scope.reviewValid = false;
     };
   });
   
-  cliqueApp.controller('MainController', ['$scope', 'TextService', 'OccasionService',
-                                  function($scope,   TextService,   OccasionService){
+  cliqueApp.controller('MainController', function($scope, TextService, OccasionService){
     // on document load, give focus to "To" and make it the current input
     $( document ).ready(function() {
       $('#clique_input_to').focus().parent().addClass('currentInput');
+    });
+    
+    // when an input is focused, scroll it to the top of the screen
+    // use setTimeout so other DOM manipulation finishes before scroll happens
+    // do not trigger this on the occasion textarea so that the occasion selection does not get hidden
+    $('input').on('focus', function() {
+      elem = $(this)[0];
+      setTimeout(function(){ elem.scrollIntoView(); }, 50);
     });
     
     // General show/hide function
@@ -112,7 +125,7 @@
     
     // if any field after "To" becomes dirty, blur the background and stop watching $scope.dirty
     var background = $scope.$watchCollection('dirty', function() {
-      for(i=1; i<fieldOrder.length; i++) {
+      for(i=1; i<fieldOrder.length; i++) { // start "i" at 1 to avoid "To"
         if ($scope.dirty[fieldOrder[i]]) {
           $('#localStreetNoBlur').addClass('blur'); // uses CSS Blur Filter
           background(); // de-register this listener once background is blurred
@@ -163,7 +176,7 @@
     };
     
     $scope.getStoreName = function() {
-      $scope.storeName = 'Doly\'s Delectibles'; // USING A PLACEHOLDER FOR NOW
+      $scope.storeName = 'Doly\'s Delectables'; // USING A PLACEHOLDER FOR NOW
     };
     
     $('#clique_code_message').on('click', function(){
@@ -363,23 +376,24 @@
         else { // if newVal is null or undefined, then it is invalid
           $scope.valid[field] = false;
           
-          // we still need to call checkValid so that checkmarks will be shown appropriately
+          // we still need to call checkValid with empty val so that checkmarks will be shown appropriately
           $scope.checkValid(field,'')
         }
         console.log(field + ': ' + newVal + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
         
         // check if all field on the main page are valid
-        $scope.mainValid = true;
+        $scope.pagesValid.main = true;
         for(i=0; i<fieldOrder.length; i++) {
-          // if any of the fields are not valid, then set mainValid to false
+          // if any of the fields are not valid, then set pagesValid.main to false
           if (!$scope.valid[fieldOrder[i]]) {
-            $scope.mainValid = false;
+            $scope.pagesValid.main = false;
             break; // no need to check remaining fields once any field is not valid
           }
         };
+        console.log('pagesValid.main = ' + $scope.pagesValid.main);
         
-        // if mainValid has ever been true, the Proceed Button will be visible
-        if ($scope.mainValid)
+        // if pagesValid.main has ever been true, the Proceed Button will be visible
+        if ($scope.pagesValid.main)
           $scope.dirty.ProceedButton = true;
       });
     });
@@ -459,9 +473,9 @@
           return false;
       }
     };
-  }]);
+  });
   
-  cliqueApp.controller('ReviewController', ['$scope', function($scope){
+  cliqueApp.controller('ReviewController', function($scope){
     // scroll to top of page
     window.scrollTo(0, 0);
     
@@ -479,6 +493,19 @@
       })
       .on('focus', function() {
         $(this).parent().addClass('currentInput');
+    });
+    
+    /**********
+    * Validation
+    **********/
+    jQuery(function($){
+      fields = ['email',
+                'phone_number'
+      ];
+
+      $.each( fields, function (index, value) {
+        $('input.'+value).formance('format_'+value);
+      });
     });
     
     $scope.dirty = {
@@ -507,17 +534,19 @@
         console.log(field + ': ' + newVal + ' - dirty=' + $scope.dirty[field] + ', valid=' + $scope.valid[field]);
         
         // check if all fields on the review page are valid
-        $scope.reviewValid = true;
+        $scope.pagesValid.review = true;
         for(i=0; i<fieldOrder.length; i++) {
-          // if any of the fields are not valid, then set reviewValid to false
+          // if any of the fields are not valid, then set pagesValid.review to false
           if (!$scope.valid[fieldOrder[i]]) {
-            $scope.reviewValid = false;
+            $scope.pagesValid.review = false;
             break; // no need to check remaining fields once any field is not valid
           }
         };
+        console.log('pagesValid.main = ' + $scope.pagesValid.main);
+        console.log('pagesValid.review = ' + $scope.pagesValid.review);
         
-        // if reviewValid has ever been true, the SubmitButton Button will be visible
-        if ($scope.mainValid)
+        // if pagesValid.review has ever been true, the SubmitButton Button will be visible
+        if ($scope.pagesValid.review)
           $scope.dirty.SubmitButton = true;
       });
     });
@@ -535,22 +564,7 @@
           return false;
       }
     };
-    
-    /**********
-    * Validation
-    **********/
-    jQuery(function($){
-      fields = ['email',
-                'phone_number'
-      ];
-
-      $.each( fields, function (index, value) {
-        $('input.'+value).formance('format_'+value);
-      });
-    });
-    
-    
-  }]);
+  });
   
   cliqueApp.controller('FinalController', function(){
     // begin fade in transition 100ms after page loads
