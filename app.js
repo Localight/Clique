@@ -176,7 +176,7 @@
     };
     
     $scope.getStoreName = function() {
-      $scope.storeName = 'Doly\'s Delectibles'; // USING A PLACEHOLDER FOR NOW
+      $scope.storeName = 'Doly\'s Delectables'; // USING A PLACEHOLDER FOR NOW
     };
     
     $('#clique_code_message').on('click', function(){
@@ -495,6 +495,19 @@
         $(this).parent().addClass('currentInput');
     });
     
+    /**********
+    * Validation
+    **********/
+    jQuery(function($){
+      fields = ['email',
+                'phone_number'
+      ];
+
+      $.each( fields, function (index, value) {
+        $('input.'+value).formance('format_'+value);
+      });
+    });
+    
     $scope.dirty = {
       PhoneNumber: false,
       Email: false,
@@ -551,21 +564,6 @@
           return false;
       }
     };
-    
-    /**********
-    * Validation
-    **********/
-    jQuery(function($){
-      fields = ['email',
-                'phone_number'
-      ];
-
-      $.each( fields, function (index, value) {
-        $('input.'+value).formance('format_'+value);
-      });
-    });
-    
-    
   });
   
   cliqueApp.controller('FinalController', function(){
