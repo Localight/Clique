@@ -658,9 +658,10 @@ AppView = Backbone.View.extend({
                 url: "/recipient",
                 data: postObj
               });
-            };  
-          });
+            }
+          });    
 
+        } 
         else {
           console.log(' handleResponse failed');
           // change UI based off failed verification
