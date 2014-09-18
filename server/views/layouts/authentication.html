@@ -1,4 +1,4 @@
-    <div class="container-fluid wrapperAuth">
+    <div class="container-fluid wrapperAuth ng-cloak">
       <p class="col-xs-12 text-center txtUpsideDown merchInfo {{show}}" ng-class="show">Staff: Enter Tricon code to accept funds.</p>
 
       <!-- pad -->
@@ -23,7 +23,7 @@
           <audio src="../public/demo23_files/audio/click.wav" type="audio/wav" id="sound">
             <source src="../public/demo23_files/audio/click.wav" type="audio/wav">
           </audio>
-            <div ng-repeat="icon in icons" ng-click="clickedCSS($index)" class="icon col-xs-4 {{clickClass}}" ng-class="icon" onclick="playSound(this)">
+            <div ng-repeat="icon in icons" ng-click="clickedCSS($index)" class="icon col-xs-4 {{clickClass}} ng-cloak" ng-class="icon" onclick="playSound(this)">
             </div>
         </span>
         <!-- </span> -->
