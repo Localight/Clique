@@ -128,7 +128,7 @@ body
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   color: white;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 #buyerName {
@@ -152,7 +152,7 @@ body
   margin-top: 2.5%;
   padding: 1.2% 3%;
   border-radius: 7px;
-  background: -webkit-linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.6)), url('../demo23_files/dolys-delectables-crop.jpg') no-repeat;
+  background: url('../demo23_files/dolys-delectables-crop.jpg') no-repeat;
   background-size: 100%;
 }
 
@@ -214,6 +214,7 @@ body
 #useNow {
   /*color: #58e6df;*/
   color: #008B8B;
+  text-decoration: none;
 }
 
 #useLater {
