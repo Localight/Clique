@@ -139,7 +139,7 @@ function createRecipient(request, response){
     console.log('Recipient Persona and Card created');
 
     // create unique URI path for recipient landing page
-    var uniqueCreditLink = 'clique.cc/recipient-gift-card/' + uniqueLink;
+    var uniqueCreditLink = 'http://2b6ee9d9.ngrok.com/recipient-gift-card/' + uniqueLink;
 
     // get icon type for icon and message in sms message
     var iconType = request.body.Icon;
